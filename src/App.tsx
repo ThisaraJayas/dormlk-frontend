@@ -4,15 +4,27 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import React from 'react'
 import { Button } from "@/components/ui/button"
+import Header from './PageComponents/Header'
+import { Route, Routes } from 'react-router-dom'
+import Home from './PageComponents/Home'
+
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-      <Button variant="outline">Click me</Button>
-    </div>
+    <Header/>
+      <Routes>
+
+      </Routes>
+     
+      {/* <Link to={''}>
+        <a>Go to About Page</a>
+      </Link> */}
+
+    
     </>
   )
 }
