@@ -14,10 +14,9 @@ export default function SearchBox() {
     };
   
   return (
-    <div>
         <div className="relative flex-1 sm:flex-initial">
           <form
-            className="hidden md:flex items-center"
+            className="flex items-center"
             onFocus={handleSearchFocus}
             onBlur={handleSearchBlur}
           >
@@ -57,6 +56,5 @@ export default function SearchBox() {
             </div>
           )}
         </div>
-    </div>
   )
 }

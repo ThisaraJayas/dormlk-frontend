@@ -68,20 +68,18 @@ export default function Header() {
             </nav>
           </SheetContent>
         </Sheet>
+        
         <Link
-          to="/"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-        >
-          <Package2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
-        </Link>
-        <Link
-          to="/dashboard"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Dashboard
-        </Link>
+                to="/dashboard"
+                className="flex items-center gap-2 ml-4 mr-6 text-lg font-bold text-emerald-500 hover:text-emerald-600"
+              >
+                <span className="text-3xl">Dorm</span>
+                
+              </Link>
+        <div className="hidden md:flex">
         <SearchBox/>
+        </div>
+        
 
 
 
