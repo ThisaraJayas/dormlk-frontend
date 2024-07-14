@@ -6,7 +6,7 @@ import React from 'react'
 import { Button } from "@/components/ui/button"
 import Header from './PageComponents/Header'
 import { Route, Routes } from 'react-router-dom'
-import Home from './PageComponents/Home'
+
 
 
 
