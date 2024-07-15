@@ -69,7 +69,7 @@ export default function DefaulltHeader() {
         </Sheet>
 
         <Link
-          to="/dashboard"
+          to="/"
           className="flex items-center gap-2 ml-4 mr-6 text-lg font-bold text-emerald-500 hover:text-emerald-600"
         >
           <span className="text-3xl">Dorm</span>
@@ -80,12 +80,12 @@ export default function DefaulltHeader() {
 
         <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-            <Link
-              to="/customers"
+            <div
+              
               className="text-muted-foreground transition-colors  hover:text-foreground"
             >
               <NavContactMenu />
-            </Link>
+            </div>
             <Link
               to="/products"
               className="text-muted-foreground transition-colors hover:text-foreground"
