@@ -19,6 +19,8 @@ export const register = createAsyncThunk("register", async (userData) => {
 });
 
 export const login = createAsyncThunk("login", async(userData)=>{
+    console.log(userData);
+    
     try{
         const {data} = await axios.post(`http://localhost:8080/auth/login`,userData)
         if(data.jwt){

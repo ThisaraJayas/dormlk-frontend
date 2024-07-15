@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import DefaulltHeader from '@/PageComponents/DefaulltHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/Redux/store'
@@ -22,10 +22,14 @@ export default function Login() {
     email:"",
     password:""
   })
+  const navigate = useNavigate()
 
   const handleLoginSubmit =(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     dispatch(login(formData))
+  }
+  if(status=='succeeded'){
+    navigate('/')
   }
 
   return (
