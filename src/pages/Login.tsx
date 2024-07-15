@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <div>
         <DefaulltHeader/>
-    <div className='mt-[10%]'>
+    <div className='mt-[9%]'>
     <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
