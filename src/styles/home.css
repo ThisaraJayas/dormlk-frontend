@@ -1,23 +1,25 @@
-.homeContainer{
+.homeContainer {
     width: 100%;
-	height: 70vh;
-	background-image: url(home6.png);
-	background-position: center;
-	background-size: cover;
+    height: 70vh;
+    background-image: url(home6.png);
+    background-position: center;
+    background-size: cover;
 }
 
-
-.bannerSection{
+.bannerSection {
+    margin-top: 6%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    padding: 40px 50px;
+    gap: 10px; /* Adjust the gap between select boxes */
+    height: 100%; /* Center the content vertically within the container */
 }
-.bannerText{
+
+.bannerText {
     margin-top: 10%;
 }
 
-.bannerText .title{
+.bannerText .title {
     font-size: 48px;
     font-family: "Lexend Deca", sans-serif;
     font-weight: 600;
