@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import '../styles/homeHeader.css'
+import "../styles/homeHeader.css";
 
-
-import { CircleUser, Menu, Package2 } from "lucide-react";
+import { CircleUser, LogIn, Menu, Package2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,9 +14,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
+import NavContactMenu from "./NavContactMenu";
 
 export default function HomeNav() {
- 
   return (
     <div>
       <header className="headerOne sticky top-0 flex h-16 items-center gap-4 border-b bg-transparent px-4 md:px-6">
@@ -71,52 +70,57 @@ export default function HomeNav() {
             </nav>
           </SheetContent>
         </Sheet>
-        
+
         <Link
-                to="/dashboard"
-                className="flex items-center gap-2 ml-4 mr-6 text-lg font-bold text-emerald-500 hover:text-emerald-600"
-              >
-                <span className="text-3xl">Dorm</span>
-                
-              </Link>
-        <div className="hidden md:flex">
-        
-        </div>
-        
-
-
+          to="/dashboard"
+          className="flex items-center gap-2 ml-4 mr-6 text-lg font-bold text-white hover:text-white"
+        >
+          <span className="text-3xl">Dorm</span>
+        </Link>
+        <div className="hidden md:flex"></div>
 
         <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             <Link
-              to="/orders"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              to="/customers"
+              className="text-muted-foreground transition-colors  hover:text-foreground"
             >
-              Orders
+              <NavContactMenu />
             </Link>
             <Link
               to="/products"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              Products
-            </Link>
-            <Link
-              to="/customers"
-              className="text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Customers
+              <Button
+                variant="outline"
+                className="bg-emerald-500 border-emerald-500 text-white flex items-center gap-2"
+              >
+                List your place
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
             </Link>
             <Link
               to="/settings"
               className="text-foreground transition-colors hover:text-foreground"
             >
-              Settings
+              <Button
+                variant="outline"
+                className="flex items-center gap-2  bg-transparent text-white"
+              >
+                <LogIn className="h-5 w-5" />
+                Login
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
             </Link>
           </nav>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
+              <Button
+                variant="outline"
+                className="flex items-center gap-2 bg-transparent text-white"
+              >
                 <CircleUser className="h-5 w-5" />
+                <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>

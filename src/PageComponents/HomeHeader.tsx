@@ -31,7 +31,7 @@ export default function HomeHeader() {
                         <HomeNav /> {/* Always show HomeNav */}
                         {showHeader && <DefaulltHeader />} {/* Show DefaulltHeader if scrolled */}
                         <div className='bannerSection'>
-                            <div className='bannerText'>
+                            {/* <div className='bannerText'>
                                 <p className='title'>
                                     Home Comfort Experts for<br />
                                     Cooling, Heating, Electrical,<br />
@@ -51,7 +51,7 @@ export default function HomeHeader() {
                                         </button>
                                     </Link>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
