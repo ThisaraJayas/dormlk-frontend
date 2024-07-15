@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import '../styles/homeHeader.css'
+
+
 import { CircleUser, Menu, Package2 } from "lucide-react";
 import {
   DropdownMenu,
@@ -13,11 +16,11 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
 
-export default function Header() {
+export default function HomeNav() {
  
   return (
     <div>
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <header className="headerOne sticky top-0 flex h-16 items-center gap-4 border-b bg-transparent px-4 md:px-6">
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -77,7 +80,7 @@ export default function Header() {
                 
               </Link>
         <div className="hidden md:flex">
-        <SearchBox/>
+        
         </div>
         
 
