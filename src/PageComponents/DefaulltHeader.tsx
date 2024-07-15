@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CircleUser, Menu, Package2 } from "lucide-react";
+import { CircleUser, Menu, Package2,LogIn } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
+import NavContactMenu from "./NavContactMenu";
 export default function DefaulltHeader() {
   return (
     <div>
@@ -87,7 +88,7 @@ export default function DefaulltHeader() {
             to="/orders"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Orders
+            <Button variant="outline">Orfd</Button>
           </Link>
           <Link
             to="/products"
@@ -99,22 +100,39 @@ export default function DefaulltHeader() {
             to="/customers"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Customers
+            <NavContactMenu/>
+          </Link>
+          <Link
+            to="/products"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Button variant="outline" className="bg-emerald-500 text-white flex items-center gap-2">
+            
+    List your place
+    
+    <span className="sr-only">Toggle user menu</span>
+  </Button>
           </Link>
           <Link
             to="/settings"
             className="text-foreground transition-colors hover:text-foreground"
           >
-            Settings
+            <Button variant="outline" className="flex items-center gap-2">
+            <LogIn  className="h-5 w-5" />
+    Login
+    
+    <span className="sr-only">Toggle user menu</span>
+  </Button>
           </Link>
         </nav>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
+  <Button variant="outline" className="flex items-center gap-2">
+    <CircleUser className="h-5 w-5" />
+    <Menu className="h-5 w-5" /> 
+    <span className="sr-only">Toggle user menu</span>
+  </Button>
+</DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
