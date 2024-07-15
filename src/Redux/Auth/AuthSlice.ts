@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register } from "./AuthAction";
+import { getUser, login, register } from "./AuthAction";
 
 
 export interface User{
@@ -45,6 +45,17 @@ export const AuthSlice = createSlice({
         state.loginUser=action.payload
        })
        builder.addCase(login.rejected, (state)=>{
+        state.status='failed'
+       })
+       //getUser
+       builder.addCase(getUser.pending,(state)=>{
+        state.status='loading'
+       })
+       builder.addCase(getUser.fulfilled, (state, action)=>{
+        state.loginUser=action.payload
+        state.status='succeeded'
+       })
+       builder.addCase(getUser.rejected,(state)=>{
         state.status='failed'
        })
     }

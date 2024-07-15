@@ -13,6 +13,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
 import NavContactMenu from "./NavContactMenu";
+
 export default function DefaulltHeader() {
   return (
     <div>

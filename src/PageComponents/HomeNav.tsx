@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import "../styles/homeHeader.css";
@@ -15,11 +15,13 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
 import NavContactMenu from "./NavContactMenu";
-import { useSelector } from "react-redux";
-import { RootState } from "@/Redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/Redux/store";
+import { getUser } from "@/Redux/Auth/AuthAction";
 
 export default function HomeNav() {
   const {loginUser} = useSelector((state:RootState)=>state.User)
+ 
   console.log(loginUser);
   
   return (

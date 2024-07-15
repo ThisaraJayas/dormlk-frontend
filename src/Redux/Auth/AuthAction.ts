@@ -42,6 +42,7 @@ export const getUser = createAsyncThunk("getUser", async()=>{
             }
         })
         console.log("User Success ",data);
+        return data
         
 
     }catch(error){
