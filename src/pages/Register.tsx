@@ -38,6 +38,9 @@ export default function Register() {
       console.log("loading..");
     }else if(status=='succeeded'){
       navigate('/login')
+    }else{
+      console.log("Error Mesage");
+      
     }
 
   return (
