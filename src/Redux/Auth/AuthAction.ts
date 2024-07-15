@@ -17,3 +17,17 @@ export const register = createAsyncThunk("register", async (userData) => {
         throw error; // Optionally throw the error for handling in your slice
     }
 });
+
+export const login = createAsyncThunk("login", async(userData)=>{
+    try{
+        const {data} = await axios.post(`http://localhost:8080/auth/login`,userData)
+        if(data.jwt){
+            localStorage.setItem("jwt",data.jwt)
+        }
+        return data
+    }catch(error){
+        console.log("Error Occured: ", error);
+        throw error
+        
+    }
+})

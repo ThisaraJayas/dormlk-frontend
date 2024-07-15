@@ -12,7 +12,13 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from 'react-router-dom'
 import DefaulltHeader from '@/PageComponents/DefaulltHeader'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/Redux/store'
 export default function Login() {
+  const dispatch = useDispatch<AppDispatch>()
+  const {status} =useSelector((state:RootState)=>state.User)
+  
+
   return (
     <div>
         <DefaulltHeader/>
