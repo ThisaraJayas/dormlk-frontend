@@ -100,7 +100,7 @@ export default function HomeNav() {
               </Button>
             </Link>
             <Link
-              to="/settings"
+              to="/login"
               className="text-foreground transition-colors hover:text-foreground"
             >
               <Button
