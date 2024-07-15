@@ -33,3 +33,19 @@ export const login = createAsyncThunk("login", async(userData)=>{
         
     }
 })
+
+export const getUser = createAsyncThunk("getUser", async()=>{
+    try{
+        const {data} = await axios.get(`http://localhost:8080/api/user/profile`,{
+            headers:{
+                "Authorization":`Bearer ${localStorage.getItem("jwt")}`
+            }
+        })
+        console.log("User Success ",data);
+        
+
+    }catch(error){
+        console.log("Error Occured: ",error);
+        throw error
+    }
+})

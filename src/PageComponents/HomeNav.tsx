@@ -15,8 +15,13 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
 import NavContactMenu from "./NavContactMenu";
+import { useSelector } from "react-redux";
+import { RootState } from "@/Redux/store";
 
 export default function HomeNav() {
+  const {loginUser} = useSelector((state:RootState)=>state.User)
+  console.log(loginUser);
+  
   return (
     <div>
       <header className="headerOne sticky top-0 flex h-16 items-center gap-4 border-b bg-transparent px-4 md:px-6">
@@ -96,19 +101,21 @@ export default function HomeNav() {
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </Link>
-            <Link
-              to="/login"
-              className="text-foreground transition-colors hover:text-foreground"
-            >
-              <Button
-                variant="outline"
-                className="flex items-center gap-2  bg-transparent text-white"
-              >
-                <LogIn className="h-5 w-5" />
-                Login
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </Link>
+            {!loginUser && (
+  <Link
+    to="/login"
+    className="text-foreground transition-colors hover:text-foreground"
+  >
+    <Button
+      variant="outline"
+      className="flex items-center gap-2 bg-transparent text-white"
+    >
+      <LogIn className="h-5 w-5" />
+      Login
+      <span className="sr-only">Toggle user menu</span>
+    </Button>
+  </Link>
+)}
           </nav>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
