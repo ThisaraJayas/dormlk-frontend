@@ -93,7 +93,7 @@ export default function HomeNav() {
             >
               <Button
                 variant="outline"
-                className="bg-emerald-500 border-emerald-500 text-white flex items-center gap-2"
+                className="bg-emerald-500 border-emerald-500 hover:bg-emerald-600 hover:text-white text-white flex items-center gap-2"
               >
                 List your place
                 <span className="sr-only">Toggle user menu</span>
