@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -14,10 +14,19 @@ import { Link } from 'react-router-dom'
 import DefaulltHeader from '@/PageComponents/DefaulltHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/Redux/store'
+import { login } from '@/Redux/Auth/AuthAction'
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>()
   const {status} =useSelector((state:RootState)=>state.User)
-  
+  const [formData,setFormData]=useState({
+    email:"",
+    password:""
+  })
+
+  const handleLoginSubmit =(e: React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    dispatch(login(formData))
+  }
 
   return (
     <div>
@@ -31,12 +40,14 @@ export default function Login() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4">
+        <form onSubmit={handleLoginSubmit} className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
+              value={formData.email}
+              onChange={(e)=>setFormData({...formData, email:e.target.value})}
               placeholder="m@example.com"
               required
             />
@@ -48,7 +59,10 @@ export default function Login() {
                 Forgot your password?
               </Link>
             </div>
-            <Input id="password" type="password" required />
+            <Input id="password"
+            value={formData.password}
+            onChange={(e)=>setFormData({...formData,password:e.target.value})}
+            type="password" required />
           </div>
           <Button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600">
             Login
@@ -56,7 +70,7 @@ export default function Login() {
           <Button variant="outline" className="w-full">
             Login with Google
           </Button>
-        </div>
+        </form>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
           <Link to="/register" className="underline">
