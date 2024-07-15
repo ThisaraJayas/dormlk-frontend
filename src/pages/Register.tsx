@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DefaulltHeader from "@/PageComponents/DefaulltHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/Redux/store";
@@ -18,8 +18,9 @@ import { register } from "@/Redux/Auth/AuthAction";
 
 
 export default function Register() {
+  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
-  const { loginUser } = useSelector((state: RootState) => state.User);
+  const { loginUser , status} = useSelector((state: RootState) => state.User);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -30,8 +31,14 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(register(formData)); 
+    dispatch(register(formData))
     };
+
+    if(status=='loading'){
+      console.log("loading..");
+    }else if(status=='succeeded'){
+      navigate('/login')
+    }
 
   return (
     <div>
@@ -60,7 +67,10 @@ export default function Register() {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="last-name">Last name</Label>
-                  <Input id="last-name" placeholder="Robinson" required />
+                  <Input id="last-name"
+                  value={formData.lastName}
+                  onChange={(e)=>setFormData({...formData, lastName:e.target.value})}
+                   placeholder="Robinson" required />
                 </div>
               </div>
               <div className="grid gap-2">
@@ -68,13 +78,18 @@ export default function Register() {
                 <Input
                   id="email"
                   type="email"
+                  value={formData.email}
+                    onChange={(e)=>setFormData({...formData, email:e.target.value})}
                   placeholder="m@example.com"
                   required
                 />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" />
+                <Input id="password"
+                value={formData.password}
+                onChange={(e)=>setFormData({...formData, password:e.target.value})}
+                type="password" />
               </div>
               <Button
                 type="submit"
