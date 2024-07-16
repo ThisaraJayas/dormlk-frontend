@@ -36,8 +36,6 @@ const Map: React.FC = () => {
       setSelected({ lat, lng });
     } else {
       console.error("Selected place does not have geometry data", place);
-      // Optionally, notify the user or handle the selection differently
-      alert("The selected location does not have geographical data.");
     }
   }, []);
 
