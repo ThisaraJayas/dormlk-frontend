@@ -11,7 +11,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import PostAdd from './pages/PostAdd'
 import Post from './pages/Post'
-import Map from './PageComponents/Map'
+
 
 
 
@@ -27,7 +27,6 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/addpost' element={<Post/>}/>
-        <Route path='/map' element={<Map/>}/>
       </Routes>
      
       {/* <Link to={''}>
