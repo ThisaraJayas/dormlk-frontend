@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import {
   Select,
@@ -20,6 +20,8 @@ import "../styles/postform.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/Redux/store";
 import { createPost } from "@/Redux/Post/PostAction";
+import {getStorage, ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage'
+import { app } from "../firebase";
 
 export const facilities = [
   "Aircondition",
@@ -49,6 +51,7 @@ export function ListPost() {
     closeByLocation: [],
     suitableFor: [],
     facilities: [],
+    images:[]
   });
   const dispatch = useDispatch<AppDispatch>();
   const {} = useSelector((state: RootState) => state.Post);
@@ -104,6 +107,42 @@ export function ListPost() {
       availability: value,
     }));
   };
+
+  //image upload
+  const [file, setFile] = useState<File | undefined>(undefined);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (file) {
+      handleImageUpload(file);
+    }
+  }, [file]);
+
+    
+  const handleImageUpload = (file: File) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, `images/${fileName}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+            console.log(error);
+        },
+        async () => {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            setPostData((prev) => ({
+                ...prev,
+                images: [...prev.images, downloadURL],
+            }));
+        }
+    );
+};
 
   return (
     <div className="w-full mt-8 lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -269,6 +308,30 @@ export function ListPost() {
                 placeholder="Enter your mobile no"
                 required
               />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="images">Images</Label>
+              <input
+    type="file"
+    ref={fileRef}
+    onChange={(e) => {
+        if (e.target.files) {
+            Array.from(e.target.files).forEach(file => handleImageUpload(file));
+        }
+    }}
+    accept="image/*"
+    multiple
+/>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {postData.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`uploaded-${index}`}
+                    className="w-20 h-20 object-cover"
+                  />
+                ))}
+              </div>
             </div>
             <Button
               type="submit"
