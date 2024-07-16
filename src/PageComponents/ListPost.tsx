@@ -5,19 +5,38 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState, useCallback } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Map from "./Map";
 
-export const facitities=[
-    "all","react","nextjs","spring boot","mysql","mongodb","angular","python","django",
+export const facilities=[
+    "Aircondition","Wi-Fi","Gym"
 ]
 
 export function ListPost() {
   const [location, setLocation] = useState(null); // State to store selected location
+  const [postData,setPostData]=useState({
+    title:String,
+    location:String,
+    description:String,
+    facilities:[]
+  })
 
   const handleLocationSelect = useCallback((place) => {
     setLocation(place); // Set selected location
     console.log(place); // Log the selected place for debugging
   }, []);
+
+  const handleFacilitiesChange = (newValue) => {
+    const currentFacilities = postData.facilities;
+    const updatedFacilities = currentFacilities.includes(newValue)
+      ? currentFacilities.filter(facility => facility !== newValue)
+      : [...currentFacilities, newValue];
+
+    setPostData(prev => ({
+      ...prev,
+      facilities: updatedFacilities
+    }));
+  };
 
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -51,6 +70,26 @@ export function ListPost() {
               </div>
               <Input id="password" type="password" required />
             </div>
+            <Label htmlFor="facilities">Facilities</Label>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {postData.facilities.map((facility, index) => (
+                <span key={index} className="bg-blue-200 text-blue-800 px-2 py-1 rounded">
+                  {facility}
+                </span>
+              ))}
+            </div>
+            <Select onValueChange={handleFacilitiesChange}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select Facilities" />
+              </SelectTrigger>
+              <SelectContent>
+                {facilities.map((facility) => (
+                  <SelectItem key={facility} value={facility}>
+                    {facility}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <div className="grid gap-2">
               <Label htmlFor="location">Location</Label>
               <GooglePlacesAutocomplete
