@@ -9,6 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Map from "./Map";
 import { Textarea } from "@/components/ui/textarea"
 import '../styles/postform.css'
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/Redux/store";
+import { createPost } from "@/Redux/Post/PostAction";
 
 export const facilities = [
     "Aircondition", "Wi-Fi", "Gym","Cooking","Parking"
@@ -22,9 +25,17 @@ export function ListPost() {
         description: "",
         facilities: []
     });
+    const dispatch = useDispatch<AppDispatch>()
+    const {}=useSelector((state:RootState)=>state.Post)
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      dispatch(createPost(postData))
+      };
 
     const handleLocationSelect = useCallback((place) => {
         setLocation(place);
+        setPostData(prev => ({ ...prev, location: place.label }));
         console.log(place);
     }, []);
 
@@ -50,11 +61,13 @@ export function ListPost() {
                             Enter your property below to get started.
                         </p>
                     </div>
-                    <div className="grid gap-4">
+                    <form onSubmit={handleSubmit} className="grid gap-4">
                         <div className="grid gap-2">
                             <Label htmlFor="email">Title</Label>
                             <Input
                                 id="title"
+                                value={postData.title}
+                                onChange={(e)=>setPostData({...postData, title:e.target.value})}
                                 type="title"
                                 placeholder="Enter your property title"
                                 required
@@ -64,7 +77,10 @@ export function ListPost() {
                             <div className="flex items-center">
                                 <Label htmlFor="password">Description</Label>
                             </div>
-                            <Textarea  style={{ height: '150px' }}   placeholder="Enter your property description here." />
+                            <Textarea  style={{ height: '150px' }} 
+                            value={postData.description}
+                            onChange={(e)=>setPostData({...postData, description:e.target.value})}
+                            placeholder="Enter your property description here." />
                         </div>
                         <Label htmlFor="facilities">Facilities</Label>
                         <div className="flex flex-wrap gap-2 mb-4">
@@ -105,8 +121,9 @@ export function ListPost() {
                         <Button type="submit" className="w-full bg-emerald-500 hover:bg-emerald-600">
                             List My Place
                         </Button>
-                    </div>
+                    </form>
                     
+
                 </div>
             </div>
 
