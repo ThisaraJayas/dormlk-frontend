@@ -7,6 +7,10 @@ import React, { useState, useCallback } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import Map from "./Map";
 
+export const facitities=[
+    "all","react","nextjs","spring boot","mysql","mongodb","angular","python","django",
+]
+
 export function ListPost() {
   const [location, setLocation] = useState(null); // State to store selected location
 
