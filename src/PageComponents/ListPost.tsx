@@ -74,9 +74,9 @@ export function ListPost() {
         </div>
       </div>
       
-      <div className=" lg:block hidden h-full">
+      <div className="lg:block hidden h-full">
         <div className="fixed-image">
-          <Map /> {/* Render the Map component instead of the image */}
+          <Map location={location} /> {/* Pass the location to the Map component */}
         </div>
       </div>
     </div>
