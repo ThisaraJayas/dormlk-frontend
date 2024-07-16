@@ -20,8 +20,13 @@ import { AppDispatch, RootState } from "@/Redux/store";
 import { getUser } from "@/Redux/Auth/AuthAction";
 
 export default function HomeNav() {
+  const dispatch = useDispatch()
   const {loginUser} = useSelector((state:RootState)=>state.User)
- 
+  useEffect(() => {
+    if (!loginUser) {
+        dispatch(getUser());
+    }
+}, [dispatch, loginUser]);
   console.log(loginUser);
   
   return (
@@ -136,7 +141,10 @@ export default function HomeNav() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              {loginUser &&(
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              )}
+              
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

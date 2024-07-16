@@ -35,18 +35,19 @@ export const login = createAsyncThunk("login", async(userData)=>{
 })
 
 export const getUser = createAsyncThunk("getUser", async()=>{
-    try{
-        const {data} = await axios.get(`http://localhost:8080/api/user/profile`,{
-            headers:{
-                "Authorization":`Bearer ${localStorage.getItem("jwt")}`
-            }
-        })
-        console.log("User Success ",data);
-        return data
-        
+    try {
+        const jwt = localStorage.getItem("jwt");
+        if (!jwt) throw new Error("JWT not found");
 
-    }catch(error){
-        console.log("Error Occured: ",error);
-        throw error
+        const { data } = await axios.get(`http://localhost:8080/api/user/profile`, {
+            headers: {
+                "Authorization": `Bearer ${jwt}`
+            }
+        });
+        console.log("User Success ", data);
+        return data;
+    } catch (error) {
+        console.log("Error Occured: ", error);
+        throw error;
     }
 })

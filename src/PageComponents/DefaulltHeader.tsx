@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CircleUser, Menu, Package2, LogIn } from "lucide-react";
@@ -13,8 +13,19 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchBox from "./SearchBox";
 import NavContactMenu from "./NavContactMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/Redux/store";
+import { getUser } from "@/Redux/Auth/AuthAction";
 
 export default function DefaulltHeader() {
+  const dispatch = useDispatch()
+  const {loginUser} = useSelector((state:RootState)=>state.User)
+
+  useEffect(()=>{
+    if (!loginUser) {
+      dispatch(getUser());
+  }
+  },[loginUser,dispatch])
   return (
     <div>
       <header className="fixed top-0 left-0 right-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
@@ -99,7 +110,8 @@ export default function DefaulltHeader() {
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </Link>
-            <Link
+            {!loginUser && (
+              <Link
               to="/settings"
               className="text-foreground transition-colors hover:text-foreground"
             >
@@ -109,6 +121,8 @@ export default function DefaulltHeader() {
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </Link>
+            )}
+            
           </nav>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -124,7 +138,10 @@ export default function DefaulltHeader() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              {loginUser &&(
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              )}
+              
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
