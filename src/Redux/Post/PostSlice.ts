@@ -6,7 +6,22 @@ export interface Post{
     title:string,
     description:string,
     location:string,
-    facilities:[]
+    facilities:[],
+    suitableFor:[],
+    closeByLocation:[],
+    cityDistrict:string,
+    accommodationType:string,
+    availability:string,
+    mobileContact: string;
+    emailContact: string;
+    whatsappContact: string;
+    price: string;
+    images: string[];
+    user: {
+        id: number;
+        firstName: string;
+        lastName: string;
+    };
 }
 interface PostState{
     post:Post,

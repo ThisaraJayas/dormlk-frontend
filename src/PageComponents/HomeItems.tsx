@@ -62,7 +62,7 @@ export default function HomeItems() {
                             <article className="mb-4 overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xl">
                               <div className="w-full h-48 overflow-hidden">
                                 <img
-                                  src={homeImg}
+                                  src={post.images[0]}
                                   alt=""
                                   className="w-full h-full object-cover"
                                 />
@@ -77,9 +77,11 @@ export default function HomeItems() {
                                     {post.location}
                                   </a>
                                 </div>
+                                
 
                                 <ul className="box-border flex list-none items-center border-t border-b border-solid border-gray-200 px-0 py-6">
-                                  <li className="mr-4 flex items-center text-left">
+                                    {post.facilities.includes('Cooking') &&(
+                                        <li className="mr-4 flex items-center text-left">
                                     <i className="mr-2 text-2xl text-green-600">
                                       {/* <!-- uil:compress-arrows --> */}
                                       <svg
@@ -97,6 +99,9 @@ export default function HomeItems() {
                                     </i>
                                     <span className="text-sm">1200sqf</span>
                                   </li>
+
+                                    )}
+                                  
 
                                   <li className="mr-4 flex items-center text-left">
                                     <i className="mr-2 text-2xl text-green-600">
