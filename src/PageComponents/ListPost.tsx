@@ -43,6 +43,7 @@ export function ListPost() {
   const [postData, setPostData] = useState({
     title: "",
     location: "",
+    cityDistrict:"",
     description: "",
     price: "",
     mobileContact: "",
@@ -107,6 +108,12 @@ export function ListPost() {
     setPostData((prevState) => ({
       ...prevState,
       availability: value,
+    }));
+  };
+  const handleDistrictChange = (value: string) => {
+    setPostData((prevState) => ({
+      ...prevState,
+      cityDistrict: value,
     }));
   };
 
@@ -222,6 +229,28 @@ export function ListPost() {
                   },
                 }}
               />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="avaliablility">Select District</Label>
+              <Select
+                onValueChange={handleDistrictChange}
+                defaultValue={postData.cityDistrict}
+              >
+                <SelectTrigger >
+                  <SelectValue placeholder="Select District" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>District</SelectLabel>
+                    <SelectItem value="Colombo">Colombo</SelectItem>
+                    <SelectItem value="Kandy">Kandy</SelectItem>
+                    <SelectItem value="Jaffna">Jaffna</SelectItem>
+                    <SelectItem value="Rathnapura">
+                    Rathnapura
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="closeByLocation">Close By Location</Label>

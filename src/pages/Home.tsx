@@ -1,4 +1,5 @@
 import HomeHeader from '@/PageComponents/HomeHeader'
+import HomeItems from '@/PageComponents/HomeItems'
 import HomeStat from '@/PageComponents/HomeStat'
 import HomeTitle from '@/PageComponents/HomeTitle'
 import React from 'react'
@@ -13,7 +14,7 @@ export default function Home() {
     </div>
     <HomeStat/>
     <HomeTitle/>
-        
+        <HomeItems/>
     </div>
   )
 }

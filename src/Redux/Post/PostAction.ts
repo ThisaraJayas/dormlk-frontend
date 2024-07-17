@@ -18,3 +18,13 @@ export const createPost = createAsyncThunk("createPost",async(postData)=>{
     }
     
 })
+
+export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async(district)=>{
+    try{
+        const {data} = await axios.get(`http://localhost:8080/api/post/${district}`)
+        return data
+    }catch(error){
+        console.log("Fetch Post by district Error : ",error); 
+        throw error
+    }
+})

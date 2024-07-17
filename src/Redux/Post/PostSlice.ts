@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPost } from "./PostAction";
+import { createPost, fetchPostByDistrict } from "./PostAction";
 
 export interface Post{
     id:Number,
@@ -32,6 +32,13 @@ export const PostSlice = createSlice({
         })
         builder.addCase(createPost.rejected,(state)=>{
             state.status='failed'
+        })
+        builder.addCase(fetchPostByDistrict.pending,(state)=>{
+            state.status='loading'
+        })
+        builder.addCase(fetchPostByDistrict.fulfilled,(state,action)=>{
+            state.status='succeeded',
+            state.allPost=action.payload
         })
     }
 
