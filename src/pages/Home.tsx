@@ -1,4 +1,6 @@
 import HomeHeader from '@/PageComponents/HomeHeader'
+import HomeStat from '@/PageComponents/HomeStat'
+import HomeTitle from '@/PageComponents/HomeTitle'
 import React from 'react'
 
 
@@ -9,6 +11,8 @@ export default function Home() {
       <HomeHeader />
       {/* Other content can go here */}
     </div>
+    <HomeStat/>
+    <HomeTitle/>
         
     </div>
   )
