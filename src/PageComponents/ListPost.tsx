@@ -45,7 +45,9 @@ export function ListPost() {
     location: "",
     description: "",
     price: "",
-    contact: "",
+    mobileContact: "",
+    emailContact:"",
+    whatsappContact:"",
     availability: "available",
     accommodationType: "",
     closeByLocation: [],
@@ -300,12 +302,54 @@ export function ListPost() {
               <Label htmlFor="mobileNo">Mobile Number</Label>
               <Input
                 id="mobileno"
-                value={postData.contact}
+                value={postData.mobileContact}
                 onChange={(e) =>
-                  setPostData({ ...postData, contact: e.target.value })
+                  setPostData({ ...postData, mobileContact: e.target.value })
                 }
                 type="mobileno"
                 placeholder="Enter your mobile no"
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="mobileNo">WhatsApp Number</Label>
+              <Input
+                id="whatsappno"
+                value={postData.whatsappContact}
+                onChange={(e) =>
+                  setPostData({ ...postData, whatsappContact: e.target.value })
+                }
+                type="mobileno"
+                placeholder="Enter your whatsApp no"
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="mobileNo">Email Address</Label>
+              <Input
+                id="emailno"
+                value={postData.emailContact}
+                onChange={(e) =>
+                  setPostData({ ...postData, emailContact: e.target.value })
+                }
+                type="emailno"
+                placeholder="Enter your contact email"
+                required
+              />
+            </div>
+            <p className="text-muted-foreground font-semibold">
+              Enter Price Information
+            </p>
+            <div className="grid gap-2">
+              <Label htmlFor="price">Monthly Price</Label>
+              <Input
+                id="price"
+                value={postData.price}
+                onChange={(e) =>
+                  setPostData({ ...postData, price: e.target.value })
+                }
+                type="mobileno"
+                placeholder="Enter monthly price"
                 required
               />
             </div>
