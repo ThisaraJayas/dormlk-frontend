@@ -16,6 +16,8 @@ export interface Post{
     emailContact: string;
     whatsappContact: string;
     price: string;
+    noOfBed:string;
+    noOfBathroom:string;
     images: string[];
     user: {
         id: number;

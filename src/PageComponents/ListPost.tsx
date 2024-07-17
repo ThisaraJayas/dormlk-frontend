@@ -29,6 +29,15 @@ export const facilities = [
   "Gym",
   "Cooking",
   "Parking",
+  "Attached Bathroom",
+  "Tables",
+  "Television",
+  "Heater",
+  "Kitcken",
+  "Pantry",
+  "Water",
+  "Electricity",
+
 ];
 export const closeByLocation = [
   "SLIIT",
