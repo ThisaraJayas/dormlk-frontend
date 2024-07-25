@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import PostAdd from './pages/PostAdd'
 import Post from './pages/Post'
+import Footer from './PageComponents/Footer'
 
 
 
@@ -28,7 +29,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/addpost' element={<Post/>}/>
       </Routes>
-     
+     <Footer/>
       {/* <Link to={''}>
         <a>Go to About Page</a>
       </Link> */}
