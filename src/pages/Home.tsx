@@ -1,6 +1,8 @@
+import HomeBanner from '@/PageComponents/HomeBanner'
 import HomeHeader from '@/PageComponents/HomeHeader'
 import HomeItems from '@/PageComponents/HomeItems'
 import HomeStat from '@/PageComponents/HomeStat'
+import HomeTestimonial from '@/PageComponents/HomeTestimonial'
 import HomeTitle from '@/PageComponents/HomeTitle'
 import React from 'react'
 
@@ -15,7 +17,8 @@ export default function Home() {
     <HomeStat/>
     <HomeTitle/>
         <HomeItems/>
-        
+        <HomeTestimonial/>
+        <HomeBanner/>
     </div>
   )
 }
