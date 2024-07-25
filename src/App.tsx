@@ -12,6 +12,7 @@ import Register from './pages/Register'
 import PostAdd from './pages/PostAdd'
 import Post from './pages/Post'
 import Footer from './PageComponents/Footer'
+import Item from './pages/Item'
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/addpost' element={<Post/>}/>
+        <Route path='/item' element={<Item/>}/>
       </Routes>
      <Footer/>
       {/* <Link to={''}>
