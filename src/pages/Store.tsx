@@ -41,6 +41,8 @@ export default function Store() {
     currentPage * ITEMS_PER_PAGE
   );
 
+  
+
   return (
     <Box p={4} mx={{ base: 2, md: 4, lg: 8 }}>
       <Text fontSize="2xl" mb={4}>Store</Text>
@@ -52,6 +54,23 @@ export default function Store() {
           onChange={(e) => setSearchQuery(e.target.value)}
           size="lg"
           variant="outline"
+          focusBorderColor="green.500"
+          sx={{
+            h: '40px',
+            maxW: '600px',
+            cursor: 'text',
+            borderRadius: 'md',
+            borderColor: 'gray.200',
+            bg: 'gray.100',
+            py: 2,
+            pl: 4,
+            outline: 'none',
+            ringColor: 'emerald.200',
+            _hover: {
+              borderColor: 'emerald.300',
+            },
+            transition: 'all 0.2s',
+          }}
         />
       </Box>
 
