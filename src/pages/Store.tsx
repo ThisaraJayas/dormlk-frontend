@@ -1,8 +1,9 @@
-import StoreItem from '@/PageComponents/StoreItem';
-import { fetchAllPosts } from '@/Redux/Post/PostAction';
-import { AppDispatch, RootState } from '@/Redux/store';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllPosts } from '@/Redux/Post/PostAction';
+import { AppDispatch, RootState } from '@/Redux/store';
+import StoreItem from '@/PageComponents/StoreItem';
+import { Box, Button, Flex, Input, Text, SimpleGrid } from '@chakra-ui/react';
 
 interface Post {
   id: number;
@@ -11,46 +12,80 @@ interface Post {
   accommodationType: string;
 }
 
+const ITEMS_PER_PAGE = 9;
+
 export default function Store() {
   const dispatch = useDispatch<AppDispatch>();
   const { allPost } = useSelector((state: RootState) => state.Post);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
+
+  useEffect(() => {
+    // Scroll to top when page changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   // Filter posts based on search query
   const filteredPosts = allPost.filter(post =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
+  const currentItems = filteredPosts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
-    <div>
-      <h1>Store</h1>
+    <Box p={4} mx={{ base: 2, md: 4, lg: 8 }}>
+      <Text fontSize="2xl" mb={4}>Store</Text>
       {/* Search Input */}
-      <div className="p-4">
-        <input
-          type="text"
+      <Box mb={4}>
+        <Input
           placeholder="Search..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-2 border rounded-md"
+          size="lg"
+          variant="outline"
         />
-      </div>
+      </Box>
 
-      <div className='m-11'>
-        <h2>Posts:</h2>
-        {filteredPosts.length ? (
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredPosts.map((post) => (
-              <StoreItem key={post.id} post={post} />
-            ))}
-          </ul>
+      {/* Posts Grid */}
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4} mb={4}>
+        {currentItems.length ? (
+          currentItems.map(post => (
+            <StoreItem key={post.id} post={post} />
+          ))
         ) : (
-          <p>No posts found.</p>
+          <Text>No posts found.</Text>
         )}
-      </div>
-    </div>
+      </SimpleGrid>
+
+      {/* Pagination Controls */}
+      <Flex justify="center" align="center">
+        <Button
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          isDisabled={currentPage === 1}
+          mr={2}
+        >
+          Previous
+        </Button>
+        <Text mx={4}>
+          Page {currentPage} of {totalPages}
+        </Text>
+        <Button
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          isDisabled={currentPage === totalPages}
+          ml={2}
+        >
+          Next
+        </Button>
+      </Flex>
+    </Box>
   );
 }
