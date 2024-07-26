@@ -28,3 +28,17 @@ export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async
         throw error
     }
 })
+
+export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilter", async({district, accommodationType})=>{
+    try{
+        const {data} = await axios.get(`http://localhost:8080/api/post/search`, 
+            {
+                params: {district, accommodationType},
+            }
+        )
+        return data
+    }catch(error){
+        console.log("Fetch by search error ",error);
+        throw error;
+    }
+})

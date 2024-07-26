@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPost, fetchPostByDistrict } from "./PostAction";
+import { createPost, fetchPostByDistrict, filterPostBySearchFilter } from "./PostAction";
 
 export interface Post{
     id:Number,
@@ -56,6 +56,16 @@ export const PostSlice = createSlice({
         builder.addCase(fetchPostByDistrict.fulfilled,(state,action)=>{
             state.status='succeeded',
             state.allPost=action.payload
+        })
+        builder.addCase(filterPostBySearchFilter.pending,(state)=>{
+            state.status='loading'
+        })
+        builder.addCase(filterPostBySearchFilter.fulfilled,(state,action)=>{
+            state.status='succeeded',
+            state.allPost=action.payload
+        })
+        builder.addCase(filterPostBySearchFilter.rejected , (state)=>{
+            state.status='failed'
         })
     }
 
