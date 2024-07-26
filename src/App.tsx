@@ -14,6 +14,7 @@ import Post from './pages/Post'
 import Footer from './PageComponents/Footer'
 import Item from './pages/Item'
 import Store from './pages/Store'
+import DefaulltHeader from './PageComponents/DefaulltHeader'
 
 
 
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
     {/* <Header/> */}
+    <DefaulltHeader/>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>

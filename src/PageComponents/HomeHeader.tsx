@@ -50,9 +50,9 @@ export default function HomeHeader() {
       <div className="pt-0">
         <div className="homeContainer">
           <div className="banner">
-            <HomeNav /> {/* Always show HomeNav */}
+            {/* <HomeNav /> 
             {showHeader && <DefaulltHeader />}{" "}
-            {/* Show DefaulltHeader if scrolled */}
+            Show DefaulltHeader if scrolled */}
             <div className="bannerSection sm:px-4">
   <div className="filterBanner m-10 inline-block max-w-4xl mx-auto">
     <div className="rounded-xl border border-gray-200 bg-white p-6 pl-12 pr-12 shadow-lg">
