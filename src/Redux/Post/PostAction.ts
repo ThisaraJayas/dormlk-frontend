@@ -42,3 +42,13 @@ export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilt
         throw error;
     }
 })
+
+export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
+    try{
+        const {data} = await axios.get(`http://localhost:8080/api/post/allPosts`)
+        return data
+    }catch(error){
+        console.log("Fetch Post Error : ",error); 
+        throw error
+    }
+})

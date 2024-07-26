@@ -13,6 +13,7 @@ import PostAdd from './pages/PostAdd'
 import Post from './pages/Post'
 import Footer from './PageComponents/Footer'
 import Item from './pages/Item'
+import Store from './pages/Store'
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/addpost' element={<Post/>}/>
         <Route path='/item' element={<Item/>}/>
+        <Route path='/store' element={<Store/>}/>
       </Routes>
      <Footer/>
       {/* <Link to={''}>
