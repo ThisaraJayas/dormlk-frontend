@@ -9,6 +9,23 @@ import { AppDispatch } from "@/Redux/store";
 import { filterPostBySearchFilter } from "@/Redux/Post/PostAction";
 import { Select } from "@chakra-ui/react";
 
+const accommodationTypes = [
+  "Annex",
+  "Shared Room",
+  "Apartment",
+  "Double Room",
+  "House",
+  "Studio Apartment",
+  "Hostel",
+];
+
+const accLocation=[
+  "Colombo",
+  "Kandy",
+  "Jaffna",
+  "Matara",
+]
+
 export default function HomeHeader() {
   const [showHeader, setShowHeader] = useState(false);
   const [accommodationType, setAccommodationType] = useState("");
@@ -62,11 +79,13 @@ export default function HomeHeader() {
                       <Select
                         value={accommodationType}
                         onChange={(e) => setAccommodationType(e.target.value)}
-                        placeholder="Select option"
+                        placeholder="Select Accomodation"
                       >
-                        <option value="Annex">Annex</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        {accommodationTypes.map((type) => (
+                          <option key={type} value={type}>
+                            {type}
+                          </option>
+                        ))}
                       </Select>
                     </div>
 
@@ -82,9 +101,11 @@ export default function HomeHeader() {
                         onChange={(e) => setDistrict(e.target.value)}
                         placeholder="Select option"
                       >
-                        <option value="Colombo">Colombo</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        {accLocation.map((type) => (
+                          <option key={type} value={type}>
+                            {type}
+                          </option>
+                        ))}
                       </Select>
                     </div>
 
