@@ -21,7 +21,7 @@ export const createPost = createAsyncThunk("createPost",async(postData)=>{
 
 export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async(district)=>{
     try{
-        const {data} = await axios.get(`http://localhost:8080/api/post/${district}`)
+        const {data} = await axios.get(`http://localhost:8080/api/post/district/${district}`)
         return data
     }catch(error){
         console.log("Fetch Post by district Error : ",error); 
@@ -49,6 +49,16 @@ export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
         return data
     }catch(error){
         console.log("Fetch Post Error : ",error); 
+        throw error
+    }
+})
+
+export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", async(accommodationType)=>{
+    try{
+        const {data} = await axios.get(`http://localhost:8080/api/post/accommodationType/${accommodationType}`)
+        return data
+    }catch(error){
+        console.log("Fetch Post by Houe Type Error : ",error); 
         throw error
     }
 })
