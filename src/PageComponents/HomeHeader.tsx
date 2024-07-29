@@ -20,7 +20,6 @@ export default function HomeHeader() {
   const [accommodationType, setAccommodationType] = useState('');
   const [district, setDistrict] = useState('');
   const navigate = useNavigate()
-
   const dispatch = useDispatch<AppDispatch>()
 
   const handleScroll = () => {
