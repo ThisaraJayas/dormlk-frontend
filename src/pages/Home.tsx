@@ -1,5 +1,6 @@
 import HomeBanner from '@/PageComponents/HomeBanner'
 import HomeHeader from '@/PageComponents/HomeHeader'
+import HomeHeaderTabs from '@/PageComponents/HomeHeaderTabs'
 import HomeItems from '@/PageComponents/HomeItems'
 import HomeStat from '@/PageComponents/HomeStat'
 import HomeTestimonial from '@/PageComponents/HomeTestimonial'
@@ -12,9 +13,12 @@ export default function Home() {
     <div>
          <div className="homeContainer"> {/* This div has the background image */}
       <HomeHeader />
+      
       {/* Other content can go here */}
     </div>
+    
     <HomeStat/>
+    <HomeHeaderTabs/>
     <HomeTitle/>
         <HomeItems/>
         <HomeTestimonial/>

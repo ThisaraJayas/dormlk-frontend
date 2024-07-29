@@ -22,6 +22,7 @@ export default function Store() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
+  
 
   useEffect(() => {
     const query = new URLSearchParams(location.search).get('query');

@@ -54,7 +54,7 @@ export default function HomeHeader() {
             {showHeader && <DefaulltHeader />}{" "}
             Show DefaulltHeader if scrolled */}
             <div className="bannerSection sm:px-4">
-  <div className="filterBanner m-10 inline-block max-w-4xl mx-auto">
+  <div className="filterBanner m-40 inline-block max-w-4xl mx-auto">
     <div className="rounded-xl border border-gray-200 bg-white p-6 pl-12 pr-12 shadow-lg">
       
       <div className="mt-2 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
