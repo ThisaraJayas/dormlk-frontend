@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllPosts } from '@/Redux/Post/PostAction';
+import { fetchAllPosts, filterPostBySearchFilter } from '@/Redux/Post/PostAction';
 import { AppDispatch, RootState } from '@/Redux/store';
 import StoreItem from '@/PageComponents/StoreItem';
 import { Box, Button, Flex, Input, Text, SimpleGrid } from '@chakra-ui/react';
@@ -24,6 +24,24 @@ export default function Store() {
   const location = useLocation();
   
 
+  // Function to parse query parameters
+  const getQueryParams = () => {
+    const params = new URLSearchParams(location.search);
+    const accommodationType = params.get('accommodationType');
+    const district = params.get('district');
+    return { accommodationType, district };
+  };
+
+  const { accommodationType, district } = getQueryParams();
+
+  useEffect(() => {
+    if (accommodationType && district) {
+      dispatch(filterPostBySearchFilter({ district, accommodationType }));
+    } else {
+      dispatch(fetchAllPosts());
+    }
+  }, [dispatch, accommodationType, district]);
+
   useEffect(() => {
     const query = new URLSearchParams(location.search).get('query');
     if (query) {
@@ -33,9 +51,9 @@ export default function Store() {
     }
   }, [location.search]);
 
-  useEffect(() => {
-    dispatch(fetchAllPosts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllPosts());
+  // }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
