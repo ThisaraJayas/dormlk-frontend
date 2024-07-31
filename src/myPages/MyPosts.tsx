@@ -1,4 +1,5 @@
 import { getUser } from '@/Redux/Auth/AuthAction';
+import { fetchPostsByUserId } from '@/Redux/Post/PostAction';
 import { AppDispatch, RootState } from '@/Redux/store';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,13 +7,20 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function MyPosts() {
   const dispatch = useDispatch<AppDispatch>();
   const {loginUser} = useSelector((state:RootState)=>state.User)
-  const {allPost}=useSelector((state:RootState)=>state.Post)
+  const {allPostByUserId}=useSelector((state:RootState)=>state.Post)
 
   useEffect(()=>{
     dispatch(getUser())
   },[dispatch])
 
-  console.log(loginUser?.id);
+
+  useEffect(() => {
+    if (loginUser?.id) {
+      dispatch(fetchPostsByUserId(loginUser.id));
+    }
+  }, [dispatch, loginUser?.id]);
+
+  console.log(allPostByUserId);
   
 
   return (
@@ -45,14 +53,14 @@ export default function MyPosts() {
             <thead className="hidden border-b lg:table-header-group">
               <tr className="">
                 <td className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
-                  Order Date
+                  Post Date
                   <svg xmlns="http://www.w3.org/2000/svg" className="float-right mt-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 </td>
     
-                <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Order ID</td>
-                <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Description</td>
+                <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Post ID</td>
+                <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Title</td>
                 
     
                
@@ -62,47 +70,72 @@ export default function MyPosts() {
             </thead>
     
             <tbody className="bg-white lg:border-gray-300">
-              <tr className="">
-                <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-                  07 February, 2022
-                  <div className="mt-1 flex flex-col text-xs font-medium lg:hidden">
-                    <div className="flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                      Jane Doeson
-                    </div>
-                    <div className="flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                      </svg>
-                      Desktop Computer
-                    </div>
-                    <div className="">24 x 10 x 5 cm</div>
-                    <div className="flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                      </svg>
-                      1 Kg
-                    </div>
-                  </div>
-                </td>
-    
-                <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">62345231143</td>
-    
-                <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">Desktop Computer</td>
-    
-                
-                <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-500 sm:px-3 lg:table-cell">
-                  <span className="  whitespace-nowrap rounded-full bg-purple-100 px-2 py-0.5 text-purple-800">Action Required</span>
-                </td>
-                <td className="whitespace-no-wrap py-4 text-right text-sm text-gray-600 sm:px-3 lg:hidden">
-                  
-                  <span className="mt-1 ml-auto block w-fit whitespace-nowrap rounded-full bg-purple-100 px-2 py-0.5 text-center text-xs text-purple-800 lg:hidden">Action Required</span>
-                </td>
-    
-                
-              </tr>
+            {allPostByUserId.map((post,index)=>(
+      <tr key={index} className="">
+      <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
+        07 February, 2022
+        <div className="mt-1 flex flex-col text-xs font-medium lg:hidden">
+          <div className="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Jane Doeson
+          </div>
+          <div className="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+            </svg>
+            Desktop Computer
+          </div>
+          <div className="">24 x 10 x 5 cm</div>
+          <div className="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+            1 Kg
+          </div>
+        </div>
+      </td>
+
+      <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">{String(post.id)}</td>
+
+      <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">{post.title}</td>
+
+      {post.postStatus=='PENDING'}
+      <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-500 sm:px-3 lg:table-cell">
+        {/* Conditional styling based on the status */}
+        <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-center text-xs ${
+          post.postStatus === 'PENDING' ? 'bg-purple-100 text-purple-800' :
+          post.postStatus === 'ACCEPTED' ? 'bg-green-100 text-green-800' :
+          post.postStatus === 'REJECTED' ? 'bg-red-100 text-red-800' :
+          'bg-gray-100 text-gray-800' // Default case if needed
+        }`}>
+          {post.postStatus === 'PENDING' ? 'Pending' :
+           post.postStatus === 'ACCEPTED' ? 'Accepted' :
+           post.postStatus === 'REJECTED' ? 'Rejected' :
+           'Unknown Status'}
+        </span>
+      </td>
+      <td className="whitespace-no-wrap py-4 text-right text-sm text-gray-600 sm:px-3 lg:hidden">
+        
+        <span className={`mt-1 ml-auto block w-fit whitespace-nowrap rounded-full px-2 py-0.5 text-center text-xs lg:hidden"
+        ${
+          post.postStatus === 'PENDING' ? 'bg-purple-100 text-purple-800' :
+          post.postStatus === 'ACCEPTED' ? 'bg-green-100 text-green-800' :
+          post.postStatus === 'REJECTED' ? 'bg-red-100 text-red-800' :
+          'bg-gray-100 text-gray-800' // Default case if needed
+        }`}>
+          {post.postStatus === 'PENDING' ? 'Pending' :
+           post.postStatus === 'ACCEPTED' ? 'Accepted' :
+           post.postStatus === 'REJECTED' ? 'Rejected' :
+           'Unknown Status'}
+        </span>
+      </td>
+
+      
+    </tr>
+    ))}
+              
              
             </tbody>
           </table>
