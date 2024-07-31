@@ -12,7 +12,7 @@ export default function MyPosts() {
     dispatch(getUser())
   },[dispatch])
 
-  console.log(loginUser.id);
+  console.log(loginUser?.id);
   
 
   return (
