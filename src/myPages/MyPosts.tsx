@@ -1,6 +1,20 @@
-import React from 'react';
+import { getUser } from '@/Redux/Auth/AuthAction';
+import { AppDispatch, RootState } from '@/Redux/store';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function MyPosts() {
+  const dispatch = useDispatch<AppDispatch>();
+  const {loginUser} = useSelector((state:RootState)=>state.User)
+  const {allPost}=useSelector((state:RootState)=>state.Post)
+
+  useEffect(()=>{
+    dispatch(getUser())
+  },[dispatch])
+
+  console.log(loginUser.id);
+  
+
   return (
     <div>
     
