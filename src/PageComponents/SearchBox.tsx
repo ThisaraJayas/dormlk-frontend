@@ -65,7 +65,7 @@ export default function SearchBox({ searchQuery, setSearchQuery }: SearchBoxProp
         />
         <button
           type="submit"
-          className="ml-0 inline-flex h-10 items-center justify-center rounded-r-md bg-emerald-500 py-2 px-4 text-center align-middle text-base font-medium normal-case text-white outline-none ring-emerald-200 ring-offset-1 focus:ring"
+          className="ml-0 md:flex hidden h-10 items-center justify-center rounded-r-md bg-emerald-500 py-2 px-4 text-center align-middle text-base font-medium normal-case text-white outline-none ring-emerald-200 ring-offset-1 focus:ring"
         >
           Search
         </button>

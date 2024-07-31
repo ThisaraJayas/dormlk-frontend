@@ -80,13 +80,16 @@ export default function DefaulltHeader() {
           </SheetContent>
         </Sheet>
 
-        <Link
-          to="/"
-          className="flex items-center gap-2 ml-4 mr-6 text-lg font-bold text-emerald-500 hover:text-emerald-600"
-        >
-          <span className="text-3xl">Dorm</span>
-        </Link>
-        <div className="hidden md:flex">
+        <div className="flex md:flex">
+  <Link
+    to="/"
+    className="flex items-center gap-2 ml-0 md:ml-4 mr-0 md:mr-6 text-lg font-bold text-emerald-500 hover:text-emerald-600"
+  >
+    <span className="text-xl md:text-3xl">Dorm</span>
+  </Link>
+</div>
+
+        <div className=" md:flex">
           <SearchBox />
         </div>
 
@@ -124,6 +127,7 @@ export default function DefaulltHeader() {
             )}
             
           </nav>
+          <div className="hidden md:flex">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex items-center gap-2">
@@ -144,6 +148,7 @@ export default function DefaulltHeader() {
               
             </DropdownMenuContent>
           </DropdownMenu>
+          </div>
         </div>
       </header>
     </div>

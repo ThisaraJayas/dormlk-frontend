@@ -15,6 +15,7 @@ import Footer from './PageComponents/Footer'
 import Item from './pages/Item'
 import Store from './pages/Store'
 import DefaulltHeader from './PageComponents/DefaulltHeader'
+import MyPage from './pages/MyPage'
 
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/addpost' element={<Post/>}/>
         <Route path='/item' element={<Item/>}/>
         <Route path='/store' element={<Store/>}/>
+        <Route path='/my/*' element={<MyPage/>}/>
       </Routes>
      <Footer/>
       {/* <Link to={''}>

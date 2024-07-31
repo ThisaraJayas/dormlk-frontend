@@ -99,7 +99,7 @@ export default function HomeHeader() {
                       <Select
                         value={district}
                         onChange={(e) => setDistrict(e.target.value)}
-                        placeholder="Select option"
+                        placeholder="Select District"
                       >
                         {accLocation.map((type) => (
                           <option key={type} value={type}>
