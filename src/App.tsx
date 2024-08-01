@@ -16,6 +16,7 @@ import Item from './pages/Item'
 import Store from './pages/Store'
 import DefaulltHeader from './PageComponents/DefaulltHeader'
 import MyPage from './pages/MyPage'
+import AdminDashboard from './Admin/AdminDashboard'
 
 
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/item' element={<Item/>}/>
         <Route path='/store' element={<Store/>}/>
         <Route path='/my/*' element={<MyPage/>}/>
+        <Route path='/admin/*' element={<AdminDashboard/>}/>
       </Routes>
      <Footer/>
       {/* <Link to={''}>
