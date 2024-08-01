@@ -1,4 +1,4 @@
-import { getAllPostsAdmin } from "@/Redux/Admin/AdminPostAction";
+import { getAllPostsAdmin, updatePostStatus } from "@/Redux/Admin/AdminPostAction";
 import { AppDispatch, RootState } from "@/Redux/store";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,9 @@ export default function AdminPost() {
     dispatch(getAllPostsAdmin());
   }, [dispatch]);
 
-  const handleStatusChange = (postId: number, newStatus: string) => {
+  const handleStatusChange = (postId: string, newStatus: string) => {
+    console.log(postId);
+    
     dispatch(updatePostStatus(postId, newStatus))
 }
 
@@ -118,7 +120,7 @@ export default function AdminPost() {
                           onChange={(e) =>
                             handleStatusChange(post.id, e.target.value)
                           }
-                          value={post.status} // Ensure the select shows the current status
+                          value={post.postStatus} // Ensure the select shows the current status
                         >
                           <option
                             value="PENDING"
