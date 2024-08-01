@@ -42,3 +42,4 @@ export const AdminPostSlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{}
 })
+export default AdminPostSlice.reducer
