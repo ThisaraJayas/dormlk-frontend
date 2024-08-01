@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getAllPostsAdmin } from "./AdminPostAction";
 
 export interface Post{
     id:Number,
@@ -40,6 +41,17 @@ export const AdminPostSlice = createSlice({
     name:"adminPost",
     initialState,
     reducers:{},
-    extraReducers:(builder)=>{}
+    extraReducers:(builder)=>{
+        builder.addCase(getAllPostsAdmin.pending,(state)=>{
+            state.status='loading'
+        })
+        builder.addCase(getAllPostsAdmin.fulfilled,(state, action)=>{
+            state.status='succeeded',
+            state.allAdminPost=action.payload
+        })
+        builder.addCase(getAllPostsAdmin.rejected,(state)=>{
+            state.status='failed'
+        })
+    }
 })
 export default AdminPostSlice.reducer

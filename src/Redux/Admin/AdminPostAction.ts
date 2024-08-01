@@ -1,9 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(userId)=>{
+
+export const getAllPostsAdmin = createAsyncThunk("getAllPostsAdmin",async()=>{
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) throw new Error("JWT not found");
     try{
-        const {data}=await axios.get(`http://localhost:8080/api/post/posts/${userId}`)
+        const {data}=await axios.get(`http://localhost:8080/api/admin/allPosts`,{
+            headers: {
+                "Authorization": `Bearer ${jwt}`
+            }
+        })
         return data
     }catch(error){
         console.log("Fetch Post by UserId Error : ",error);
