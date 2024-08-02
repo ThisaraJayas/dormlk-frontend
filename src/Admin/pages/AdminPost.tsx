@@ -1,4 +1,4 @@
-import { getAllPostsAdmin, updatePostStatus } from "@/Redux/Admin/AdminPostAction";
+import { getAllPostsAdmin, updatePostStatus, updatePostStatuss } from "@/Redux/Admin/AdminPostAction";
 import { AppDispatch, RootState } from "@/Redux/store";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +11,11 @@ export default function AdminPost() {
     dispatch(getAllPostsAdmin());
   }, [dispatch]);
 
-  const handleStatusChange = (postId: string, newStatus: string) => {
-    console.log(postId);
-    
-    dispatch(updatePostStatus(postId, newStatus))
-}
+  const handleStatusChange = (postId: number, newStatus: string) => {
+    console.log("Post ID:", postId);
+    console.log("New Status:", newStatus);
+    dispatch(updatePostStatus({ postId, newStatus }));
+  };
 
   console.log(allAdminPost);
 
@@ -115,35 +115,32 @@ export default function AdminPost() {
                       </td>
 
                       <td>
-                        <select
+                      <select
                           className="sm: mr-4 block w-full whitespace-pre rounded-lg border p-1 pr-10 text-base outline-none focus:shadow sm:text-sm"
-                          onChange={(e) =>
-                            handleStatusChange(post.id, e.target.value)
-                          }
-                          value={post.postStatus} // Ensure the select shows the current status
+                          onChange={(e) => handleStatusChange(post.id, e.target.value)}
+                          value={post.postStatus}
                         >
-                          <option
-                            value="PENDING"
-                            className="whitespace-no-wrap text-sm"
-                          >
+                          <option value="PENDING" className="whitespace-no-wrap text-sm">
                             PENDING
                           </option>
-                          <option
-                            value="ACCEPTED"
-                            className="whitespace-no-wrap text-sm"
-                          >
+                          <option value="ACCEPTED" className="whitespace-no-wrap text-sm">
                             ACCEPTED
                           </option>
-                          <option
-                            value="REJECTED"
-                            className="whitespace-no-wrap text-sm"
-                          >
+                          <option value="REJECTED" className="whitespace-no-wrap text-sm">
                             REJECTED
                           </option>
                         </select>
                       </td>
                       <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-500 sm:px-6 lg:table-cell">
-                        <div className="inline-flex items-center rounded-full bg-blue-600 py-2 px-3 text-xs text-white">
+                      <div
+                          className={`inline-flex items-center rounded-full py-2 px-3 text-xs text-white ${
+                            post.postStatus === "ACCEPTED"
+                              ? "bg-green-600"
+                              : post.postStatus === "REJECTED"
+                              ? "bg-red-600"
+                              : "bg-gray-400"
+                          }`}
+                        >
                           {post.postStatus}
                         </div>
                       </td>

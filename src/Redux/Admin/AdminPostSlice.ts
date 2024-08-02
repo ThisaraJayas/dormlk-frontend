@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPostsAdmin } from "./AdminPostAction";
+import { getAllPostsAdmin, updatePostStatus } from "./AdminPostAction";
 
 export interface Post{
     id:Number,
@@ -50,6 +50,22 @@ export const AdminPostSlice = createSlice({
             state.allAdminPost=action.payload
         })
         builder.addCase(getAllPostsAdmin.rejected,(state)=>{
+            state.status='failed'
+        })
+        builder.addCase(updatePostStatus.pending,(state)=>{
+            state.status='loading'
+        })
+        builder.addCase(updatePostStatus.fulfilled,(state, action)=>{
+            state.status='succeeded';
+            const index = state.allAdminPost.findIndex(
+                (post) => post.id === action.payload.id
+              );
+              if (index !== -1) {
+                // Replace the old post with the updated one
+                state.allAdminPost[index] = action.payload;
+              }
+        })
+        builder.addCase(updatePostStatus.rejected,(state)=>{
             state.status='failed'
         })
     }

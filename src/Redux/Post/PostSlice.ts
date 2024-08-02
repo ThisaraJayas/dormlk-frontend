@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createPost, fetchAllPosts, fetchPostByDistrict, fetchPostByHouseType, fetchPostsByUserId, filterPostBySearchFilter } from "./PostAction";
 
 export interface Post{
-    id:Number,
+    id:number,
     title:string,
     description:string,
     location:string,

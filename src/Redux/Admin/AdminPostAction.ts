@@ -17,19 +17,31 @@ export const getAllPostsAdmin = createAsyncThunk("getAllPostsAdmin",async()=>{
     }
 })
 
-export const updatePostStatus = createAsyncThunk("updatePostStatus",async(postId, newStatus)=>{
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) throw new Error("JWT not found");
-    try{
-        const {data}=await axios.put(`http://localhost:8080/api/admin/${postId}/status`,
-            {status: newStatus},
-            {
+
+export const updatePostStatus = createAsyncThunk(
+    "updatePostStatus",
+    async ({ postId, newStatus }: { postId: number; newStatus: string }) => {
+      console.log("New Status:", newStatus);
+      console.log("Post ID:", postId);
+  
+      const jwt = localStorage.getItem("jwt");
+      if (!jwt) throw new Error("JWT not found");
+  
+      try {
+        const { data } = await axios.put(
+          `http://localhost:8080/api/admin/${postId}/status/${newStatus}`,
+          {}, // empty data object for PUT request
+          {
             headers: {
-                "Authorization": `Bearer ${jwt}`
-            }
-        })
-        return data
-    }catch(error){
-        console.log("Fetch Post by UserId Error : ",error);
+              Authorization: `Bearer ${jwt}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        return data;
+      } catch (error) {
+        console.error("Update Post Status Error:", error);
+        throw error;
+      }
     }
-})
+  );
