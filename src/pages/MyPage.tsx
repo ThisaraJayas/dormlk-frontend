@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Checkbox } from '@chakra-ui/react'
 import MyPosts from '@/myPages/MyPosts'
 import MyProfile from '@/myPages/MyProfile'
+import Footer from '@/PageComponents/Footer'
 
 
 
@@ -35,6 +36,7 @@ export default function MyPage() {
     }
   };
   return (
+    <>
     <div className="flex min-h-screen w-full flex-col">
       
       <main className=" mt-14 flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
@@ -60,5 +62,7 @@ export default function MyPage() {
         </div>
       </main>
     </div>
+    <Footer/>
+    </>
   )
 }

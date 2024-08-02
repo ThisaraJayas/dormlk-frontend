@@ -1,11 +1,12 @@
-import { getAllPostsAdmin, updatePostStatus, updatePostStatuss } from "@/Redux/Admin/AdminPostAction";
+import { getAllPostsAdmin, updatePostStatus } from "@/Redux/Admin/AdminPostAction";
 import { AppDispatch, RootState } from "@/Redux/store";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AdminPost() {
   const dispatch = useDispatch<AppDispatch>();
   const { allAdminPost } = useSelector((state: RootState) => state.AdminPost);
+  const [filterStatus, setFilterStatus] = useState<string>("");
 
   useEffect(() => {
     dispatch(getAllPostsAdmin());
@@ -17,7 +18,14 @@ export default function AdminPost() {
     dispatch(updatePostStatus({ postId, newStatus }));
   };
 
-  console.log(allAdminPost);
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilterStatus(e.target.value);
+  };
+
+  // Filter posts based on the selected status
+  const filteredPosts = allAdminPost.filter((post) =>
+    filterStatus ? post.postStatus === filterStatus : true
+  );
 
   return (
     <div>
@@ -31,21 +39,22 @@ export default function AdminPost() {
             <div className="mt-4 sm:mt-0">
               <p>.</p>
               <div className="flex items-center justify-start sm:justify-end">
-                <div className="flex items-center">
+              <div className="flex items-center">
                   <label
-                    htmlFor=""
+                    htmlFor="filterStatus"
                     className="mr-2 flex-shrink-0 text-sm font-medium text-gray-900"
                   >
-                    {" "}
-                    Sort by:{" "}
+                    Filter by Status:
                   </label>
                   <select
-                    name=""
+                    id="filterStatus"
                     className="sm: mr-4 block w-full whitespace-pre rounded-lg border p-1 pr-10 text-base outline-none focus:shadow sm:text-sm"
+                    onChange={handleFilterChange}
                   >
-                    <option className="whitespace-no-wrap text-sm">
-                      Recent
-                    </option>
+                    <option value="">All</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="ACCEPTED">ACCEPTED</option>
+                    <option value="REJECTED">REJECTED</option>
                   </select>
                 </div>
 
@@ -100,8 +109,8 @@ export default function AdminPost() {
               </thead>
 
               <tbody className="lg:border-gray-300">
-                {allAdminPost &&
-                  allAdminPost.map((post) => (
+                {
+                  filteredPosts.map((post) => (
                     <tr key={post.id} className="">
                       <td className="whitespace-no-wrap py-4 text-sm font-bold text-gray-900 sm:px-6">
                         {String(post.id)}

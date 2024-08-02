@@ -15,6 +15,7 @@ import DefaulltHeader from '@/PageComponents/DefaulltHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/Redux/store'
 import { login } from '@/Redux/Auth/AuthAction'
+import Footer from '@/PageComponents/Footer'
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>()
   const {status} =useSelector((state:RootState)=>state.User)
@@ -84,6 +85,7 @@ export default function Login() {
       </CardContent>
     </Card>
     </div>
+    <Footer/>
     </div>
   )
 }

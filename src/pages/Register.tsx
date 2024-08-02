@@ -15,6 +15,7 @@ import DefaulltHeader from "@/PageComponents/DefaulltHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/Redux/store";
 import { register } from "@/Redux/Auth/AuthAction";
+import Footer from "@/PageComponents/Footer";
 
 
 export default function Register() {
@@ -113,6 +114,7 @@ export default function Register() {
           </CardContent>
         </Card>
       </div>
+      <Footer/>
     </div>
   );
 }

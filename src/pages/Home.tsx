@@ -1,3 +1,4 @@
+import Footer from '@/PageComponents/Footer'
 import HomeBanner from '@/PageComponents/HomeBanner'
 import HomeHeader from '@/PageComponents/HomeHeader'
 import HomeHeaderTabs from '@/PageComponents/HomeHeaderTabs'
@@ -23,6 +24,7 @@ export default function Home() {
         <HomeItems/>
         <HomeTestimonial/>
         <HomeBanner/>
+        <Footer/>
     </div>
   )
 }

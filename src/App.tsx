@@ -39,7 +39,7 @@ function App() {
         <Route path='/my/*' element={<MyPage/>}/>
         <Route path='/admin/*' element={<AdminDashboard/>}/>
       </Routes>
-     <Footer/>
+     
       {/* <Link to={''}>
         <a>Go to About Page</a>
       </Link> */}

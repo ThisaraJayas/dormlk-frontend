@@ -6,6 +6,7 @@ import StoreItem from '@/PageComponents/StoreItem';
 import { Box, Button, Flex, Input, Text, SimpleGrid } from '@chakra-ui/react';
 import DefaulltHeader from '@/PageComponents/DefaulltHeader';
 import { useLocation } from 'react-router-dom';
+import Footer from '@/PageComponents/Footer';
 
 interface Post {
   id: number;
@@ -108,6 +109,7 @@ export default function Store() {
         </Button>
       </Flex>
     </Box>
+    <Footer/>
     </>
   );
 }
