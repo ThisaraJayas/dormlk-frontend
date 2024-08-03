@@ -70,3 +70,14 @@ export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(us
         console.log("Fetch Post by UserId Error : ",error);
     }
 })
+
+export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(postId)=>{
+    try{
+        const {data}=await axios.get(`http://localhost:8080/api/post/${postId}`)
+        console.log(data);
+        
+        return data
+    }catch(error){
+        console.log("Fetch Post by UserId Error : ",error);
+    }
+})

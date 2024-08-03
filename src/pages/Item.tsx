@@ -1,58 +1,79 @@
-import React from 'react'
+import ItemBreadChumb from '@/PageComponents/ItemBreadChumb'
+import React, { useEffect, useState } from 'react'
+import img1 from '../styles/home3.png'
+import img2 from '../styles/home1.jpg'
+import img3 from '../styles/home6.png'
+import img4 from '../styles/home4.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/Redux/store'
+import { useParams } from 'react-router-dom'
+import { fetchPostsByPostId } from '@/Redux/Post/PostAction'
+
 
 export default function Item() {
+  const dispatch = useDispatch<AppDispatch>()
+  const {itemPost} =useSelector((state:RootState)=>state.Post)
+  const { id } = useParams();
+  const [selectedImage, setSelectedImage] = useState('');
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchPostsByPostId(id));
+    }
+  }, [dispatch, id]);
+
+  console.log(itemPost);
+
+  useEffect(() => {
+    if (itemPost && itemPost.images && itemPost.images.length > 0) {
+      setSelectedImage(itemPost.images[0]); // Set the first image as the default selected image
+    }
+  }, [itemPost]);
+
+  const handleThumbnailClick = (image: string) => {
+    setSelectedImage(image);
+  };
+    // Add a loading or error state if necessary
+    if (!itemPost) {
+      return <div>Loading...</div>; // You can replace this with a more sophisticated loading indicator
+    }
+  
   return (
     <div>
-        <section className="py-12 sm:py-16"> 
+        <section className="py-12 mt-6 sm:py-16"> 
   <div className="container mx-auto px-4">
-    <nav className="flex">
-      <ol role="list" className="flex items-center">
-        <li className="text-left">
-          <div className="-m-1">
-            <a href="#" className="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </a>
-          </div>
-        </li>
-
-        <li className="text-left">
-          <div className="flex items-center">
-            <span className="mx-2 text-gray-400">/</span>
-            <div className="-m-1">
-              <a href="#" className="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Products </a>
-            </div>
-          </div>
-        </li>
-
-        <li className="text-left">
-          <div className="flex items-center">
-            <span className="mx-2 text-gray-400">/</span>
-            <div className="-m-1">
-              <a href="#" className="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800" aria-current="page"> Coffee </a>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </nav>
+    <ItemBreadChumb/>
 
     <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
       <div className="lg:col-span-3 lg:row-end-1">
         <div className="lg:flex lg:items-start">
           <div className="lg:order-2 lg:ml-5">
             <div className="max-w-xl overflow-hidden rounded-lg">
-              <img className="h-full w-full max-w-full object-cover" src="/images/JHxMnVrtPMdcNU1s_7g7f.png" alt="" />
+              <img className="h-full w-full max-w-full object-cover" src={selectedImage} alt="" />
             </div>
           </div>
 
           <div className="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
             <div className="flex flex-row items-start lg:flex-col">
-              <button type="button" className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center">
-                <img className="h-full w-full object-cover" src="/images/JHxMnVrtPMdcNU1s_7g7f.png" alt="" />
-              </button>
-              <button type="button" className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                <img className="h-full w-full object-cover" src="/images/JHxMnVrtPMdcNU1s_7g7f.png" alt="" />
-              </button>
-              <button type="button" className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                <img className="h-full w-full object-cover" src="/images/JHxMnVrtPMdcNU1s_7g7f.png" alt="" />
-              </button>
+            {itemPost.images &&
+                      itemPost.images.map((image, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => handleThumbnailClick(image)}
+                          className={`flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 ${
+                            selectedImage === image
+                              ? 'border-gray-900'
+                              : 'border-transparent'
+                          } text-center`}
+                        >
+                          <img
+                            className="h-full w-full object-cover"
+                            src={image}
+                            alt={`Thumbnail ${index}`}
+                          />
+                        </button>
+                      ))}
             </div>
           </div>
         </div>

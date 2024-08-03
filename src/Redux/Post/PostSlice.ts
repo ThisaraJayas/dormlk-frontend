@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPost, fetchAllPosts, fetchPostByDistrict, fetchPostByHouseType, fetchPostsByUserId, filterPostBySearchFilter } from "./PostAction";
+import { createPost, fetchAllPosts, fetchPostByDistrict, fetchPostByHouseType, fetchPostsByPostId, fetchPostsByUserId, filterPostBySearchFilter } from "./PostAction";
 
 export interface Post{
     id:number,
@@ -28,17 +28,19 @@ export interface Post{
 }
 interface PostState{
     post:Post,
+    itemPost:Post,
     allPost:Post[]
     allPostByHouseType:Post[]
     allPostByUserId:Post[]
     status: "idle" | "loading" | "succeeded" | "failed"
 }
 const initialState:PostState={
-    post: undefined,
     allPost: [],
     status: "idle",
     allPostByHouseType: [],
-    allPostByUserId: []
+    allPostByUserId: [],
+    itemPost: null,
+    post: undefined
 }
 export const PostSlice = createSlice({
     name:"post",
@@ -97,6 +99,16 @@ export const PostSlice = createSlice({
             state.allPostByUserId=action.payload
         })
         builder.addCase(fetchPostsByUserId.rejected , (state)=>{
+            state.status='failed'
+        })
+        builder.addCase(fetchPostsByPostId .pending,(state)=>{
+            state.status='loading'
+        })
+        builder.addCase(fetchPostsByPostId.fulfilled,(state,action)=>{
+            state.status='succeeded',
+            state.itemPost=action.payload
+        })
+        builder.addCase(fetchPostsByPostId.rejected , (state)=>{
             state.status='failed'
         })
     }
