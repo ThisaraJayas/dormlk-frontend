@@ -7,6 +7,19 @@ import { useParams } from "react-router-dom";
 import { fetchPostsByPostId } from "@/Redux/Post/PostAction";
 import ChakraCarousel from "@/PageComponents/ChakraCarousel";
 import Comment from "../PageComponents/Comment";
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  TabIndicator,
+  Flex,
+  Image,
+  Box,
+  Spinner,
+} from "@chakra-ui/react";
+import ReviewCard from "@/PageComponents/ReviewCard";
 
 export default function Item() {
   const dispatch = useDispatch<AppDispatch>();
@@ -272,9 +285,8 @@ export default function Item() {
             </div>
 
             <div className="lg:col-span-3">
-              <div className="border-b border-gray-300">
-                <nav className="flex gap-4">
-                  <a
+              {/* <nav className="flex gap-4"> */}
+              {/* <a
                     href="#"
                     title=""
                     className="border-b-2 border-gray-900 py-4 text-sm font-medium text-gray-900 hover:border-gray-400 hover:text-gray-800"
@@ -294,19 +306,67 @@ export default function Item() {
                       1,209{" "}
                     </span>
                   </a>
-                </nav>
-              </div>
-
-              <div className="mt-8 flow-root sm:mt-12">
-                <h1 className="text-3xl font-bold">Description of Property</h1>
-                <p className="mt-4">{itemPost.description}</p>
-                {/* <h1 className="mt-8 text-3xl font-bold">Description of Property</h1>
+                </nav> */}
+              <Tabs>
+                <TabList>
+                  <Tab
+                    sx={{
+                      _selected: {
+                        color: "black",
+                        borderBottomColor: "black",
+                      },
+                    }}
+                  >
+                    <p
+                      title=""
+                      className="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium text-gray-600"
+                    >
+                      {" "}
+                      Description{" "}
+                    </p>
+                  </Tab>
+                  <Tab
+                    sx={{
+                      _selected: {
+                        color: "black",
+                        borderBottomColor: "black",
+                      },
+                    }}
+                  >
+                    <p
+                      title=""
+                      className="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium text-gray-600"
+                    >
+                      Reviews
+                      <span className="ml-2 block rounded-full bg-gray-500 px-2 py-px text-xs font-bold text-gray-100">
+                        {" "}
+                        1,209{" "}
+                      </span>
+                    </p>
+                  </Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <div className="mt-8 flow-root sm:mt-12">
+                      <h1 className="text-3xl font-bold">
+                        Description of Property
+                      </h1>
+                      <p className="mt-4">{itemPost.description}</p>
+                      {/* <h1 className="mt-8 text-3xl font-bold">Description of Property</h1>
           <p className="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio numquam enim facere.</p>
           <p className="mt-4">Amet consectetur adipisicing elit. Optio numquam enim facere. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore rerum nostrum eius facere, ad neque.</p> */}
-              </div>
-              <div className="mt-8 flow-root sm:mt-12">
-              <h1 className="text-3xl font-bold">Write your comment</h1>
-              <Comment postId={id}/>
+                    </div>
+                  </TabPanel>
+                  <TabPanel>
+                    <ReviewCard />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+
+              <div className="border-b mt-7 border-gray-300"></div>
+              <div className="flow-root sm:mt-12">
+                <h1 className="text-2xl font-bold">Write your Review</h1>
+                <Comment postId={id} />
               </div>
             </div>
           </div>
