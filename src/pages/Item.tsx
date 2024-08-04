@@ -70,7 +70,7 @@ export default function Item() {
             </div>
           
       <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-        <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">Afro-Brazillian Coffee</h1>
+        <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{itemPost.title}</h1>
 
         <div className="mt-5 flex items-center">
           <div className="flex items-center">
@@ -93,39 +93,37 @@ export default function Item() {
           <p className="ml-2 text-sm font-medium text-gray-500">1,209 Reviews</p>
         </div>
 
-        <h2 className="mt-8 text-base text-gray-900">Coffee Type</h2>
-        <div className="mt-3 flex select-none flex-wrap items-center gap-1">
+        <h2 className="mt-8 text-base text-gray-900">Facilities</h2>
+        
+                    {itemPost.facilities &&
+                      itemPost.facilities.map((facitites, index) => (
+                        <div key={index} className="mt-3 flex select-none flex-wrap items-center gap-1">
           <label className="">
             <input type="radio" name="type" value="Powder" className="peer sr-only" checked />
-            <p className="peer-checked:bg-black peer-checked:text-white rounded-lg border border-black px-6 py-2 font-bold">Powder</p>
-          </label>
-          <label className="">
-            <input type="radio" name="type" value="Whole Bean" className="peer sr-only" />
-            <p className="peer-checked:bg-black peer-checked:text-white rounded-lg border border-black px-6 py-2 font-bold">Whole Bean</p>
-          </label>
-          <label className="">
-            <input type="radio" name="type" value="Groud" className="peer sr-only" />
-            <p className="peer-checked:bg-black peer-checked:text-white rounded-lg border border-black px-6 py-2 font-bold">Groud</p>
+            <p className="bg-emerald-600 text-white rounded-lg border border-emerald-600 px-6 py-2 font-bold">{facitites}</p>
           </label>
         </div>
+                      ))}
+        
 
-        <h2 className="mt-8 text-base text-gray-900">Choose subscription</h2>
+        <h2 className="mt-8 text-base text-gray-900">House Details</h2>
+        
         <div className="mt-3 flex select-none flex-wrap items-center gap-1">
+        <label className="">
+            <input type="radio" name="subscription" value="4 Months" className="peer sr-only" />
+            <p className="bg-white text-emerald-600 rounded-lg border border-emerald-600 px-6 py-2 font-bold">{itemPost.accommodationType}</p>
+            
+          </label>
           <label className="">
             <input type="radio" name="subscription" value="4 Months" className="peer sr-only" />
-            <p className="peer-checked:bg-black peer-checked:text-white rounded-lg border border-black px-6 py-2 font-bold">4 Months</p>
-            <span className="mt-1 block text-center text-xs">$80/mo</span>
+            <p className="bg-white text-emerald-600 rounded-lg border border-emerald-600 px-6 py-2 font-bold">{itemPost.noOfBathroom} Beds</p>
+            
           </label>
           <label className="">
             <input type="radio" name="subscription" value="8 Months" className="peer sr-only" checked />
-            <p className="peer-checked:bg-black peer-checked:text-white rounded-lg border border-black px-6 py-2 font-bold">8 Months</p>
-            <span className="mt-1 block text-center text-xs">$60/mo</span>
+            <p className="bg-white text-emerald-600 rounded-lg border border-emerald-600 px-6 py-2 font-bold">{itemPost.noOfBathroom} Bathrooms</p>
           </label>
-          <label className="">
-            <input type="radio" name="subscription" value="12 Months" className="peer sr-only" />
-            <p className="peer-checked:bg-black peer-checked:text-white rounded-lg border border-black px-6 py-2 font-bold">12 Months</p>
-            <span className="mt-1 block text-center text-xs">$40/mo</span>
-          </label>
+          
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
