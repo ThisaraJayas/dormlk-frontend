@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from "@/Redux/store";
 import { useParams } from "react-router-dom";
 import { fetchPostsByPostId } from "@/Redux/Post/PostAction";
 import ChakraCarousel from "@/PageComponents/ChakraCarousel";
+import Comment from "../PageComponents/Comment";
 
 export default function Item() {
   const dispatch = useDispatch<AppDispatch>();
@@ -302,6 +303,10 @@ export default function Item() {
                 {/* <h1 className="mt-8 text-3xl font-bold">Description of Property</h1>
           <p className="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio numquam enim facere.</p>
           <p className="mt-4">Amet consectetur adipisicing elit. Optio numquam enim facere. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore rerum nostrum eius facere, ad neque.</p> */}
+              </div>
+              <div className="mt-8 flow-root sm:mt-12">
+              <h1 className="text-3xl font-bold">Write your comment</h1>
+              <Comment/>
               </div>
             </div>
           </div>
