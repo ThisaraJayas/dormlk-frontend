@@ -1,9 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createComment } from "./CommentAction"
+import { createComment, fetchCommentsByPostId } from "./CommentAction"
 
 export interface Comment{
     id:number,
     content:string,
+    createdDateTime: Date,
+    user: {
+        id: number;
+        firstName: string;
+        lastName: string;
+    };
 }
 
 interface CommentState{
@@ -28,6 +34,13 @@ export const CommentSlice = createSlice({
         builder.addCase(createComment.fulfilled,(state,action)=>{
             state.status='succeeded',
             state.comment=action.payload
+        })
+        builder.addCase(fetchCommentsByPostId.pending,(state)=>{
+            state.status='loading'
+        })
+        builder.addCase(fetchCommentsByPostId.fulfilled,(state,action)=>{
+            state.status='succeeded',
+            state.allComment=action.payload
         })
     }
 

@@ -18,3 +18,14 @@ export const createComment = createAsyncThunk("createComment",async(content)=>{
     }
     
 })
+
+export const fetchCommentsByPostId = createAsyncThunk("fetchCommentsByPostId",async(postId)=>{
+    console.log("PPP ",postId);
+    
+    try{
+        const {data}=await axios.get(`http://localhost:8080/api/comments/${postId}`)
+        return data
+    }catch(error){
+        console.log("Fetch Comments by PostId Error : ",error);
+    }
+})

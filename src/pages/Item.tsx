@@ -358,7 +358,7 @@ export default function Item() {
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    <ReviewCard />
+                    <ReviewCard postId={id} />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
