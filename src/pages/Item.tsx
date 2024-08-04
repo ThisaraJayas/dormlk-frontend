@@ -306,7 +306,7 @@ export default function Item() {
               </div>
               <div className="mt-8 flow-root sm:mt-12">
               <h1 className="text-3xl font-bold">Write your comment</h1>
-              <Comment/>
+              <Comment postId={id}/>
               </div>
             </div>
           </div>
