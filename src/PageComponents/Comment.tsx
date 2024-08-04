@@ -25,8 +25,8 @@ export default function Comment({ postId }) {
   return (
     <div>
       <div className="">
-        <div className="mx-auto max-w-screen-sm px-4">
-          <div className="-ml-20 flex p-4 text-left text-gray-700">
+        <div className="mt-5 mx-auto max-w-screen-sm px-4">
+          <div className="-ml-10 lg:-ml-20 flex p-4 text-left text-gray-700">
             <img
               className="mr-5 h-12 w-12 rounded-full"
               src="https://ui-avatars.com/api/?name=John+Doe"
