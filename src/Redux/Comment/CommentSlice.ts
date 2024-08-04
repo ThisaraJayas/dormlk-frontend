@@ -5,6 +5,7 @@ export interface Comment{
     id:number,
     content:string,
     createdDateTime: Date,
+    starRating:number,
     user: {
         id: number;
         firstName: string;

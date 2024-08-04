@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { fetchPostsByPostId } from "@/Redux/Post/PostAction";
 import ChakraCarousel from "@/PageComponents/ChakraCarousel";
 import Comment from "../PageComponents/Comment";
+import StarRatings from 'react-star-ratings'; 
+
 import {
   Tabs,
   TabList,
@@ -19,13 +21,23 @@ import {
   Box,
   Spinner,
 } from "@chakra-ui/react";
-import ReviewCard from "@/PageComponents/ReviewCard";
+import ReviewCard, { averageRating } from "@/PageComponents/ReviewCard";
+import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction";
 
+var totalComments = 0;
 export default function Item() {
   const dispatch = useDispatch<AppDispatch>();
   const { itemPost } = useSelector((state: RootState) => state.Post);
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
+  const { allComment } = useSelector((state: RootState) => state.Comment);
+ totalComments = allComment.length
+
+  useEffect(() => {
+    dispatch(fetchCommentsByPostId(id));
+  }, [dispatch, id]);
+
+console.log("RRR ",totalComments);
 
   useEffect(() => {
     if (id) {
@@ -85,64 +97,23 @@ export default function Item() {
 
               <div className="mt-5 flex items-center">
                 <div className="flex items-center">
-                  <svg
-                    className="block h-4 w-4 align-middle text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      className=""
-                    ></path>
-                  </svg>
-                  <svg
-                    className="block h-4 w-4 align-middle text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      className=""
-                    ></path>
-                  </svg>
-                  <svg
-                    className="block h-4 w-4 align-middle text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      className=""
-                    ></path>
-                  </svg>
-                  <svg
-                    className="block h-4 w-4 align-middle text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      className=""
-                    ></path>
-                  </svg>
-                  <svg
-                    className="block h-4 w-4 align-middle text-yellow-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                      className=""
-                    ></path>
-                  </svg>
+                <StarRatings
+                  rating={averageRating}
+                  starRatedColor="orange"
+                  numberOfStars={5}
+                  starDimension="15px"
+                  starSpacing="1px"
+                />
+                <span className="ml-1 mt-1 text-sm">({averageRating.toFixed(1)})</span>
                 </div>
-                <p className="ml-2 text-sm font-medium text-gray-500">
-                  1,209 Reviews
+                
+              
+               
+              
+            
+            
+                <p className="ml-4 mt-1 text-sm font-medium text-gray-500">
+                  {totalComments} Reviews
                 </p>
               </div>
 
@@ -340,7 +311,7 @@ export default function Item() {
                       Reviews
                       <span className="ml-2 block rounded-full bg-gray-500 px-2 py-px text-xs font-bold text-gray-100">
                         {" "}
-                        1,209{" "}
+                       {totalComments}{" "}
                       </span>
                     </p>
                   </Tab>

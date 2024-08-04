@@ -2,6 +2,7 @@ import { createComment } from "@/Redux/Comment/CommentAction";
 import { AppDispatch, RootState } from "@/Redux/store";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import StarRatings from 'react-star-ratings';
 
 export default function Comment({ postId }) {
   console.log("Commne tpost : ", postId);
@@ -9,9 +10,11 @@ export default function Comment({ postId }) {
   const dispatch = useDispatch<AppDispatch>()
   const {comment}=useSelector((state:RootState)=>state.Comment)
   const [content, setContent] = useState("");
+  const [starRating, setRating] = useState(1);
 
   console.log(comment);
-  
+  console.log(starRating);
+
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -19,12 +22,17 @@ export default function Comment({ postId }) {
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createComment({ content, postId }));
-        setContent(""); 
+        dispatch(createComment({ content, postId, starRating }));
+        setContent("");
+        setRating(0); 
+  };
+  const changeRating = (newRating: number) => {
+    setRating(newRating); // Update rating state
   };
   return (
     <div>
       <div className="">
+        
         <div className="mt-5 mx-auto max-w-screen-sm px-4">
           <div className="-ml-10 lg:-ml-20 flex p-4 text-left text-gray-700">
             <img
@@ -44,6 +52,17 @@ export default function Comment({ postId }) {
                     className="h-40 w-full min-w-full max-w-full overflow-auto whitespace-pre-wrap rounded-md border bg-white p-5 text-sm font-normal normal-case text-gray-600 opacity-100 outline-none focus:text-gray-600 focus:opacity-100 focus:ring"                    value={content}
                     onChange={handleCommentChange}
                   ></textarea>
+                </div>
+                <div className="my-2">
+                  <StarRatings
+                    rating={starRating}
+                    starRatedColor="orange"
+                    changeRating={changeRating}
+                    numberOfStars={5}
+                    name='rating'
+                    starDimension="20px"
+                    starSpacing="5px"
+                  />
                 </div>
                 <div className="float-right my-2">
                   <input
