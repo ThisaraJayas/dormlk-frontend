@@ -38,15 +38,32 @@ import ReviewCard, { averageRating } from "@/PageComponents/ReviewCard";
 import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction";
 import { suitableFor } from "@/PageComponents/ListPost";
 import { Contact2Icon, MessageCircleMore, Send, Telescope } from "lucide-react";
+import { createMessage } from "@/Redux/Messages/MessageAction";
 
 var totalComments = 0;
 export default function Item() {
   const dispatch = useDispatch<AppDispatch>();
   const { itemPost } = useSelector((state: RootState) => state.Post);
+  const { message } = useSelector((state: RootState) => state.Message);
+
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const { allComment } = useSelector((state: RootState) => state.Comment);
+
+  // State for form inputs
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [messageText, setMessageText] = useState('');
+
  totalComments = allComment.length
+
+  const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch(createMessage({  postId: id, firstName, email, mobileNo, message: messageText })); 
+  };
+  console.log("Send Message ",message);
+  
 
   useEffect(() => {
     dispatch(fetchCommentsByPostId(id));
@@ -234,52 +251,65 @@ console.log("RRR ",totalComments);
           Spot-on choice and perfect timing! Your home is just a few steps away. Enquiry is absolutely free.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-      <div className="grid grid-cols-1 gap-2">
-        <Label htmlFor="name" className="text-left">
-          Full Name
-        </Label>
-        <Input
-          id="name"
-          placeholder="Enter full name"
-          className="col-span-1"
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-2">
-        <Label htmlFor="email" className="text-left">
-          Email
-        </Label>
-        <Input
-          type="email"
-          id="email"
-          placeholder="Enter email"
-          className="col-span-1"
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-2">
-        <Label htmlFor="name" className="text-left">
-          Mobile Number
-        </Label>
-        <Input
-          id="name"
-          placeholder="Enter mobile no"
-          className="col-span-1"
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-2">
-        <Label htmlFor="message" className="text-left">
-          Message
-        </Label>
-        <Textarea
-          id="message"
-          className="col-span-1"
-          placeholder="Type your message here."
-        />
-      </div>
-    </div>
-        <DialogFooter>
-          <Button className=" bg-emerald-600 hover:bg-emerald-700"  type="submit">Send <Send className="ml-1 h-4"/></Button>
-        </DialogFooter>
+        <form onSubmit={handleMessageSubmit}>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-1 gap-2">
+              <Label htmlFor="name" className="text-left">
+                Full Name
+              </Label>
+              <Input
+                id="name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Enter full name"
+                className="col-span-1"
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              <Label htmlFor="email" className="text-left">
+                Email
+              </Label>
+              <Input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
+                className="col-span-1"
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              <Label htmlFor="mobile" className="text-left">
+                Mobile Number
+              </Label>
+              <Input
+                id="mobile"
+                value={mobileNo}
+                onChange={(e) => setMobileNo(e.target.value)}
+                placeholder="Enter mobile no"
+                className="col-span-1"
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              <Label htmlFor="message" className="text-left">
+                Message
+              </Label>
+              <Textarea
+                id="message"
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+                placeholder="Type your message here."
+                className="col-span-1"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button className="bg-emerald-600 hover:bg-emerald-700" type="submit">
+              Send <Send className="ml-1 h-4" />
+            </Button>
+          </DialogFooter>
+        </form>
+        
       </DialogContent>
     </Dialog>
               </div>

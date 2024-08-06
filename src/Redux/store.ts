@@ -3,6 +3,7 @@ import AuthReducer from "./Auth/AuthSlice";
 import PostReducer from "./Post/PostSlice";
 import AdminPostReducer from "./Admin/AdminPostSlice";
 import CommentReducer from "./Comment/CommentSlice";
+import MessageReducer from "./Messages/MessageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     Post:PostReducer,
     AdminPost:AdminPostReducer,
     Comment:CommentReducer,
+    Message:MessageReducer,
   },
 });
 
