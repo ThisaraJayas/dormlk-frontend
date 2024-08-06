@@ -9,6 +9,7 @@ import ChakraCarousel from "@/PageComponents/ChakraCarousel";
 import Comment from "../PageComponents/Comment";
 import StarRatings from 'react-star-ratings'; 
 
+
 import {
   Tabs,
   TabList,
@@ -23,6 +24,8 @@ import {
 } from "@chakra-ui/react";
 import ReviewCard, { averageRating } from "@/PageComponents/ReviewCard";
 import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction";
+import { suitableFor } from "@/PageComponents/ListPost";
+import { Contact2Icon, MessageCircleMore, Telescope } from "lucide-react";
 
 var totalComments = 0;
 export default function Item() {
@@ -91,8 +94,11 @@ console.log("RRR ",totalComments);
             </div>
 
             <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-              <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">
+              <h1 className="sm: text-4xl font-bold text-gray-900 sm:text-4xl">
                 {itemPost.title}
+              </h1>
+              <h1 className="sm: text-1xl text-gray-600 sm:text-1xl">
+                {itemPost.location}
               </h1>
 
               <div className="mt-5 flex items-center">
@@ -178,21 +184,8 @@ console.log("RRR ",totalComments);
                   type="button"
                   className="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-emerald-600 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-emerald-700"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="shrink-0 mr-3 h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
-                  </svg>
-                  Contact
+                  <MessageCircleMore className="mr-2"/>
+                    Enquire Now
                 </button>
               </div>
               <h2 className="mt-4 text-base text-gray-900">Contact Details</h2>
@@ -320,9 +313,32 @@ console.log("RRR ",totalComments);
                   <TabPanel>
                     <div className="mt-8 flow-root sm:mt-12">
                       <h1 className="text-3xl font-bold">
-                        Description of Property
+                      About the Property
                       </h1>
-                      <p className="mt-4">{itemPost.description}</p>
+                      <p className="mt-4">District : {itemPost.cityDistrict}</p>
+                      {/* <p className="">Suitable For : 
+                        {itemPost.suitableFor.map((sutiablefor,index)=>(
+                          <span key={index}>
+                            { sutiablefor} ,
+                          </span>
+                        ))} */}
+                      {/* </p> */}
+                      <p>Suitable For : {itemPost.suitableFor.join(', ')}</p>
+                      <p>Property Close to : {itemPost.closeByLocation.join(', ')}</p>
+                      <p>Facilities Available : {itemPost.facilities.join(', ')}</p>
+                      <h1 className="text-1xl mt-5 mb-2 font-bold">
+                      Description
+                      </h1>
+                      <p className="">{itemPost.description}</p>
+
+                      {/* {itemPost.facilities &&
+                  itemPost.facilities.map((facitites, index) => (
+                    <label key={index} className="">
+                      <p className="bg-emerald-600 text-white rounded-lg border border-emerald-600 px-6 py-2 font-bold">
+                        {facitites}
+                      </p>
+                    </label>
+                  ))} */}
                       {/* <h1 className="mt-8 text-3xl font-bold">Description of Property</h1>
           <p className="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio numquam enim facere.</p>
           <p className="mt-4">Amet consectetur adipisicing elit. Optio numquam enim facere. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore rerum nostrum eius facere, ad neque.</p> */}
