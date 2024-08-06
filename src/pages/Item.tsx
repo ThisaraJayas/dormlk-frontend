@@ -8,7 +8,19 @@ import { fetchPostsByPostId } from "@/Redux/Post/PostAction";
 import ChakraCarousel from "@/PageComponents/ChakraCarousel";
 import Comment from "../PageComponents/Comment";
 import StarRatings from 'react-star-ratings'; 
-
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
 
 import {
   Tabs,
@@ -25,7 +37,7 @@ import {
 import ReviewCard, { averageRating } from "@/PageComponents/ReviewCard";
 import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction";
 import { suitableFor } from "@/PageComponents/ListPost";
-import { Contact2Icon, MessageCircleMore, Telescope } from "lucide-react";
+import { Contact2Icon, MessageCircleMore, Send, Telescope } from "lucide-react";
 
 var totalComments = 0;
 export default function Item() {
@@ -180,13 +192,96 @@ console.log("RRR ",totalComments);
                   <span className="text-base">/month</span>
                 </div>
 
-                <button
+                {/* <button
                   type="button"
                   className="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-emerald-600 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-emerald-700"
                 >
                   <MessageCircleMore className="mr-2"/>
-                    Enquire Now
-                </button>
+                    Enquire
+                </button> */}
+                {/* <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button                   className="inline-flex items-center h-13 justify-center rounded-md border-2 border-transparent bg-emerald-600 bg-none px-12 py-3 text-center text-base font-bold text-white hover:text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-emerald-700"
+ variant="outline"><MessageCircleMore className="mr-2"/>
+                    Enquire</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="font-bold text-2xl ">Enquire Now</AlertDialogTitle>
+          <AlertDialogDescription>
+          Spot-on choice and perfect timing! Your home is just a few steps away. Enquiry is absolutely free.
+          </AlertDialogDescription>
+          <AlertDialogDescription>
+          
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog> */}
+    <Dialog>
+      <DialogTrigger asChild>
+      <Button                   className="inline-flex items-center h-13 justify-center rounded-md border-2 border-transparent bg-emerald-600 bg-none px-12 py-3 text-center text-base font-bold text-white hover:text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-emerald-700"
+ variant="outline"><MessageCircleMore className="mr-2"/>
+                    Enquire</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px] max-w-[325px] mr-4 ml-4 ">
+        <DialogHeader>
+          <DialogTitle className="font-bold text-2xl" >Enquire Now</DialogTitle>
+          <DialogDescription>
+          Spot-on choice and perfect timing! Your home is just a few steps away. Enquiry is absolutely free.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+      <div className="grid grid-cols-1 gap-2">
+        <Label htmlFor="name" className="text-left">
+          Full Name
+        </Label>
+        <Input
+          id="name"
+          placeholder="Enter full name"
+          className="col-span-1"
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-2">
+        <Label htmlFor="email" className="text-left">
+          Email
+        </Label>
+        <Input
+          type="email"
+          id="email"
+          placeholder="Enter email"
+          className="col-span-1"
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-2">
+        <Label htmlFor="name" className="text-left">
+          Mobile Number
+        </Label>
+        <Input
+          id="name"
+          placeholder="Enter mobile no"
+          className="col-span-1"
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-2">
+        <Label htmlFor="message" className="text-left">
+          Message
+        </Label>
+        <Textarea
+          id="message"
+          className="col-span-1"
+          placeholder="Type your message here."
+        />
+      </div>
+    </div>
+        <DialogFooter>
+          <Button className=" bg-emerald-600 hover:bg-emerald-700"  type="submit">Send <Send className="ml-1 h-4"/></Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
               </div>
               <h2 className="mt-4 text-base text-gray-900">Contact Details</h2>
               <ul className="mt-4 space-y-2">
