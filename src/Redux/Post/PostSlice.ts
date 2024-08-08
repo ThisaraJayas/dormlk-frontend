@@ -22,6 +22,7 @@ export interface Post{
     images: string[];
     user: {
         id: number;
+        email:string;
         firstName: string;
         lastName: string;
     };
