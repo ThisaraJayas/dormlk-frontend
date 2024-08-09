@@ -4,8 +4,9 @@ import { fetchMessagesByUserId, fetchRecivedMessages } from '@/Redux/Messages/Me
 import { AppDispatch, RootState } from '@/Redux/store'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Textarea } from '@chakra-ui/react'
 import { fetchAllPosts } from '@/Redux/Post/PostAction'
+import MessageReply from './components/MessageReply'
 
 export default function MyProfile() {
   const dispatch = useDispatch<AppDispatch>()
@@ -32,6 +33,20 @@ console.log("mmmmmm   ",messagesRecived);
       dispatch(fetchRecivedMessages(loginUser.id))
     }
   }, [dispatch, loginUser?.id]);
+
+  const formatDateTime = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+    return new Intl.DateTimeFormat("en-US", options).format(
+      new Date(dateString)
+    );
+  };
 
   return (
     <div>
@@ -84,13 +99,16 @@ console.log("mmmmmm   ",messagesRecived);
                   <span className="truncate text-sm text-gray-400">
                     Replied in{' '}
                     <a href="#" className="font-medium text-blue-600">
-                      {/* Assuming you want to display post title or some related info */}
-                      {message.message}
+                    <time className="text-xs" dateTime={message.createdDateTime}>
+                {formatDateTime(message.createdDateTime)}
+              </time>{" "}
                     </a>
                   </span>
                 </p>
               </div>
             </div>
+              <div className="mb-3">{message.message}</div>
+
             <div className="mb-3">
               {/* Additional content or styling can be added here */}
             </div>
@@ -99,9 +117,10 @@ console.log("mmmmmm   ",messagesRecived);
                 {/* Display the message creation time or similar */}
                 You commented on 
               </p>
-              <p> {message.user.id}</p>
+             <MessageReply/>
             </div>
           </div>
+          
         ))}
       </div>
     {/* )} */}
