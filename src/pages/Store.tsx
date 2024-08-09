@@ -4,7 +4,7 @@ import { fetchAllPosts, filterPostBySearchFilter } from '@/Redux/Post/PostAction
 import { AppDispatch, RootState } from '@/Redux/store';
 import StoreItem from '@/PageComponents/StoreItem';
 import { Box, Button, Flex, Text, SimpleGrid, Select } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/PageComponents/Footer';
 
 interface Post {
@@ -25,6 +25,7 @@ export default function Store() {
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedDateSort, setSelectedDateSort] = useState('');
   const location = useLocation();
+  const navigate = useNavigate()
 
   // Function to parse query parameters
   const getQueryParams = () => {
@@ -58,10 +59,13 @@ export default function Store() {
   }, [currentPage]);
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLocation(e.target.value);
+    const newLocation = e.target.value;
+    navigate('/store')
+    setSelectedLocation(newLocation);
   };
 
   const handleDateSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    navigate('/store')
     setSelectedDateSort(e.target.value);
   };
 
