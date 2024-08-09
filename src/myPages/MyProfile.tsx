@@ -117,7 +117,7 @@ console.log("mmmmmm   ",messagesRecived);
                 {/* Display the message creation time or similar */}
                 You commented on 
               </p>
-             <MessageReply/>
+             <MessageReply messageId={message.id}/>
             </div>
           </div>
           

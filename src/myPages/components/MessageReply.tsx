@@ -1,9 +1,11 @@
 import { Textarea } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
-export default function MessageReply() {
+export default function MessageReply({messageId}) {
     const [messageReply, setMessageReply]=useState('')
     console.log(messageReply);
+    console.log(messageId);
+    
     
   return (
     <div>
