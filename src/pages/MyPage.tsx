@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CircleUser, Menu, Package2, Search } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -10,12 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@chakra-ui/react'
 import MyPosts from '@/myPages/MyPosts'
 import MyMessages from '@/myPages/MyMessages'
 import Footer from '@/PageComponents/Footer'
+import MyAccount from '@/myPages/MyAccount'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/Redux/store'
 
 
 
@@ -24,12 +27,22 @@ export default function MyPage() {
   const location = useLocation();
   const currentPath = location.pathname.split("/").pop();
 
+  const {loginUser, status} =useSelector((state:RootState)=>state.User)
+    const navigate = useNavigate()
+    useEffect(() => {
+      if (status === 'failed' && !loginUser) {
+        navigate('/login');
+      }
+    }, [status, loginUser, navigate]);
+
   const renderSettingsContent = () => {
     switch (currentPath) {
-      case 'general':
+      case 'posts':
         return <MyPosts />;
       case 'messages':
         return <MyMessages />;
+      case 'account':
+        return <MyAccount />;
       // Add cases for other settings
       default:
         return <MyPosts />;
@@ -47,11 +60,11 @@ export default function MyPage() {
           <nav
             className="grid gap-4  text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0"
           >
-            <Link to="/my/general" className="font-semibold text-primary">
-              General
+            <Link to="/my/posts" className="font-semibold text-primary">
+              Posts
             </Link>
             <Link to="/my/messages">Messages</Link>
-            <Link to="/my/integrations">Integrations</Link>
+            <Link to="/my/account">Account</Link>
             <Link to="/my/support">Support</Link>
             <Link to="/my/organizations">Organizations</Link>
             <Link to="/my/advanced">Advanced</Link>

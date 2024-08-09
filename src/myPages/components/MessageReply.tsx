@@ -2,15 +2,18 @@ import { createReply } from '@/Redux/Reply/ReplyAction';
 import { AppDispatch, RootState } from '@/Redux/store';
 import { Button, Textarea } from '@chakra-ui/react'
 import { Reply, Send } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function MessageReply({messageId, onNewReply }) {
     const [messageReply, setMessageReply]=useState('')
     const dispatch = useDispatch<AppDispatch>()
     const {reply} =useSelector((state:RootState)=>state.Reply)
+    
     console.log(messageReply);
     console.log(messageId);
+    
     
     const handleReplySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

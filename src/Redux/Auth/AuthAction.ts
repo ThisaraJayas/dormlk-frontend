@@ -51,3 +51,30 @@ export const getUser = createAsyncThunk("getUser", async()=>{
         throw error;
     }
 })
+
+export const passwordChange = createAsyncThunk("passwordChange", async(newPassword)=>{
+    console.log(newPassword);
+    
+    try{
+        const jwt = localStorage.getItem("jwt");
+        if (!jwt) throw new Error("JWT not found");
+        const {data} = await axios.put(`http://localhost:8080/api/user/change-password/${newPassword}`,
+            { }, 
+            {
+              headers: {
+                'Authorization': `Bearer ${jwt}`,
+                'Content-Type': 'application/json'
+              }
+            })
+            console.log("New Password : ",data);
+        return data
+    }catch(error){
+        console.log("Error Occured: ", error);
+        throw error
+        
+    }
+})
+
+export const logout = createAsyncThunk("logout", async()=>{
+    localStorage.clear()
+})

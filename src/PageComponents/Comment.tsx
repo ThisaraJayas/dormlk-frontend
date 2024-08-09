@@ -2,6 +2,7 @@ import { createComment } from "@/Redux/Comment/CommentAction";
 import { AppDispatch, RootState } from "@/Redux/store";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
 
 export default function Comment({ postId }) {
@@ -11,6 +12,10 @@ export default function Comment({ postId }) {
   const {comment}=useSelector((state:RootState)=>state.Comment)
   const [content, setContent] = useState("");
   const [starRating, setRating] = useState(1);
+
+  const {loginUser, status} =useSelector((state:RootState)=>state.User)
+  const navigate = useNavigate()
+ 
 
   console.log(comment);
   console.log(starRating);
@@ -22,9 +27,14 @@ export default function Comment({ postId }) {
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createComment({ content, postId, starRating }));
-        setContent("");
-        setRating(0); 
+        if (loginUser) {
+          dispatch(createComment({ content, postId, starRating }));
+          setContent("");
+          setRating(0);
+        }else{
+          navigate('/login');
+        }
+         
   };
   const changeRating = (newRating: number) => {
     setRating(newRating); // Update rating state

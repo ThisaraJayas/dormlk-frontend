@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CircleUser, Menu, Package2, LogIn } from "lucide-react";
 import {
@@ -15,17 +15,24 @@ import SearchBox from "./SearchBox";
 import NavContactMenu from "./NavContactMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
-import { getUser } from "@/Redux/Auth/AuthAction";
+import { getUser, logout } from "@/Redux/Auth/AuthAction";
 
 export default function DefaulltHeader() {
   const dispatch = useDispatch()
   const {loginUser} = useSelector((state:RootState)=>state.User)
+  const navigate = useNavigate()
 
   useEffect(()=>{
     if (!loginUser) {
       dispatch(getUser());
   }
   },[loginUser,dispatch])
+ 
+  const logoutFunction = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(logout())
+    window.location.reload();
+};
   return (
     <div>
       <header className="fixed top-0 left-0 right-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
@@ -143,7 +150,7 @@ export default function DefaulltHeader() {
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
               {loginUser &&(
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={logoutFunction}>Logout</DropdownMenuItem>
               )}
               
             </DropdownMenuContent>
