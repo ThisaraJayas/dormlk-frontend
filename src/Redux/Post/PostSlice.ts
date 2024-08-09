@@ -16,6 +16,7 @@ export interface Post{
     emailContact: string;
     postStatus: string;
     whatsappContact: string;
+    createdDateTime: Date,
     price: string;
     noOfBed:string;
     noOfBathroom:string;

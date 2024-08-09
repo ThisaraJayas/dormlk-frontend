@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPosts, filterPostBySearchFilter } from '@/Redux/Post/PostAction';
 import { AppDispatch, RootState } from '@/Redux/store';
 import StoreItem from '@/PageComponents/StoreItem';
-import { Box, Button, Flex, Input, Text, SimpleGrid } from '@chakra-ui/react';
-import DefaulltHeader from '@/PageComponents/DefaulltHeader';
+import { Box, Button, Flex, Text, SimpleGrid, Select } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import Footer from '@/PageComponents/Footer';
 
@@ -13,6 +12,7 @@ interface Post {
   title: string;
   cityDistrict: string;
   accommodationType: string;
+  createdDateTime: Date;
 }
 
 const ITEMS_PER_PAGE = 9;
@@ -22,8 +22,9 @@ export default function Store() {
   const { allPost } = useSelector((state: RootState) => state.Post);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedDateSort, setSelectedDateSort] = useState('');
   const location = useLocation();
-  
 
   // Function to parse query parameters
   const getQueryParams = () => {
@@ -52,18 +53,33 @@ export default function Store() {
     }
   }, [location.search]);
 
-  // useEffect(() => {
-  //   dispatch(fetchAllPosts());
-  // }, [dispatch]);
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
-  const filteredPosts = allPost.filter(post =>
-    post.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleLocationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLocation(e.target.value);
+  };
 
+  const handleDateSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDateSort(e.target.value);
+  };
+
+  const filterAndSortPosts = (posts: Post[]) => {
+    let filteredPosts = posts
+      .filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
+      .filter(post => selectedLocation ? post.cityDistrict === selectedLocation : true);
+
+    if (selectedDateSort === 'newest') {
+      filteredPosts = filteredPosts.sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+    } else if (selectedDateSort === 'oldest') {
+      filteredPosts = filteredPosts.sort((a, b) => new Date(a.createdDateTime).getTime() - new Date(b.createdDateTime).getTime());
+    }
+
+    return filteredPosts;
+  };
+
+  const filteredPosts = filterAndSortPosts(allPost);
   const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
   const currentItems = filteredPosts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -72,44 +88,57 @@ export default function Store() {
 
   return (
     <>
+      <Box p={4} mx={{ base: 2, md: 4, lg: 8 }}>
+        <Text fontSize="2xl" className="sm:mt-['20%']"  mt={{ base: '15%', md: '5%' }} mb={4}>Find Property</Text>
+        
+        {/* Filter Controls */}
+        <Flex mb={4}  justifyContent="space-between" alignItems="center">
+          <Select placeholder="Select Location" onChange={handleLocationChange} value={selectedLocation} width="47%">
+            <option value="Colombo">Colombo</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Galle">Galle</option>
+            {/* Add more locations as needed */}
+          </Select>
 
-    <Box p={4} mx={{ base: 2, md: 4, lg: 8 }}>
-      <Text fontSize="2xl" mb={4}>Store</Text>
-      
+          <Select placeholder="Sort by Date" onChange={handleDateSortChange} value={selectedDateSort} width="47%">
+            <option value="newest">Newest to Oldest</option>
+            <option value="oldest">Oldest to Newest</option>
+          </Select>
+        </Flex>
 
-      {/* Posts Grid */}
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4} mb={4}>
-        {currentItems.length ? (
-          currentItems.map(post => (
-            <StoreItem key={post.id} post={post} />
-          ))
-        ) : (
-          <Text>No posts found.</Text>
-        )}
-      </SimpleGrid>
+        {/* Posts Grid */}
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} ml={'5%'} mr={'5%'} mb={4}>
+          {currentItems.length ? (
+            currentItems.map(post => (
+              <StoreItem key={post.id} post={post} />
+            ))
+          ) : (
+            <Text>No posts found.</Text>
+          )}
+        </SimpleGrid>
 
-      {/* Pagination Controls */}
-      <Flex justify="center" align="center">
-        <Button
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          isDisabled={currentPage === 1}
-          mr={2}
-        >
-          Previous
-        </Button>
-        <Text mx={4}>
-          Page {currentPage} of {totalPages}
-        </Text>
-        <Button
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-          isDisabled={currentPage === totalPages}
-          ml={2}
-        >
-          Next
-        </Button>
-      </Flex>
-    </Box>
-    <Footer/>
+        {/* Pagination Controls */}
+        <Flex justify="center" align="center">
+          <Button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            isDisabled={currentPage === 1}
+            mr={2}
+          >
+            Previous
+          </Button>
+          <Text mx={4}>
+            Page {currentPage} of {totalPages}
+          </Text>
+          <Button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            isDisabled={currentPage === totalPages}
+            ml={2}
+          >
+            Next
+          </Button>
+        </Flex>
+      </Box>
+      <Footer/>
     </>
   );
 }
