@@ -5,16 +5,23 @@ import { Reply, Send } from 'lucide-react';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function MessageReply({messageId}) {
+export default function MessageReply({messageId, onNewReply }) {
     const [messageReply, setMessageReply]=useState('')
     const dispatch = useDispatch<AppDispatch>()
     const {reply} =useSelector((state:RootState)=>state.Reply)
     console.log(messageReply);
     console.log(messageId);
     
-    const handleReplySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleReplySubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createReply({ messageId, reply:messageReply })); 
+        const newReply = { messageId, reply: messageReply };
+        const result = await dispatch(createReply(newReply));
+        if (result) {
+          // Clear the textarea
+          setMessageReply('');
+          // Trigger the callback to update the parent component
+          onNewReply(messageId, result.payload);
+        }
   };
     
   return (
