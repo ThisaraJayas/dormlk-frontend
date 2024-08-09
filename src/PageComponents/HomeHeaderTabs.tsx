@@ -85,16 +85,16 @@ export default function HomeHeaderTabs() {
         <TabPanels>
         {["Annex", "Shared Room", "Apartment", "Double Room","House","Studio Apartment","Hostel"].map(
                 (houseType, index) => (
-                  <TabPanel key={index}>
-                    <section className="flex flex-col items-center bg-white">
-                      <div className="mt-10 grid max-w-md grid-cols-1 gap-6 px-2 sm:max-w-lg sm:px-20 md:max-w-screen-xl md:grid-cols-2 md:px-10 lg:grid-cols-3 lg:gap-8">
+                  <TabPanel key={index}  ml={{ base: '3%', md: '3%' }} mr={{ base: '3%', md: '3%' }}>
+                    <section className="flex flex-col items-center bg-white" >
+                      <div  className="mt-10 grid max-w-md grid-cols-1 gap-6 px-2 sm:max-w-lg sm:px-20 md:max-w-screen-xl md:grid-cols-2 md:px-10 lg:grid-cols-3 lg:gap-8">
                         {status === "loading" ? (
                           <div className="flex justify-center">
                             <Spinner size="lg" />
                           </div>
                         ) : (
                             allPostByHouseType.slice(0,6).map((post) => (
-                            <article className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xl">
+                            <article className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xls">
                               <div className="w-full h-48 overflow-hidden">
                                 <img
                                   src={post.images[0]}

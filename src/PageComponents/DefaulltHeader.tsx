@@ -109,7 +109,7 @@ export default function DefaulltHeader() {
               <NavContactMenu />
             </div>
             <Link
-              to="/products"
+              to="/addPost"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               <Button
@@ -122,7 +122,7 @@ export default function DefaulltHeader() {
             </Link>
             {!loginUser && (
               <Link
-              to="/settings"
+              to="/login"
               className="text-foreground transition-colors hover:text-foreground"
             >
               <Button variant="outline" className="flex items-center gap-2">
