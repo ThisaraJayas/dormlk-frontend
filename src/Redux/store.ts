@@ -4,6 +4,7 @@ import PostReducer from "./Post/PostSlice";
 import AdminPostReducer from "./Admin/AdminPostSlice";
 import CommentReducer from "./Comment/CommentSlice";
 import MessageReducer from "./Messages/MessageSlice";
+import ReplyReducer from "./Reply/ReplySlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     AdminPost:AdminPostReducer,
     Comment:CommentReducer,
     Message:MessageReducer,
+    Reply:ReplyReducer,
   },
 });
 

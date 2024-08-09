@@ -15,6 +15,11 @@ export interface Message{
         firstName: string;
         lastName: string;
     };
+    replies:{
+        id:number,
+        reply:string,
+        createdDateTime: Date,
+    }
     post:{
         user:{
             id: number;
