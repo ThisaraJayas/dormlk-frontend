@@ -92,55 +92,7 @@ console.log("mmmmmm   ",messagesRecived);
             ))}
           </TabPanel>
     {/* .......................................tab2........................ */}
-    {/* <TabPanel>
-  <div> */}
-    {/* Check if there are any messages where the post's user matches the loginUser */}
-    
-      {/* <div> */}
-        {/* Render content for messages from posts belonging to the logged-in user */}
-        {/* {messagesRecived.map((message, index) => (
-          <div key={index} className="mx-auto my-10 max-w-4xl rounded-xl border px-4 py-6 text-gray-700">
-            <div className="mb-5">
-              <div className="flex items-center">
-                <img
-                  className="h-10 w-10 rounded-full object-cover"
-                  src="/images/ddHJYlQqOzyOKm4CSCY8o.png" // Replace with dynamic image source if needed
-                  alt="User"
-                />
-                <p className="ml-4 w-56">
-                  <strong className="block font-medium text-gray-700">{message.fullName}</strong>
-                  <span className="truncate text-sm text-gray-400">
-                    Replied in{' '}
-                    <a href="#" className="font-medium text-blue-600">
-                    <time className="text-xs" dateTime={message.createdDateTime}>
-                {formatDateTime(message.createdDateTime)}
-              </time>{" "}
-                    </a>
-                  </span>
-                </p>
-              </div>
-            </div>
-              <div className="mb-3">{message.message}</div>
- */}
-
-            
-            {/* <div className="mb-3"> */}
-              {/* Additional content or styling can be added here */}
-            {/* </div>
-            <div className="rounded-lg bg-gray-100 p-4">
-              <p className="mb-2 text-gray-500"> */}
-                {/* Display the message creation time or similar */}
-                {/* You commented on 
-              </p>
-             <MessageReply messageId={message.id} onNewReply={handleNewReply}/>
-            </div>
-          </div>
-          
-        ))}
-      </div> */}
-    {/* )} */}
-  {/* </div>
-</TabPanel> */}
+   
 <TabPanel>
             <div>
               {messagesRecived.map((message, index) => (
