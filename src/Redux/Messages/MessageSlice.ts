@@ -21,6 +21,9 @@ export interface Message{
         createdDateTime: Date,
     }
     post:{
+        id:number,
+        title:string,
+        cityDistrict:string,
         user:{
             id: number;
             email:string;

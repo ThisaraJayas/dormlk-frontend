@@ -14,7 +14,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@chakra-ui/react'
 import MyPosts from '@/myPages/MyPosts'
-import MyProfile from '@/myPages/MyProfile'
+import MyMessages from '@/myPages/MyMessages'
 import Footer from '@/PageComponents/Footer'
 
 
@@ -28,8 +28,8 @@ export default function MyPage() {
     switch (currentPath) {
       case 'general':
         return <MyPosts />;
-      case 'security':
-        return <MyProfile />;
+      case 'messages':
+        return <MyMessages />;
       // Add cases for other settings
       default:
         return <MyPosts />;
@@ -50,7 +50,7 @@ export default function MyPage() {
             <Link to="/my/general" className="font-semibold text-primary">
               General
             </Link>
-            <Link to="/my/security">Security</Link>
+            <Link to="/my/messages">Messages</Link>
             <Link to="/my/integrations">Integrations</Link>
             <Link to="/my/support">Support</Link>
             <Link to="/my/organizations">Organizations</Link>
