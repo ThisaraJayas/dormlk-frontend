@@ -10,7 +10,7 @@ export default function Post() {
         <DefaulltHeader/>
         {/* <ListPost/> */}
         <ListPostSteper/>
-        <Footer/>
+        
     </div>
   )
 }
