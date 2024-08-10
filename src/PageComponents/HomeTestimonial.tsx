@@ -7,8 +7,8 @@ export default function HomeTestimonial() {
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="flex flex-col items-center">
       <div className="text-center">
-        <p className="text-lg font-medium text-blue-600">Over 1000+ students trust Dorm for their student housing needs</p>
-        <h2 className="mt-4 text-3xl font-bold text-blue-900 sm:text-4xl xl:text-5xl">What do students have to say about us?
+        <p className="text-lg font-medium text-blue-600">Over 1000+ people, including students, trust Dorm for their housing needs.</p>
+        <h2 className="mt-4 text-3xl font-bold text-blue-900 sm:text-4xl xl:text-5xl">What do our users have to say about us?
         </h2>
       </div>
 
@@ -44,7 +44,7 @@ export default function HomeTestimonial() {
                 </div>
 
                 <blockquote className="mt-8 flex-1">
-                  <p className="font-[400] text-xl italic text-blue-900">“Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ducimus repellat aperiam quam consequatur eligendi totam vitae iusto mollitia esse.”</p>
+                  <p className="font-[400] text-xl italic text-blue-900">“Was looking to book an accomodation with my friends under a budget and Dorm.lk was very helpful. Thank you!”</p>
                 </blockquote>
               </div>
 
@@ -79,7 +79,7 @@ export default function HomeTestimonial() {
                 </div>
 
                 <blockquote className="mt-8 flex-1">
-                  <p className="font-[400] text-xl italic text-blue-900">“Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ducimus repellat aperiam quam consequatur eligendi totam vitae iusto mollitia esse.”</p>
+                  <p className="font-[400] text-xl italic text-blue-900">“Couldn't ask for more. Extra thanks to amber for coordinating with me on every step.”</p>
                 </blockquote>
               </div>
 
@@ -114,7 +114,7 @@ export default function HomeTestimonial() {
                 </div>
 
                 <blockquote className="mt-8 flex-1">
-                  <p className="font-[400] text-xl italic text-blue-900">“Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ducimus repellat aperiam quam consequatur eligendi totam vitae iusto mollitia esse.”</p>
+                  <p className="font-[400] text-xl italic text-blue-900">Dorm.lk's outstanding service made my accommodation booking seamless. Their agent was patience and clear communication was exceptional. Highly recommend Dorm.lk!”</p>
                 </blockquote>
               </div>
 

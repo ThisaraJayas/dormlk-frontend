@@ -93,7 +93,7 @@ export default function HomeHeaderTabs() {
                             <Spinner size="lg" />
                           </div>
                         ) : (
-                            allPostByHouseType.slice(0,6).map((post) => (
+                            allPostByHouseType?.slice(0,6).map((post) => (
                             <article className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xls">
                               <div className="w-full h-48 overflow-hidden">
                                 <img

@@ -8,6 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link, useNavigate } from 'react-router-dom'
@@ -24,20 +30,22 @@ export default function Login() {
     password:""
   })
   const navigate = useNavigate()
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleLoginSubmit =(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     dispatch(login(formData))
+    setIsSubmitted(true)
   }
   if(status=='succeeded'){
     navigate('/')
   }
 
   return (
-    <div>
-        <DefaulltHeader/>
-    <div className='mt-[9%]'>
-    <Card className="mx-auto max-w-sm">
+    <div style={{background: 'linear-gradient(to bottom right, #75ff70, #00a59d, #fdbb2d)', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 0, margin: 0 }}>
+      <DefaulltHeader />
+      <div className='mt-24 md:mt-[10%] mb-[9%]'>
+        <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
@@ -45,6 +53,12 @@ export default function Login() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+      {isSubmitted && status === 'failed' && (
+              <Alert mb={'5px'} status='error'>
+                <AlertIcon />
+                Invalid email or password.
+              </Alert>
+            )}
         <form onSubmit={handleLoginSubmit} className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
