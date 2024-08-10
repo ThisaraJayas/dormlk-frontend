@@ -1,6 +1,7 @@
 import { getUser } from '@/Redux/Auth/AuthAction';
-import { fetchPostsByUserId } from '@/Redux/Post/PostAction';
+import { DeleteByPostId, fetchPostsByUserId } from '@/Redux/Post/PostAction';
 import { AppDispatch, RootState } from '@/Redux/store';
+import { Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -35,7 +36,17 @@ export default function MyPosts() {
     setFilterStatus(status);
     setIsDropdownOpen(false);
   };
-
+  const handleDelete = async(postId: number) => {
+    try {
+      // Dispatch delete action
+      await dispatch(DeleteByPostId(postId));
+  
+      // Update local state to remove the deleted post
+      dispatch(fetchPostsByUserId(loginUser.id));
+    } catch (error) {
+      console.error("Failed to delete post", error);
+    }
+  };
   return (
     <div>
     
@@ -131,6 +142,7 @@ export default function MyPosts() {
                
     
                 <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Status</td>
+                <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Delete Post</td>
               </tr>
             </thead>
     
@@ -181,10 +193,29 @@ export default function MyPosts() {
            'Unknown Status'}
         </span>
       </td>
-      <td className="whitespace-no-wrap py-4 text-right text-sm text-gray-600 sm:px-3 lg:hidden">
-        
-        <span className={`mt-1 ml-auto block w-fit whitespace-nowrap rounded-full px-2 py-0.5 text-center text-xs lg:hidden"
-        ${
+      <td className='hidden lg:table-cell'>
+      <Button
+          style={{
+            backgroundColor: '#10b981', // Emerald 600
+            borderColor: '#10b981', // Emerald 600
+            color: '#ffffff', // White text
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#059669'; // Emerald 700
+            e.currentTarget.style.borderColor = '#059669'; // Emerald 700
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#10b981'; // Emerald 600
+            e.currentTarget.style.borderColor = '#10b981'; // Emerald 600
+          }}
+          onClick={() => handleDelete(post.id)} // Add onClick handler
+          className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
+        >
+          Delete Post
+        </Button>
+      </td>
+      <td className="whitespace-no-wrap py-4 lg:py-4 text-right text-sm text-gray-600 sm:px-3 lg:hidden flex items-center gap-4">
+        <span className={`mt-1 block w-fit whitespace-nowrap rounded-full px-2 py-0.5 text-center text-xs ${
           post.postStatus === 'PENDING' ? 'bg-purple-100 text-purple-800' :
           post.postStatus === 'ACCEPTED' ? 'bg-green-100 text-green-800' :
           post.postStatus === 'REJECTED' ? 'bg-red-100 text-red-800' :
@@ -195,8 +226,26 @@ export default function MyPosts() {
            post.postStatus === 'REJECTED' ? 'Rejected' :
            'Unknown Status'}
         </span>
+        <Button
+          style={{
+            backgroundColor: '#10b981', // Emerald 600
+            borderColor: '#10b981', // Emerald 600
+            color: '#ffffff', // White text
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#059669'; // Emerald 700
+            e.currentTarget.style.borderColor = '#059669'; // Emerald 700
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#10b981'; // Emerald 600
+            e.currentTarget.style.borderColor = '#10b981'; // Emerald 600
+          }}
+          onClick={() => handleDelete(post.id)} // Add onClick handler
+          className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
+        >
+          Delete Post
+        </Button>
       </td>
-
       
     </tr>
     ))}

@@ -81,3 +81,20 @@ export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(po
         console.log("Fetch Post by UserId Error : ",error);
     }
 })
+
+export const DeleteByPostId = createAsyncThunk("DeleteByPostId",async(postId)=>{
+    try{
+        const jwt = localStorage.getItem("jwt");
+        if (!jwt) throw new Error("JWT not found");
+        const {data}=await axios.delete(`http://localhost:8080/api/post/${postId}`,{
+            headers: {
+                "Authorization": `Bearer ${jwt}`
+            }
+        })
+        console.log(data);
+        
+        return data
+    }catch(error){
+        console.log("delete Post by PostId Error : ",error);
+    }
+})

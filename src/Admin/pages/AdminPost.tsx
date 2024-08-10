@@ -1,5 +1,7 @@
 import { getAllPostsAdmin, updatePostStatus } from "@/Redux/Admin/AdminPostAction";
+import { DeleteByPostId } from "@/Redux/Post/PostAction";
 import { AppDispatch, RootState } from "@/Redux/store";
+import { Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,6 +9,7 @@ export default function AdminPost() {
   const dispatch = useDispatch<AppDispatch>();
   const { allAdminPost } = useSelector((state: RootState) => state.AdminPost);
   const [filterStatus, setFilterStatus] = useState<string>("");
+  const [posts, setPosts] = useState(allAdminPost);
 
   useEffect(() => {
     dispatch(getAllPostsAdmin());
@@ -23,10 +26,13 @@ export default function AdminPost() {
   };
 
   // Filter posts based on the selected status
-  const filteredPosts = allAdminPost.filter((post) =>
+  const filteredPosts = posts.filter((post) =>
     filterStatus ? post.postStatus === filterStatus : true
   );
-
+  const handleDelete = async(postId: number) => {
+    await dispatch(DeleteByPostId(postId));
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));// Ensure deletePost action is dispatched
+  };
   return (
     <div>
       <div className="">
@@ -105,6 +111,9 @@ export default function AdminPost() {
                   <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-6">
                     Status
                   </td>
+                  <td className="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-6">
+                    Delete
+                  </td>
                 </tr>
               </thead>
 
@@ -153,6 +162,27 @@ export default function AdminPost() {
                           {post.postStatus}
                         </div>
                       </td>
+                      <td>
+                      <Button
+                        style={{
+                          backgroundColor: '#10b981', // Emerald 600
+                          borderColor: '#10b981', // Emerald 600
+                          color: '#ffffff', // White text
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#059669'; // Emerald 700
+                          e.currentTarget.style.borderColor = '#059669'; // Emerald 700
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#10b981'; // Emerald 600
+                          e.currentTarget.style.borderColor = '#10b981'; // Emerald 600
+                        }}
+                        onClick={() => handleDelete(post.id)} // Add onClick handler
+                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
+                      >
+                        Delete Post
+                      </Button>
+                    </td>
                     </tr>
                   ))}
               </tbody>
