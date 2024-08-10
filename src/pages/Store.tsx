@@ -4,7 +4,7 @@ import { fetchAllPosts, filterPostBySearchFilter } from '@/Redux/Post/PostAction
 import { AppDispatch, RootState } from '@/Redux/store';
 import StoreItem from '@/PageComponents/StoreItem';
 import { Box, Button, Flex, Text, SimpleGrid, Select } from '@chakra-ui/react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '@/PageComponents/Footer';
 
 interface Post {
@@ -114,7 +114,9 @@ export default function Store() {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} ml={'5%'} mr={'5%'} mb={4}>
           {currentItems.length ? (
             currentItems.map(post => (
+              <Link to={`/store/${post.id}`}>
               <StoreItem key={post.id} post={post} />
+              </Link>
             ))
           ) : (
             <Text>No posts found.</Text>
