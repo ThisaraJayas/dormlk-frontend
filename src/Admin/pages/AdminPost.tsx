@@ -4,12 +4,20 @@ import { AppDispatch, RootState } from "@/Redux/store";
 import { Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPost() {
   const dispatch = useDispatch<AppDispatch>();
   const { allAdminPost } = useSelector((state: RootState) => state.AdminPost);
+  const { loginUser } = useSelector((state: RootState) => state.User);
   const [filterStatus, setFilterStatus] = useState<string>("");
   const [posts, setPosts] = useState(allAdminPost);
+  const navigate = useNavigate()
+  console.log("USSS ",loginUser?.userType);
+  if(loginUser?.userType==='REGULAR'){
+    navigate('/')
+  }
+
 
   useEffect(() => {
     dispatch(getAllPostsAdmin());
@@ -164,19 +172,19 @@ export default function AdminPost() {
                       </td>
                       <td>
                       <Button
-                        style={{
-                          backgroundColor: '#10b981', // Emerald 600
-                          borderColor: '#10b981', // Emerald 600
-                          color: '#ffffff', // White text
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#059669'; // Emerald 700
-                          e.currentTarget.style.borderColor = '#059669'; // Emerald 700
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#10b981'; // Emerald 600
-                          e.currentTarget.style.borderColor = '#10b981'; // Emerald 600
-                        }}
+                       style={{
+                        backgroundColor: '#f12905', // Emerald 600
+                        borderColor: '#f12905', // Emerald 600
+                        color: '#ffffff', // White text
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#d60000'; // Emerald 700
+                        e.currentTarget.style.borderColor = '#d60000'; // Emerald 700
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#f12905'; // Emerald 600
+                        e.currentTarget.style.borderColor = '#f12905'; // Emerald 600
+                      }}
                         onClick={() => handleDelete(post.id)} // Add onClick handler
                         className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
                       >

@@ -195,18 +195,18 @@ export default function MyPosts() {
       </td>
       <td className='hidden lg:table-cell'>
       <Button
-          style={{
-            backgroundColor: '#10b981', // Emerald 600
-            borderColor: '#10b981', // Emerald 600
+           style={{
+            backgroundColor: '#f12905', // Emerald 600
+            borderColor: '#f12905', // Emerald 600
             color: '#ffffff', // White text
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#059669'; // Emerald 700
-            e.currentTarget.style.borderColor = '#059669'; // Emerald 700
+            e.currentTarget.style.backgroundColor = '#d60000'; // Emerald 700
+            e.currentTarget.style.borderColor = '#d60000'; // Emerald 700
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#10b981'; // Emerald 600
-            e.currentTarget.style.borderColor = '#10b981'; // Emerald 600
+            e.currentTarget.style.backgroundColor = '#f12905'; // Emerald 600
+            e.currentTarget.style.borderColor = '#f12905'; // Emerald 600
           }}
           onClick={() => handleDelete(post.id)} // Add onClick handler
           className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
@@ -228,17 +228,17 @@ export default function MyPosts() {
         </span>
         <Button
           style={{
-            backgroundColor: '#10b981', // Emerald 600
-            borderColor: '#10b981', // Emerald 600
+            backgroundColor: '#f12905', // Emerald 600
+            borderColor: '#f12905', // Emerald 600
             color: '#ffffff', // White text
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#059669'; // Emerald 700
-            e.currentTarget.style.borderColor = '#059669'; // Emerald 700
+            e.currentTarget.style.backgroundColor = '#d60000'; // Emerald 700
+            e.currentTarget.style.borderColor = '#d60000'; // Emerald 700
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#10b981'; // Emerald 600
-            e.currentTarget.style.borderColor = '#10b981'; // Emerald 600
+            e.currentTarget.style.backgroundColor = '#f12905'; // Emerald 600
+            e.currentTarget.style.borderColor = '#f12905'; // Emerald 600
           }}
           onClick={() => handleDelete(post.id)} // Add onClick handler
           className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"

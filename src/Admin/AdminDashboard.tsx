@@ -1,9 +1,17 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AdminHome from './pages/AdminHome';
 import AdminPost from './pages/AdminPost';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/Redux/store';
 
 export default function AdminDashboard() {
+  const { loginUser } = useSelector((state: RootState) => state.User);
+  const navigate = useNavigate()
+  console.log("USSS ",loginUser?.userType);
+  if(loginUser?.userType==='REGULAR'){
+    navigate('/')
+  }
     const location = useLocation();
   const currentPath = location.pathname.split("/").pop();
 
