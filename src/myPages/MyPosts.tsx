@@ -17,6 +17,8 @@ export default function MyPosts() {
   },[dispatch])
 
 
+ 
+
   useEffect(() => {
     if (loginUser?.id) {
       dispatch(fetchPostsByUserId(loginUser.id));
@@ -36,6 +38,8 @@ export default function MyPosts() {
     setFilterStatus(status);
     setIsDropdownOpen(false);
   };
+
+  const sortedPosts = filteredPosts.sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
   const handleDelete = async(postId: number) => {
     try {
       // Dispatch delete action
@@ -46,6 +50,15 @@ export default function MyPosts() {
     } catch (error) {
       console.error("Failed to delete post", error);
     }
+  };
+
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
   return (
     <div>
@@ -147,29 +160,26 @@ export default function MyPosts() {
             </thead>
     
             <tbody className="bg-white lg:border-gray-300">
-            {filteredPosts.map((post,index)=>(
+            {sortedPosts.map((post,index)=>(
       <tr key={index} className="">
       <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-        07 February, 2022
+      {formatDate(post.createdDateTime)}
         <div className="mt-1 flex flex-col text-xs font-medium lg:hidden">
+          
           <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            Jane Doeson
+           
+            {/* <div className=" whitespace-no-wrap">
+            <span className="mr-2">Post Date:</span>
+            <span>{formatDate(post.createdDateTime)}</span>
+          </div> */}
           </div>
-          <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-            </svg>
-            Desktop Computer
+          <div className=" whitespace-no-wrap">
+          <span className="mr-2">Post ID:</span> {post.id}
           </div>
-          <div className="">24 x 10 x 5 cm</div>
-          <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-            </svg>
-            1 Kg
+          
+          <div className=" whitespace-no-wrap">
+            
+            <span className="mr-2">Title:</span> {post.title}
           </div>
         </div>
       </td>
