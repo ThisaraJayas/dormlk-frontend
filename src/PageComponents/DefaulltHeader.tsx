@@ -96,7 +96,7 @@ export default function DefaulltHeader() {
                   className="text-foreground transition-colors hover:text-foreground"
               >
                   <Button variant="outline" className="flex items-center gap-2">
-                      <BiRegistered className="h-5 w-5" />
+                      
                       Register
                       <span className="sr-only">Toggle user menu</span>
                   </Button>
@@ -171,7 +171,7 @@ export default function DefaulltHeader() {
                   className="text-foreground transition-colors hover:text-foreground"
               >
                   <Button variant="outline" className="flex items-center gap-2">
-                      <BiRegistered className="h-5 w-5" />
+                      
                       Register
                       <span className="sr-only">Toggle user menu</span>
                   </Button>
