@@ -78,6 +78,12 @@ export default function DefaulltHeader() {
               >
                 My Profile
               </Link>
+              <Link
+                to={'/store'}
+                className="text-muted-foreground hover:text-foreground mb-6"
+              >
+                Find Properties
+              </Link>
              
                 {!loginUser && (
               <div className="flex gap-4"> {/* Add 'flex' to make items horizontal and 'gap-4' for spacing */}
@@ -117,6 +123,7 @@ export default function DefaulltHeader() {
               </Button>
               </Link>
               
+              
             </nav>
           </SheetContent>
         </Sheet>
@@ -142,6 +149,18 @@ export default function DefaulltHeader() {
             >
               <NavContactMenu />
             </div>
+            <Link
+                to="/store"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                 <Button
+                variant="outline"
+                className="bg-emerald-600 border-emerald-600 hover:bg-emerald-600 hover:text-white text-white flex items-center gap-2"
+              >
+                Find Properties
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+              </Link>
             <Link
               to="/addPost"
               className="text-muted-foreground transition-colors hover:text-foreground"
