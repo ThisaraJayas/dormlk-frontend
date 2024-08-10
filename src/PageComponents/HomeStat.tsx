@@ -20,7 +20,7 @@ export default function HomeStat() {
           <p className="relative">
           <LuBedDouble style={{ color: '#90928b', fontSize: '80px' }} />
           </p>
-          <p className="relative text-2xl font-black text-gray-700">1M+ Beds</p>
+          <p className="relative text-2xl font-black text-gray-700">100+ Beds</p>
           <p className="relative mt-3 mb-2 text-gray-600">Book your perfect place from an extensive list of options.</p>
         </div>
   

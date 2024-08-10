@@ -8,28 +8,31 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"; // Adjust the import path as needed
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp, faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const contactMethods = [
     {
         title: "Quick Chat",
         description: "Online",
         icon: "💬",
-        href: "#",
+        href: "",
     },
     {
         title: "WhatsApp",
-        icon: "WhatsApp", // You may replace with an actual icon if using an icon library
-        href: "https://wa.me/your-number",
+        icon: <FontAwesomeIcon icon={faWhatsapp} style={{color: "#63E6BE",}} />,
+        href: "https://wa.me/+94721636568",
     },
     {
-        title: "Facebook Messenger",
-        icon: "Messenger", // You may replace with an actual icon if using an icon library
-        href: "https://m.me/your-page",
+        title: "Messenger",
+        icon: <FontAwesomeIcon icon={faFacebookMessenger} style={{color: "#3e9eff",}} />,
+        href: "",
     },
     {
         title: "Email",
-        icon: "📧",
-        href: "mailto:contact@amberstudent.com",
+        icon: <FontAwesomeIcon icon={faEnvelope} style={{color: "#000"}} />,
+        href: "mailto:dormlk@gmail.com",
     },
 ];
 
@@ -56,7 +59,7 @@ export default function NavContactMenu() {
                                             <a href={method.href} className="block p-3 rounded-md bg-gray-50 hover:bg-gray-100 transition flex items-center">
                                                 <span className="mr-2">{method.icon}</span>
                                                 <div className="flex flex-col">
-                                                    <span className="font-medium text-gray-800">{method.title}</span>
+                                                    <span className="font-medium text-gray-800 whitespace-nowrap">{method.title}</span>
                                                     {method.description && (
                                                         <span className="text-sm text-green-500">{method.description}</span>
                                                     )}
@@ -75,7 +78,7 @@ export default function NavContactMenu() {
                                         <NavigationMenuLink asChild>
                                             <Link to={link.href} className="block p-3 rounded-md bg-gray-50 hover:bg-gray-100 transition">
                                                 <div className="flex flex-col">
-                                                    <span className="font-medium text-gray-800">{link.title}</span>
+                                                    <span className="font-medium text-gray-800 whitespace-nowrap">{link.title}</span>
                                                 </div>
                                             </Link>
                                         </NavigationMenuLink>
