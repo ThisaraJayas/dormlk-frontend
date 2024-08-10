@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Progress } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 import {
   Select,
   SelectContent,
@@ -15,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogContent, AlertDialogCloseButton } from "@chakra-ui/react";
 import Map from "./Map";
 import { Textarea } from "@/components/ui/textarea";
 import "../styles/postform.css";
@@ -38,7 +40,7 @@ import {
   Stepper,
 } from "@chakra-ui/react";
 
-
+const MAX_IMAGES = 8;
 export const facilities = [
   "Aircondition",
   "Wi-Fi",
@@ -85,11 +87,48 @@ export default function ListPostSteper() {
     noOfBathroom:""
   });
   const dispatch = useDispatch<AppDispatch>();
-  const {} = useSelector((state: RootState) => state.Post);
+  const {status} = useSelector((state: RootState) => state.Post);
+
+  const [titleCount, setTitleCount] = useState(70);
+  const [descriptionCount, setDescriptionCount] = useState(5000);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
+
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (status) {
+      
+      if (status === "succeeded") {
+        setDialogTitle("Success ✔️");
+        setDialogMessage("Post submitted for review successfully!");
+      } else if (status === "failed") {
+        setDialogTitle("Failed ❌");
+        setDialogMessage("Post submission failed. Please try again.");
+      } else if (status === "loading") {
+        setDialogTitle("Loading..");
+        setDialogMessage("Submitting your post...");
+      }
+    }
+  }, [status]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createPost(postData));
+    // Format the price before sending to the database
+    const formattedPrice = formatPrice(postData.price);
+    const dataToSubmit = { ...postData, price: formattedPrice };
+    dispatch(createPost(dataToSubmit));
+    setIsDialogOpen(true);
+  };
+
+  const formatPrice = (price: string) => {
+    // Remove any non-numeric characters
+    const numericPrice = price.replace(/[^0-9]/g, "");
+    // Add commas as thousand separators
+    return numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   const handleLocationSelect = useCallback((place) => {
@@ -180,6 +219,10 @@ export default function ListPostSteper() {
   }, [file]);
 
   const handleImageUpload = (file: File) => {
+    if (postData.images.length >= MAX_IMAGES) {
+      setShowAlert(true);
+      return;
+    }
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, `images/${fileName}`);
@@ -205,7 +248,53 @@ export default function ListPostSteper() {
       }
     );
   };
+   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
 
+      if (postData.images.length + selectedFiles.length > MAX_IMAGES) {
+        setShowAlert(true);
+        return;
+      }
+
+      selectedFiles.forEach((file) => {
+        setFile(file);
+      });
+    }
+  };
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Update the price in the state
+    setPostData((prev) => ({ ...prev, price: value }));
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    setPostData((prev) => ({ ...prev, title: newTitle }));
+    setTitleCount(70 - newTitle.length);
+  };
+
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newDescription = e.target.value;
+    setPostData((prev) => ({ ...prev, description: newDescription }));
+    setDescriptionCount(5000 - newDescription.length);
+  };
+
+  const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+  const value = e.target.value;
+
+  // Allow only numeric input
+  if (/^\d*$/.test(value)) {
+    if (type === "mobile") {
+      setPostData((prev) => ({ ...prev, mobileContact: value }));
+    } else if (type === "whatsapp") {
+      setPostData((prev) => ({ ...prev, whatsappContact: value }));
+    }
+  } else {
+    // Show alert if non-numeric input is entered
+    setShowAlert(true);
+  }
+};
   return (
     <div className="w-full mt-8 lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[200px]">
       <div className="flex items-center justify-center py-12">
@@ -245,13 +334,15 @@ export default function ListPostSteper() {
                   <Input
                     id="title"
                     value={postData.title}
-                    onChange={(e) =>
-                      setPostData({ ...postData, title: e.target.value })
-                    }
+                    onChange={handleTitleChange}
                     type="title"
                     placeholder="Enter your property title"
+                    maxLength={70}
                     required
                   />
+                   <p className="text-sm text-gray-500">
+                    {titleCount} characters remaining
+                  </p>
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
@@ -259,11 +350,13 @@ export default function ListPostSteper() {
                   </div>
                   <Textarea
                     value={postData.description}
-                    onChange={(e) =>
-                      setPostData({ ...postData, description: e.target.value })
-                    }
+                    onChange={handleDescriptionChange}
                     placeholder="Enter your property description here."
+                    maxLength={5000}
                   />
+                   <p className="text-sm text-gray-500">
+                    {descriptionCount} characters remaining
+                  </p>
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="location">Location</Label>
@@ -297,6 +390,27 @@ export default function ListPostSteper() {
                         <SelectItem value="Kandy">Kandy</SelectItem>
                         <SelectItem value="Jaffna">Jaffna</SelectItem>
                         <SelectItem value="Rathnapura">Rathnapura</SelectItem>
+                        <SelectItem value="Gampaha">Gampaha</SelectItem>
+                        <SelectItem value="Ratnapura">Ratnapura</SelectItem>
+                        <SelectItem value="Nuwara Eliya">Nuwara Eliya</SelectItem>
+                        <SelectItem value="Ampara">Ampara</SelectItem>
+                        <SelectItem value="Anuradhapura">Anuradhapura</SelectItem>
+                        <SelectItem value="Badulla">Badulla</SelectItem>
+                        <SelectItem value="Batticaloa">Batticaloa</SelectItem>
+                        <SelectItem value="Hambantota">Hambantota</SelectItem>
+                        <SelectItem value="Kalutara">Kalutara</SelectItem>
+                        <SelectItem value="Kegalle">Kegalle</SelectItem>
+                        <SelectItem value="Kilinochchi">Kilinochchi</SelectItem>
+                        <SelectItem value="Kurunegala">Kurunegala</SelectItem>
+                        <SelectItem value="Mannar">Mannar</SelectItem>
+                        <SelectItem value="Matale">Matale</SelectItem>
+                        <SelectItem value="Monaragala">Monaragala</SelectItem>
+                        <SelectItem value="Mullaitivu">Mullaitivu</SelectItem>
+                        <SelectItem value="Polonnaruwa">Polonnaruwa</SelectItem>
+                        <SelectItem value="Puttalam">Puttalam</SelectItem>
+                        <SelectItem value="Trincomalee">Trincomalee</SelectItem>
+                        <SelectItem value="Vavuniya">Vavuniya</SelectItem>
+
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -527,10 +641,9 @@ export default function ListPostSteper() {
                   <Input
                     id="price"
                     value={postData.price}
-                    onChange={(e) =>
-                      setPostData({ ...postData, price: e.target.value })
-                    }
+                    onChange={handlePriceChange}
                     type="mobileno"
+                    maxLength={7}
                     placeholder="Enter monthly price"
                     required
                   />
@@ -559,6 +672,15 @@ export default function ListPostSteper() {
                   </h1>
                 </div>
                 <div className="grid w-full max-w-sm items-center gap-1.5">
+                  {showAlert && (
+        <Alert status="warning" variant="subtle">
+          <AlertIcon />
+          <AlertTitle>Upload Limit Reached</AlertTitle>
+          <AlertDescription>
+            You can upload a maximum of {MAX_IMAGES} images.
+          </AlertDescription>
+        </Alert>
+      )}
                   <Label htmlFor="images">Images</Label>
                   <Input
                     type="file"
@@ -570,6 +692,7 @@ export default function ListPostSteper() {
                         );
                       }
                     }}
+                    
                     accept="image/*"
                     multiple
                   />
@@ -635,19 +758,22 @@ export default function ListPostSteper() {
                     5/5 Contact Details
                   </h1>
                 </div>
+                {/* {showAlert && (
+      <Alert status="error" onClose={() => setShowAlert(false)}>
+        <AlertIcon />
+        <AlertTitle>Invalid Input!</AlertTitle>
+        <AlertDescription>Only numbers are allowed for contact numbers.</AlertDescription>
+      </Alert>
+    )} */}
                 <div className="grid gap-2">
                   <Label htmlFor="mobileNo">Mobile Number</Label>
                   <Input
                     id="mobileno"
                     value={postData.mobileContact}
-                    onChange={(e) =>
-                      setPostData({
-                        ...postData,
-                        mobileContact: e.target.value,
-                      })
-                    }
+        onChange={(e) => handleContactChange(e, "mobile")}
                     type="mobileno"
                     placeholder="Enter your mobile no"
+                    maxLength={12}
                     required
                   />
                 </div>
@@ -656,13 +782,9 @@ export default function ListPostSteper() {
                   <Input
                     id="whatsappno"
                     value={postData.whatsappContact}
-                    onChange={(e) =>
-                      setPostData({
-                        ...postData,
-                        whatsappContact: e.target.value,
-                      })
-                    }
+        onChange={(e) => handleContactChange(e, "whatsapp")}
                     type="mobileno"
+                    maxLength={12}
                     placeholder="Enter your whatsApp no"
                     required
                   />
@@ -671,11 +793,12 @@ export default function ListPostSteper() {
                   <Label htmlFor="mobileNo">Email Address</Label>
                   <Input
                     id="emailno"
+                    type='email'
                     value={postData.emailContact}
                     onChange={(e) =>
                       setPostData({ ...postData, emailContact: e.target.value })
                     }
-                    type="emailno"
+                    
                     placeholder="Enter your contact email"
                     required
                   />
@@ -698,6 +821,29 @@ export default function ListPostSteper() {
             )}
           </form>
         </div>
+          {/* Dialog */}
+          <AlertDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} leastDestructiveRef={cancelRef}>
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader>{dialogTitle}</AlertDialogHeader>
+              <AlertDialogCloseButton />
+              <AlertDialogBody>{dialogMessage}</AlertDialogBody>
+              <AlertDialogFooter>
+                <Button style={{
+   backgroundColor: '#01aa7a',
+    color: 'white',
+    border: 'none',
+    padding: '8px 16px',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    transition: 'background-color 0.2s',
+  }} ref={cancelRef} onClick={() => setIsDialogOpen(false)}>
+                  Close
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
       </div>
 
       <div className="lg:block hidden h-full">
