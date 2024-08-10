@@ -144,10 +144,11 @@ export default function DefaulltHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>Manage Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <Link to={'/my/posts'}><DropdownMenuItem>My Posts</DropdownMenuItem></Link>
+              <Link to={'/my/messages'}><DropdownMenuItem>My Messages</DropdownMenuItem></Link>
+              <Link to={'/my/account'}><DropdownMenuItem>My Profile</DropdownMenuItem></Link>
               <DropdownMenuSeparator />
               {loginUser &&(
                 <DropdownMenuItem onClick={logoutFunction}>Logout</DropdownMenuItem>
