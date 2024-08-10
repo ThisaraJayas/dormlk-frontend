@@ -61,7 +61,7 @@ export default function SearchBox({ searchQuery, setSearchQuery }: SearchBoxProp
           onFocus={handleSearchFocus}
           onBlur={handleSearchBlur}
           className="h-10 max-w-[600px] cursor-text rounded-md border bg-gray-100 py-2 pl-4 outline-none ring-emerald-200 hover:border hover:border-emerald-300 transition-all duration-200"
-          placeholder="Search City, Campus.."
+          placeholder="Search City, Property.."
         />
         <button
           type="submit"
@@ -70,26 +70,26 @@ export default function SearchBox({ searchQuery, setSearchQuery }: SearchBoxProp
           Search
         </button>
       </form>
-          {showRecommendations && (
+          {/* {showRecommendations && (
             <div className="absolute left-0 right-0 mt-2 divide-y rounded-b-xl border px-4 shadow-lg bg-white">
               <div className="cursor-pointer px-4 py-2 text-gray-600 hover:bg-emerald-400 hover:text-white">
-                <span className="m-0 font-medium">Ca</span>{" "}
-                <span>lifornia</span>
+                <span className="m-0 font-medium">Colombo</span>{" "}
+                
               </div>
               <div className="cursor-pointer px-4 py-2 text-gray-600 hover:bg-emerald-400 hover:text-white">
-                <span className="m-0 font-medium">Ca</span> <span>nada</span>
+                <span className="m-0 font-medium">Kandy</span>
               </div>
               <div className="cursor-pointer px-4 py-2 text-gray-600 hover:bg-emerald-400 hover:text-white">
-                <span className="m-0 font-medium">Ca</span> <span>mbodia</span>
+                <span className="m-0 font-medium">Matara</span>
               </div>
               <div className="cursor-pointer px-4 py-2 text-gray-600 hover:bg-emerald-400 hover:text-white">
-                <span className="m-0 font-medium">Ca</span> <span>meo</span>
+                <span className="m-0 font-medium">Gampaha</span>
               </div>
               <div className="cursor-pointer px-4 py-2 text-gray-600 hover:bg-emerald-400 hover:text-white">
-                <span className="m-0 font-medium">Ca</span> <span>rsville</span>
+                <span className="m-0 font-medium">Jaffna</span> 
               </div>
             </div>
-          )}
+          )} */}
         </div>
   )
 }

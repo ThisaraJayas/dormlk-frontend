@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CircleUser, Menu, Package2, LogIn } from "lucide-react";
+import { CircleUser, Menu, Package2, LogIn, RegexIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +16,7 @@ import NavContactMenu from "./NavContactMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
 import { getUser, logout } from "@/Redux/Auth/AuthAction";
+import { BiRegistered } from "react-icons/bi";
 
 export default function DefaulltHeader() {
   const dispatch = useDispatch()
@@ -56,33 +57,66 @@ export default function DefaulltHeader() {
                 <Package2 className="h-6 w-6" />
                 <span className="sr-only">Acme Inc</span>
               </Link>
-              <Link
-                to="/dashboard"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Dashboard
-              </Link>
-              <Link
-                to="/orders"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Orders
-              </Link>
-              <Link
-                to="/products"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Products
-              </Link>
-              <Link
-                to="/customers"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Customers
-              </Link>
               <Link to="/settings" className="hover:text-foreground">
-                Settings
+                <div className=""><NavContactMenu /></div>
               </Link>
+              <Link
+                to={'/my/posts'}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                My Posts
+              </Link>
+              <Link
+                to={'/my/messages'}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                My Messages
+              </Link>
+              <Link
+                to={'/my/profile'}
+                className="text-muted-foreground hover:text-foreground mb-6"
+              >
+                My Profile
+              </Link>
+             
+                {!loginUser && (
+              <div className="flex gap-4"> {/* Add 'flex' to make items horizontal and 'gap-4' for spacing */}
+              <Link
+                  to="/login"
+                  className="text-foreground transition-colors hover:text-foreground"
+              >
+                  <Button variant="outline" className="flex items-center gap-2">
+                      <LogIn className="h-5 w-5" />
+                      Login
+                      <span className="sr-only">Toggle user menu</span>
+                  </Button>
+              </Link>
+              <Link
+                  to="/register"
+                  className="text-foreground transition-colors hover:text-foreground"
+              >
+                  <Button variant="outline" className="flex items-center gap-2">
+                      <BiRegistered className="h-5 w-5" />
+                      Register
+                      <span className="sr-only">Toggle user menu</span>
+                  </Button>
+              </Link>
+          </div>
+            )}
+              
+              <Link
+                to="/addPost"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                 <Button
+                variant="outline"
+                className="bg-emerald-500 border-emerald-500 hover:bg-emerald-600 hover:text-white text-white flex items-center gap-2"
+              >
+                List your place
+                <span className="sr-only">Toggle user menu</span>
+              </Button>
+              </Link>
+              
             </nav>
           </SheetContent>
         </Sheet>
@@ -121,16 +155,28 @@ export default function DefaulltHeader() {
               </Button>
             </Link>
             {!loginUser && (
+              <div className="flex gap-4"> {/* Add 'flex' to make items horizontal and 'gap-4' for spacing */}
               <Link
-              to="/login"
-              className="text-foreground transition-colors hover:text-foreground"
-            >
-              <Button variant="outline" className="flex items-center gap-2">
-                <LogIn className="h-5 w-5" />
-                Login
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </Link>
+                  to="/login"
+                  className="text-foreground transition-colors hover:text-foreground"
+              >
+                  <Button variant="outline" className="flex items-center gap-2">
+                      <LogIn className="h-5 w-5" />
+                      Login
+                      <span className="sr-only">Toggle user menu</span>
+                  </Button>
+              </Link>
+              <Link
+                  to="/register"
+                  className="text-foreground transition-colors hover:text-foreground"
+              >
+                  <Button variant="outline" className="flex items-center gap-2">
+                      <BiRegistered className="h-5 w-5" />
+                      Register
+                      <span className="sr-only">Toggle user menu</span>
+                  </Button>
+              </Link>
+          </div>
             )}
             
           </nav>
