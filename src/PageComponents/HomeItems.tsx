@@ -153,7 +153,7 @@ export default function HomeItems() {
                                       <span className="text-sm">{post.noOfBathroom} Bathroom</span>
                                     </li>
                                   )}
-                                  {post.facilities.includes("Wi-Fi") && (
+                                  {post.facilities.find(facility => facility === "Wi-Fi") && (
                                     <li className="mr-3 mb-2 flex items-center text-left bg-gray-100 p-2 rounded-md">
                                       <i className="mr-1 text-2xl text-green-600">
                                         {/* Cooking icon SVG */}
@@ -173,7 +173,7 @@ export default function HomeItems() {
                                       <span className="text-sm">Wi-Fi</span>
                                     </li>
                                   )}
-                                  {post.facilities.includes("Parking") && (
+                                  {post.facilities.find(facility => facility === "Parking") && (
                                     <li className="mr-3 mb-2 flex items-center text-left bg-gray-100 p-2 rounded-md">
                                       <i className="mr-1 text-2xl text-green-600">
                                         {/* Cooking icon SVG */}
@@ -194,7 +194,7 @@ export default function HomeItems() {
                                     </li>
                                   )}
                                   
-                                  {post.facilities.includes("Aircondition") && (
+                                  {post.facilities.find(facility => facility === "Aircondition")&& (
                                     <li className="mr-3 mb-2 flex items-center text-left  bg-gray-100 p-2 rounded-md">
                                       <i className="mr-1 text-2xl text-green-600">
                                         {/* Cooking icon SVG */}

@@ -13,16 +13,25 @@ import { fetchPostByHouseType } from '@/Redux/Post/PostAction.ts'
 import { TfiLocationPin } from 'react-icons/tfi'
 import { Link } from 'react-router-dom'
 
-
+type Facility = 'Parking' | 'Wi-Fi' | 'Pool' | 'Gym';
 interface Post {
-  facilities: string[];
-  // other properties
+  id: string;
+  title: string;
+  images: string[];
+  cityDistrict: string;
+  accommodationType?: string;
+  noOfBed?: number;
+  noOfBathroom?: number;
+  facilities: Facility[];
+}
+const post: Post = {
+  id: '',
+  title: '',
+  images: [],
+  cityDistrict: '',
+  facilities: []
 }
 
-const post: Post = {
-  facilities: ['Wi-Fi', 'Parking'],
-  // other properties
-};
 export default function HomeHeaderTabs() {
     const dispatch = useDispatch<AppDispatch>();
   const { allPostByHouseType, status } = useSelector((state: RootState) => state.Post);
@@ -192,7 +201,7 @@ export default function HomeHeaderTabs() {
                                       <span className="text-sm">{post.noOfBathroom} Bathroom</span>
                                     </li>
                                   )}
-                                  {post.facilities.includes("Wi-Fi") && (
+                                  { post.facilities.find(facility => facility === "Wi-Fi") !== undefined && (
                                     <li className="mr-3 mb-2 flex items-center text-left bg-gray-100 p-2 rounded-md">
                                       <i className="mr-1 text-2xl text-green-600">
                                         {/* Cooking icon SVG */}
@@ -212,7 +221,7 @@ export default function HomeHeaderTabs() {
                                       <span className="text-sm">Wi-Fi</span>
                                     </li>
                                   )}
-                                  {post.facilities.includes("Parking") && (
+                                  {post.facilities.find(facility => facility === "Parking") && (
                                     <li className="mr-3 mb-2 flex items-center text-left bg-gray-100 p-2 rounded-md">
                                       <i className="mr-1 text-2xl text-green-600">
                                         {/* Cooking icon SVG */}
@@ -233,7 +242,7 @@ export default function HomeHeaderTabs() {
                                     </li>
                                   )}
                                   
-                                  {post.facilities.includes("Aircondition") && (
+                                  {post.facilities.find(facility => facility === "Aircondition") && (
                                     <li className="mr-3 mb-2 flex items-center text-left  bg-gray-100 p-2 rounded-md">
                                       <i className="mr-1 text-2xl text-green-600">
                                         {/* Cooking icon SVG */}
