@@ -13,7 +13,7 @@ export const createMessage = createAsyncThunk("createMessage",async(messageDetai
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`http://localhost:8080/api/messages`, messageDetails,{
+        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/messages`, messageDetails,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -35,7 +35,7 @@ export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",as
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data}=await axios.get(`http://localhost:8080/api/messages/messages/${userId}`, {
+        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/messages/messages/${userId}`, {
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -52,7 +52,7 @@ export const fetchRecivedMessages = createAsyncThunk("fetchRecivedMessages",asyn
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data}=await axios.get(`http://localhost:8080/api/messages/received?userId=${userId}`, {
+        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/messages/received?userId=${userId}`, {
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }

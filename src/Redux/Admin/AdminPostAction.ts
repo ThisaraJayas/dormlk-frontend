@@ -6,7 +6,7 @@ export const getAllPostsAdmin = createAsyncThunk("getAllPostsAdmin",async()=>{
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data}=await axios.get(`http://localhost:8080/api/admin/allPosts`,{
+        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/admin/allPosts`,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -31,7 +31,7 @@ export const updatePostStatus = createAsyncThunk(
   
       try {
         const { data } = await axios.put(
-          `http://localhost:8080/api/admin/${postId}/status/${newStatus}`,
+          `https://dormlk-production.up.railway.app/api/admin/${postId}/status/${newStatus}`,
           {}, // empty data object for PUT request
           {
             headers: {

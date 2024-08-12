@@ -9,7 +9,7 @@ export const createReply = createAsyncThunk("createReply",async(replyDetails :Re
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`http://localhost:8080/api/reply`, replyDetails,{
+        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/reply`, replyDetails,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }

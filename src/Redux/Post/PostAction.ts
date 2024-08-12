@@ -22,7 +22,7 @@ export const createPost = createAsyncThunk("createPost",async(postData :Post)=>{
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`http://localhost:8080/api/post`,postData,{
+        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/post`,postData,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -37,7 +37,7 @@ export const createPost = createAsyncThunk("createPost",async(postData :Post)=>{
 
 export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async(district : string)=>{
     try{
-        const {data} = await axios.get(`http://localhost:8080/api/post/district/${district}`)
+        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/district/${district}`)
         return data
     }catch(error){
         console.log("Fetch Post by district Error : ",error); 
@@ -53,7 +53,7 @@ interface FilterPostBySearchParams {
 export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilter", async(params: FilterPostBySearchParams)=>{
     const { district, accommodationType } = params;
     try{
-        const {data} = await axios.get(`http://localhost:8080/api/post/search`, 
+        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/search`, 
             {
                 params: {district, accommodationType},
             }
@@ -67,7 +67,7 @@ export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilt
 
 export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
     try{
-        const {data} = await axios.get(`http://localhost:8080/api/post/allPosts`)
+        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/allPosts`)
         return data
     }catch(error){
         console.log("Fetch Post Error : ",error); 
@@ -77,7 +77,7 @@ export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
 
 export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", async(accommodationType : string)=>{
     try{
-        const {data} = await axios.get(`http://localhost:8080/api/post/accommodationType/${accommodationType}`)
+        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/accommodationType/${accommodationType}`)
         return data
     }catch(error){
         console.log("Fetch Post by Houe Type Error : ",error); 
@@ -86,7 +86,7 @@ export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", asy
 
 export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(userId : number)=>{
     try{
-        const {data}=await axios.get(`http://localhost:8080/api/post/posts/${userId}`)
+        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/post/posts/${userId}`)
         return data
     }catch(error){
         console.log("Fetch Post by UserId Error : ",error);
@@ -95,7 +95,7 @@ export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(us
 
 export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(postId :number)=>{
     try{
-        const {data}=await axios.get(`http://localhost:8080/api/post/${postId}`)
+        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/post/${postId}`)
         console.log(data);
         
         return data
@@ -108,7 +108,7 @@ export const DeleteByPostId = createAsyncThunk("post/DeleteByPostId",async(postI
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data}=await axios.delete(`http://localhost:8080/api/post/${postId}`,{
+        const {data}=await axios.delete(`https://dormlk-production.up.railway.app/api/post/${postId}`,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
