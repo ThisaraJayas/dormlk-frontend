@@ -62,7 +62,7 @@ export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", asy
     }
 })
 
-export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(userId)=>{
+export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(userId : number)=>{
     try{
         const {data}=await axios.get(`http://localhost:8080/api/post/posts/${userId}`)
         return data
@@ -82,7 +82,7 @@ export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(po
     }
 })
 
-export const DeleteByPostId = createAsyncThunk("DeleteByPostId",async(postId)=>{
+export const DeleteByPostId = createAsyncThunk("post/DeleteByPostId",async(postId : number)=>{
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");

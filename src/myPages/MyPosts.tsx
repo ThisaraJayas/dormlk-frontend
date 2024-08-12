@@ -21,7 +21,8 @@ export default function MyPosts() {
 
   useEffect(() => {
     if (loginUser?.id) {
-      dispatch(fetchPostsByUserId(loginUser.id));
+      const userId: number = loginUser.id.valueOf();
+      dispatch(fetchPostsByUserId(userId));
     }
   }, [dispatch, loginUser?.id]);
 
@@ -32,34 +33,39 @@ export default function MyPosts() {
     : allPostByUserId;
 
    const handleFilterClick = () => {
-      setIsDropdownOpen(prevState => !prevState);
+    console.log('Current state:', isDropdownOpen);
+    setIsDropdownOpen(prevState => {
+        console.log('Toggling state from', prevState, 'to', !prevState);
+        return !prevState;
+    });
   };
   const handleFilterOptionClick = (status: string | null) => {
     setFilterStatus(status);
     setIsDropdownOpen(false);
   };
 
-  const sortedPosts = filteredPosts.sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+  // const sortedPosts = filteredPosts.sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
   const handleDelete = async(postId: number) => {
     try {
       // Dispatch delete action
       await dispatch(DeleteByPostId(postId));
   
       // Update local state to remove the deleted post
-      dispatch(fetchPostsByUserId(loginUser.id));
+      const userId: number = loginUser.id.valueOf();
+      dispatch(fetchPostsByUserId(userId));
     } catch (error) {
       console.error("Failed to delete post", error);
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+  // const formatDate = (dateString: string) => {
+  //   const options: Intl.DateTimeFormatOptions = {
+  //     year: 'numeric',
+  //     month: 'long',
+  //     day: 'numeric',
+  //   };
+  //   return new Date(dateString).toLocaleDateString(undefined, options);
+  // };
   return (
     <div>
     
@@ -160,10 +166,10 @@ export default function MyPosts() {
             </thead>
     
             <tbody className="bg-white lg:border-gray-300">
-            {sortedPosts.map((post,index)=>(
+            {filteredPosts.map((post,index)=>(
       <tr key={index} className="">
       <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-      {formatDate(post.createdDateTime)}
+      {/* {formatDate(post.createdDateTime)} */}
         <div className="mt-1 flex flex-col text-xs font-medium lg:hidden">
           
           <div className="flex items-center">
