@@ -39,6 +39,7 @@ import {
   StepDescription,
   Stepper,
 } from "@chakra-ui/react";
+import image from '../styles/home2.jpg'
 
 const MAX_IMAGES = 8;
 export const facilities = [
@@ -280,6 +281,12 @@ export default function ListPostSteper() {
     setDescriptionCount(5000 - newDescription.length);
   };
 
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const location = e.target.value;
+    setPostData((prev) => ({ ...prev, location: location }));
+    
+  };
+
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
   const value = e.target.value;
 
@@ -358,6 +365,7 @@ export default function ListPostSteper() {
                     {descriptionCount} characters remaining
                   </p>
                 </div>
+                
                 <div className="grid gap-2">
                   <Label htmlFor="location">Location</Label>
                   {/* <GooglePlacesAutocomplete
@@ -373,6 +381,15 @@ export default function ListPostSteper() {
                       },
                     }}
                   /> */}
+                  <Input
+                    id="title"
+                    value={postData.location}
+                    onChange={handleAddressChange}
+                    type="title"
+                    placeholder="Enter your Address"
+                    maxLength={100}
+                    required
+                  />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="avaliablility">Select District</Label>
@@ -848,7 +865,8 @@ export default function ListPostSteper() {
 
       <div className="lg:block hidden h-full">
         <div className="fixed-image">
-          <Map location={location} />
+          {/* <Map location={location} /> */}
+          <img src={image} alt="Description of image" className="w-full h-full object-cover" />
         </div>
       </div>
     </div>
