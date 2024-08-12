@@ -18,7 +18,6 @@ import { RootState } from "@/Redux/store.ts";
 import { getUser, logout } from "@/Redux/Auth/AuthAction.ts";
 import { BiRegistered } from "react-icons/bi";
 
-
 export default function DefaulltHeader() {
  
   const dispatch = useDispatch()
