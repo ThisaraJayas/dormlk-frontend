@@ -13,6 +13,7 @@ interface Post {
   cityDistrict: string;
   accommodationType: string;
   createdDateTime: Date;
+  price:string
 }
 
 const ITEMS_PER_PAGE = 9;

@@ -305,7 +305,7 @@ export default function ListPostSteper() {
               Enter your property below to get started.
             </p> */}
           </div>
-          <Stepper _activeStep={currentStep} colorScheme="teal">
+          <Stepper index={currentStep} colorScheme="teal">
             <Step>
               {/* <StepIndicator />
           <StepTitle>Property Details</StepTitle> */}
@@ -360,7 +360,7 @@ export default function ListPostSteper() {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="location">Location</Label>
-                  <GooglePlacesAutocomplete
+                  {/* <GooglePlacesAutocomplete
                     apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
                     selectProps={{
                       value: location,
@@ -372,7 +372,7 @@ export default function ListPostSteper() {
                         clearSuggestions();
                       },
                     }}
-                  />
+                  /> */}
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="avaliablility">Select District</Label>

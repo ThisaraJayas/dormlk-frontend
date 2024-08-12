@@ -104,7 +104,7 @@ console.log("RRR ",totalComments);
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
                 <div className="lg:order-2 lg:ml-5">
-                  <ChakraCarousel>
+                  <ChakraCarousel gap='1'>
                     {itemPost.images &&
                       itemPost.images.map((image, index) => (
                         <div

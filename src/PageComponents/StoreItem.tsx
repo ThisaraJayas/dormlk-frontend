@@ -12,7 +12,7 @@ interface Post {
   noOfBed?: number;
   noOfBathroom?: number;
   facilities?: string[];
-  price: number;
+  price: string;
 }
 
 interface StoreItemProps {
