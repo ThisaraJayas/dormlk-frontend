@@ -11,7 +11,9 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
     // ...
   }
 }

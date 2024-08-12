@@ -1,6 +1,6 @@
-import { getUser } from '@/Redux/Auth/AuthAction';
-import { DeleteByPostId, fetchPostsByUserId } from '@/Redux/Post/PostAction';
-import { AppDispatch, RootState } from '@/Redux/store';
+import { getUser } from '@/Redux/Auth/AuthAction.ts';
+import { DeleteByPostId, fetchPostsByUserId } from '@/Redux/Post/PostAction.ts';
+import { AppDispatch, RootState } from '@/Redux/store.ts';
 import { Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

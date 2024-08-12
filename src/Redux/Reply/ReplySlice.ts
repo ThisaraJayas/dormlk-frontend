@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createComment } from "../Comment/CommentAction";
-import { createReply } from "./ReplyAction";
+import { createComment } from "../Comment/CommentAction.ts";
+import { createReply } from "./ReplyAction.ts";
 
 
 export interface Reply{

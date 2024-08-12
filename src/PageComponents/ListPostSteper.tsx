@@ -1,8 +1,8 @@
 import "../styles/post.css";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Progress } from "@chakra-ui/react";
@@ -15,21 +15,21 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select.tsx";
 import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogContent, AlertDialogCloseButton } from "@chakra-ui/react";
-import Map from "./Map";
-import { Textarea } from "@/components/ui/textarea";
+import Map from "./Map.tsx";
+import { Textarea } from "@/components/ui/textarea.tsx";
 import "../styles/postform.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/store";
-import { createPost } from "@/Redux/Post/PostAction";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
+import { createPost } from "@/Redux/Post/PostAction.ts";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../firebase.ts";
 import {
   Step,
   StepIndicator,
@@ -305,7 +305,7 @@ export default function ListPostSteper() {
               Enter your property below to get started.
             </p> */}
           </div>
-          <Stepper activeStep={currentStep} colorScheme="teal">
+          <Stepper _activeStep={currentStep} colorScheme="teal">
             <Step>
               {/* <StepIndicator />
           <StepTitle>Property Details</StepTitle> */}

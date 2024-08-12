@@ -1,7 +1,6 @@
-import DefaulltHeader from '@/PageComponents/DefaulltHeader'
-import Footer from '@/PageComponents/Footer'
-import { ListPost } from '@/PageComponents/ListPost'
-import ListPostSteper from '@/PageComponents/ListPostSteper'
+import DefaulltHeader from '@/PageComponents/DefaulltHeader.tsx'
+import Footer from '@/PageComponents/Footer.tsx'
+import ListPostSteper from '@/PageComponents/ListPostSteper.tsx'
 import React from 'react'
 
 export default function Post() {

@@ -1,14 +1,14 @@
-import ItemBreadChumb from "@/PageComponents/ItemBreadChumb";
+import ItemBreadChumb from "@/PageComponents/ItemBreadChumb.tsx";
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/item.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/store";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
 import { useParams } from "react-router-dom";
-import { fetchPostsByPostId } from "@/Redux/Post/PostAction";
-import ChakraCarousel from "@/PageComponents/ChakraCarousel";
-import Comment from "../PageComponents/Comment";
+import { fetchPostsByPostId } from "@/Redux/Post/PostAction.ts";
+import ChakraCarousel from "@/PageComponents/ChakraCarousel.tsx";
+import Comment from "../PageComponents/Comment.tsx";
 import StarRatings from 'react-star-ratings'; 
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea.tsx"
 import {
   Dialog,
   DialogContent,
@@ -17,10 +17,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dialog.tsx"
+import { Input } from "@/components/ui/input.tsx"
+import { Button } from "@/components/ui/button.tsx"
+import { Label } from "@/components/ui/label.tsx"
 
 import {
   Tabs,
@@ -34,11 +34,10 @@ import {
   Box,
   Spinner,
 } from "@chakra-ui/react";
-import ReviewCard, { averageRating } from "@/PageComponents/ReviewCard";
-import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction";
-import { suitableFor } from "@/PageComponents/ListPost";
+import ReviewCard, { averageRating } from "@/PageComponents/ReviewCard.tsx";
+import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction.ts";
 import { Contact2Icon, MessageCircleMore, Send, Telescope } from "lucide-react";
-import { createMessage } from "@/Redux/Messages/MessageAction";
+import { createMessage } from "@/Redux/Messages/MessageAction.ts";
 
 var totalComments = 0;
 export default function Item() {
@@ -60,20 +59,23 @@ export default function Item() {
 
   const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(createMessage({  postId: id, firstName, email, mobileNo, message: messageText })); 
+        const messageId: number = Number(id);
+        dispatch(createMessage({ id: messageId, firstName, email, mobileNo, message: messageText })); 
   };
   console.log("Send Message ",message);
   
 
   useEffect(() => {
-    dispatch(fetchCommentsByPostId(id));
+    const Id: number = Number(id);
+    dispatch(fetchCommentsByPostId(Id));
   }, [dispatch, id]);
 
 console.log("RRR ",totalComments);
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchPostsByPostId(id));
+      const Id: number = Number(id);
+      dispatch(fetchPostsByPostId(Id));
     }
   }, [dispatch, id]);
 

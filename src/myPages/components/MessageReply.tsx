@@ -1,5 +1,5 @@
-import { createReply } from '@/Redux/Reply/ReplyAction';
-import { AppDispatch, RootState } from '@/Redux/store';
+import { createReply } from '@/Redux/Reply/ReplyAction.ts';
+import { AppDispatch, RootState } from '@/Redux/store.ts';
 import { Button, Textarea } from '@chakra-ui/react'
 import { Reply, Send } from 'lucide-react';
 import React, { useEffect, useState } from 'react'

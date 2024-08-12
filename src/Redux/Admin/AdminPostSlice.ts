@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPostsAdmin, updatePostStatus } from "./AdminPostAction";
+import { getAllPostsAdmin, updatePostStatus } from "./AdminPostAction.ts";
 
 export interface Post{
-    id:Number,
+    id:number,
     title:string,
     description:string,
     location:string,
@@ -37,6 +37,7 @@ const initialState:PostState={
     status: "idle",
 }
 
+
 export const AdminPostSlice = createSlice({
     name:"adminPost",
     initialState,
@@ -48,6 +49,7 @@ export const AdminPostSlice = createSlice({
         builder.addCase(getAllPostsAdmin.fulfilled,(state, action)=>{
             state.status='succeeded',
             state.allAdminPost=action.payload
+            console.log("All ",action.payload);
         })
         builder.addCase(getAllPostsAdmin.rejected,(state)=>{
             state.status='failed'

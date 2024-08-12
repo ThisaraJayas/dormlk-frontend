@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import HomeNav from "./HomeNav";
+import HomeNav from "./HomeNav.tsx";
 import "../styles/home.css";
-import DefaulltHeader from "./DefaulltHeader";
+import DefaulltHeader from "./DefaulltHeader.tsx";
 import { Search } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/Redux/store";
-import { filterPostBySearchFilter } from "@/Redux/Post/PostAction";
+import { AppDispatch } from "@/Redux/store.ts";
+import { filterPostBySearchFilter } from "@/Redux/Post/PostAction.ts";
 import { Select } from "@chakra-ui/react";
 
 const accommodationTypes = [

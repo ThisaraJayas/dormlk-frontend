@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card.tsx";
 import {
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
 } from "@chakra-ui/react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
 import { Link, useNavigate } from "react-router-dom";
-import DefaulltHeader from "@/PageComponents/DefaulltHeader";
+import DefaulltHeader from "@/PageComponents/DefaulltHeader.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/store";
-import { register } from "@/Redux/Auth/AuthAction";
-import Footer from "@/PageComponents/Footer";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
+import { register } from "@/Redux/Auth/AuthAction.ts";
+import Footer from "@/PageComponents/Footer.tsx";
 
 
 export default function Register() {

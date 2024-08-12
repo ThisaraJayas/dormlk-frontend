@@ -1,7 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+export interface Post {
+    title: string;
+    location: string;
+    cityDistrict: string;
+    description: string;
+    price: string;
+    mobileContact: string;
+    emailContact: string;
+    whatsappContact: string;
+    availability: string;
+    accommodationType: string;
+    closeByLocation: string[]; // Update type if necessary
+  suitableFor: string[]; // Update type if necessary
+  facilities: string[]; // Update type if necessary
+  images: string[];
+}
 
-export const createPost = createAsyncThunk("createPost",async(postData)=>{
+export const createPost = createAsyncThunk("createPost",async(postData :Post)=>{
     console.log(postData);
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
@@ -19,7 +35,7 @@ export const createPost = createAsyncThunk("createPost",async(postData)=>{
     
 })
 
-export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async(district)=>{
+export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async(district : string)=>{
     try{
         const {data} = await axios.get(`http://localhost:8080/api/post/district/${district}`)
         return data
@@ -29,7 +45,13 @@ export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async
     }
 })
 
-export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilter", async({district, accommodationType})=>{
+interface FilterPostBySearchParams {
+    district: string;
+    accommodationType: string;
+  }
+
+export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilter", async(params: FilterPostBySearchParams)=>{
+    const { district, accommodationType } = params;
     try{
         const {data} = await axios.get(`http://localhost:8080/api/post/search`, 
             {
@@ -53,7 +75,7 @@ export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
     }
 })
 
-export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", async(accommodationType)=>{
+export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", async(accommodationType : string)=>{
     try{
         const {data} = await axios.get(`http://localhost:8080/api/post/accommodationType/${accommodationType}`)
         return data
@@ -71,7 +93,7 @@ export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(us
     }
 })
 
-export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(postId)=>{
+export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(postId :number)=>{
     try{
         const {data}=await axios.get(`http://localhost:8080/api/post/${postId}`)
         console.log(data);

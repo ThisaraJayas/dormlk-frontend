@@ -1,5 +1,5 @@
-import { getUser, logout, passwordChange } from '@/Redux/Auth/AuthAction'
-import { AppDispatch, RootState } from '@/Redux/store'
+import { getUser, logout, passwordChange } from '@/Redux/Auth/AuthAction.ts'
+import { AppDispatch, RootState } from '@/Redux/store.ts'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

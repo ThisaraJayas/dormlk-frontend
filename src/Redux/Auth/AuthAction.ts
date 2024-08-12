@@ -1,7 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+export interface Login {
+    email: string;
+    password: string;
+}
 
-export const register = createAsyncThunk("register", async (userData) => {
+export interface Register {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+export const register = createAsyncThunk("register", async (userData: Register) => {
     console.log(userData);
     
     try {
@@ -18,7 +28,7 @@ export const register = createAsyncThunk("register", async (userData) => {
     }
 });
 
-export const login = createAsyncThunk("login", async(userData)=>{
+export const login = createAsyncThunk("login", async(userData : Login)=>{
     console.log(userData);
     
     try{
@@ -52,7 +62,7 @@ export const getUser = createAsyncThunk("getUser", async()=>{
     }
 })
 
-export const passwordChange = createAsyncThunk("passwordChange", async(newPassword)=>{
+export const passwordChange = createAsyncThunk("passwordChange", async(newPassword :string)=>{
     console.log(newPassword);
     
     try{

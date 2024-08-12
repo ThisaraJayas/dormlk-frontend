@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import im1 from "../styles/home1.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/store";
-import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
+import { fetchCommentsByPostId } from "@/Redux/Comment/CommentAction.ts";
 import { Box, Button, Flex, Input, Text, SimpleGrid } from '@chakra-ui/react';
 import StarRatings from 'react-star-ratings'; 
 
@@ -24,8 +24,9 @@ export default function ReviewCard({ postId }) {
   const totalRatingSum = validRatings.reduce((sum, comment) => sum + comment.starRating, 0);
   averageRating = validRatings.length > 0 ? (totalRatingSum / validRatings.length) : 0;
 
-  const formatDateTime = (dateString) => {
-    const options = {
+
+  const formatDateTime = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -37,10 +38,12 @@ export default function ReviewCard({ postId }) {
       new Date(dateString)
     );
   };
-
   const sortedComments = [...allComment].sort(
-    (a, b) => new Date(b.createdDateTime) - new Date(a.createdDateTime)
-  );
+    (a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+
+  // const sortedComments = [...allComment].sort(
+  //   (a, b) => new Date(b.createdDateTime) - new Date(a.createdDateTime)
+  // );
   const totalPages = Math.ceil(sortedComments.length / ITEMS_PER_PAGE);
   const currentItems = sortedComments.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -64,9 +67,10 @@ export default function ReviewCard({ postId }) {
               <h3 className="font-medium">
                 {comment.user.firstName} {comment.user.lastName}
               </h3>
-              <time className="text-xs" dateTime={comment.createdDateTime}>
-                {formatDateTime(comment.createdDateTime)}
-              </time>{" "}
+              <time className="text-xs" dateTime={new Date(comment.createdDateTime).toISOString()}>
+                               {formatDateTime(String(comment.createdDateTime))}
+                            </time>{" "}
+              
             </div>
             {comment.starRating !== null && (
               <div className="flex items-center mb-4">

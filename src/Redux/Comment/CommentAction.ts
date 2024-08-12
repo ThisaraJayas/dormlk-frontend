@@ -1,7 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-export const createComment = createAsyncThunk("createComment",async(content)=>{
+interface Comment {
+    content: string;
+    postId: number;
+    starRating: number;
+  }
+export const createComment = createAsyncThunk("createComment",async(content : Comment)=>{
     console.log(content);
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
@@ -19,7 +23,7 @@ export const createComment = createAsyncThunk("createComment",async(content)=>{
     
 })
 
-export const fetchCommentsByPostId = createAsyncThunk("fetchCommentsByPostId",async(postId)=>{
+export const fetchCommentsByPostId = createAsyncThunk("fetchCommentsByPostId",async(postId : number)=>{
     console.log("PPP ",postId);
     
     try{

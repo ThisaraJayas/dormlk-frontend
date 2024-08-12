@@ -1,10 +1,5 @@
 import React from 'react'
-import { BedDouble } from 'lucide-react';
-import KingBedTwoToneIcon from '@mui/icons-material/KingBedTwoTone';
-import '../styles/homestat.css'
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
-import SignpostTwoToneIcon from '@mui/icons-material/SignpostTwoTone';
-import SupportAgentTwoToneIcon from '@mui/icons-material/SupportAgentTwoTone';
+import { BedDouble } from 'lucide-react';import '../styles/homestat.css'
 import { MdSupportAgent } from "react-icons/md";
 import { TfiLocationPin } from "react-icons/tfi";
 import { BiSupport } from "react-icons/bi";

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllPosts, filterPostBySearchFilter } from '@/Redux/Post/PostAction';
-import { AppDispatch, RootState } from '@/Redux/store';
-import StoreItem from '@/PageComponents/StoreItem';
+import { fetchAllPosts, filterPostBySearchFilter } from '@/Redux/Post/PostAction.ts';
+import { AppDispatch, RootState } from '@/Redux/store.ts';
+import StoreItem from '@/PageComponents/StoreItem.tsx';
 import { Box, Button, Flex, Text, SimpleGrid, Select } from '@chakra-ui/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Footer from '@/PageComponents/Footer';
+import Footer from '@/PageComponents/Footer.tsx';
 
 interface Post {
   id: number;

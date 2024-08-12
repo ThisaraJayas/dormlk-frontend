@@ -8,12 +8,12 @@ import {
   Spinner,
   Button,
 } from "@chakra-ui/react";
-import ReviewCard, { averageRating, totalComments } from "@/PageComponents/ReviewCard";
+import ReviewCard, { averageRating, totalComments } from "@/PageComponents/ReviewCard.tsx";
 import homeImg from "../styles/home4.png";
 import homeImg2 from "../styles/home2.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/store";
-import { fetchPostByDistrict } from "@/Redux/Post/PostAction";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
+import { fetchPostByDistrict } from "@/Redux/Post/PostAction.ts";
 import { TfiLocationPin } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";

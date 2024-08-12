@@ -8,13 +8,21 @@ import houseImg from '../assets/homeIcons/home(2).png'
 import studioImg from '../assets/homeIcons/home-office.png'
 import hostelImg from '../assets/homeIcons/hostel.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '@/Redux/store'
-import { fetchPostByHouseType } from '@/Redux/Post/PostAction'
+import { AppDispatch, RootState } from '@/Redux/store.ts'
+import { fetchPostByHouseType } from '@/Redux/Post/PostAction.ts'
 import { TfiLocationPin } from 'react-icons/tfi'
 import { Link } from 'react-router-dom'
 
 
+interface Post {
+  facilities: string[];
+  // other properties
+}
 
+const post: Post = {
+  facilities: ['Wi-Fi', 'Parking'],
+  // other properties
+};
 export default function HomeHeaderTabs() {
     const dispatch = useDispatch<AppDispatch>();
   const { allPostByHouseType, status } = useSelector((state: RootState) => state.Post);

@@ -1,13 +1,13 @@
-import { getUser } from '@/Redux/Auth/AuthAction'
-import { fetchCommentsByPostId } from '@/Redux/Comment/CommentAction'
-import { fetchMessagesByUserId, fetchRecivedMessages } from '@/Redux/Messages/MessageAction'
-import { AppDispatch, RootState } from '@/Redux/store'
+import { getUser } from '@/Redux/Auth/AuthAction.ts'
+import { fetchCommentsByPostId } from '@/Redux/Comment/CommentAction.ts'
+import { fetchMessagesByUserId, fetchRecivedMessages } from '@/Redux/Messages/MessageAction.ts'
+import { AppDispatch, RootState } from '@/Redux/store.ts'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Textarea } from '@chakra-ui/react'
-import { fetchAllPosts } from '@/Redux/Post/PostAction'
-import MessageReply from './components/MessageReply'
-import { updateMessageWithReply } from '@/Redux/Messages/MessageSlice';
+import { fetchAllPosts } from '@/Redux/Post/PostAction.ts'
+import MessageReply from './components/MessageReply.tsx'
+import { updateMessageWithReply } from '@/Redux/Messages/MessageSlice.ts';
 
 export default function MyProfile() {
   const dispatch = useDispatch<AppDispatch>()
@@ -31,13 +31,14 @@ console.log("mmmmmm   ",messagesRecived);
 
   useEffect(() => {
     if (loginUser?.id) {
-      dispatch(fetchMessagesByUserId(loginUser.id));
-      dispatch(fetchRecivedMessages(loginUser.id))
+      const userId: number = loginUser.id.valueOf();
+      dispatch(fetchMessagesByUserId(userId));
+      dispatch(fetchRecivedMessages(userId))
     }
   }, [dispatch, loginUser?.id]);
 
-  const formatDateTime = (dateString) => {
-    const options = {
+  const formatDateTime = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -52,13 +53,14 @@ console.log("mmmmmm   ",messagesRecived);
   const handleNewReply = (messageId, reply) => {
     // Dispatch an action to update the message with the new reply in the Redux store
     dispatch(updateMessageWithReply({ messageId, reply }));
-    dispatch(fetchMessagesByUserId(loginUser.id));
-    dispatch(fetchRecivedMessages(loginUser.id));
+    const userId: number = loginUser.id.valueOf();
+    dispatch(fetchMessagesByUserId(userId));
+    dispatch(fetchRecivedMessages(userId));
 }
 
 // Sort messages and replies by date in descending order
-const sortedAllMessages = [...allMessage].sort((a, b) => new Date(b.createdDateTime) - new Date(a.createdDateTime));
-const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.createdDateTime) - new Date(a.createdDateTime));
+const sortedAllMessages = [...allMessage].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
 
   return (
     <div>
@@ -74,8 +76,8 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                 <span className="truncate text-sm text-gray-400">
                           Send on {' '}
                           <a href="#" className="font-medium text-blue-600">
-                            <time className="text-xs" dateTime={message.createdDateTime}>
-                              {formatDateTime(message.createdDateTime)}
+                            <time className="text-xs" dateTime={new Date(message.createdDateTime).toISOString()}>
+                               {formatDateTime(String(message.createdDateTime))}
                             </time>{" "}
                           </a>
                         </span>
@@ -83,7 +85,7 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                 <p>Property : {message.post.title}</p>
                 <p className='mt-3'><b>{message.message}</b></p>
 
-                {message.replies && message.replies.length > 0 && (
+                {message.replies && (
                   <div className="mt-4">
                     {message.replies.map((reply, replyIndex) => (
                       <div
@@ -118,8 +120,8 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                         <span className="truncate text-sm text-gray-400">
                         Received on {' '}
                           <a href="#" className="font-medium text-blue-600">
-                            <time className="text-xs" dateTime={message.createdDateTime}>
-                              {formatDateTime(message.createdDateTime)}
+                          <time className="text-xs" dateTime={new Date(message.createdDateTime).toISOString()}>
+                               {formatDateTime(String(message.createdDateTime))}
                             </time>{" "}
                           </a>
                         </span>

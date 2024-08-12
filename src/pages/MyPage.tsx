@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { CircleUser, Menu, Package2, Search } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button.tsx"
 import {
   Card,
   CardContent,
@@ -9,16 +9,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card.tsx"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/ui/input.tsx'
 import { Checkbox } from '@chakra-ui/react'
-import MyPosts from '@/myPages/MyPosts'
-import MyMessages from '@/myPages/MyMessages'
-import Footer from '@/PageComponents/Footer'
-import MyAccount from '@/myPages/MyAccount'
+import MyPosts from '@/myPages/MyPosts.tsx'
+import MyMessages from '@/myPages/MyMessages.tsx'
+import Footer from '@/PageComponents/Footer.tsx'
+import MyAccount from '@/myPages/MyAccount.tsx'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/Redux/store'
+import { RootState } from '@/Redux/store.ts'
 
 
 

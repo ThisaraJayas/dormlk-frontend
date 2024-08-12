@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import "../styles/homeHeader.css";
 
 import { CircleUser, LogIn, Menu, Package2 } from "lucide-react";
@@ -11,20 +11,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import SearchBox from "./SearchBox";
-import NavContactMenu from "./NavContactMenu";
+} from "@/components/ui/dropdown-menu.tsx";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet.tsx";
+import SearchBox from "./SearchBox.tsx";
+import NavContactMenu from "./NavContactMenu.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/store";
-import { getUser } from "@/Redux/Auth/AuthAction";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
+import { getUser } from "@/Redux/Auth/AuthAction.ts";
 
 export default function HomeNav() {
   const dispatch = useDispatch()
   const {loginUser} = useSelector((state:RootState)=>state.User)
   useEffect(() => {
     if (!loginUser) {
-        dispatch(getUser());
+        dispatch(getUser() as any);
     }
 }, [dispatch, loginUser]);
   console.log(loginUser);

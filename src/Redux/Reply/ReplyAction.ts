@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-export const createReply = createAsyncThunk("createReply",async(replyDetails)=>{
+interface ReplyDetails {
+    messageId: number;
+    reply: string;
+  }
+export const createReply = createAsyncThunk("createReply",async(replyDetails :ReplyDetails)=>{
     console.log("reply detail ",replyDetails);
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");

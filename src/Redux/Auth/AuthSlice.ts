@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, login, logout, passwordChange, register } from "./AuthAction";
+import { getUser, login, logout, passwordChange, register } from "./AuthAction.ts";
 
 
 export interface User{

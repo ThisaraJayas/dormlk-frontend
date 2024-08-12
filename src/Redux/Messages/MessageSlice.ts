@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createComment } from "../Comment/CommentAction";
-import { createMessage, fetchMessagesByUserId, fetchRecivedMessages } from "./MessageAction";
+import { createComment } from "../Comment/CommentAction.ts";
+import { createMessage, fetchMessagesByUserId, fetchRecivedMessages } from "./MessageAction.ts";
 
 export interface Message{
     id:number,
@@ -19,7 +19,12 @@ export interface Message{
         id:number,
         reply:string,
         createdDateTime: Date,
-    }
+        user: {
+            id: number;
+            firstName: string;
+            lastName: string;
+        };
+    }[]; 
     post:{
         id:number,
         title:string,

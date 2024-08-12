@@ -11,6 +11,8 @@ export const getAllPostsAdmin = createAsyncThunk("getAllPostsAdmin",async()=>{
                 "Authorization": `Bearer ${jwt}`
             }
         })
+        console.log(data);
+        
         return data
     }catch(error){
         console.log("Fetch Post by UserId Error : ",error);

@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import AdminHome from './pages/AdminHome';
-import AdminPost from './pages/AdminPost';
+import AdminHome from './pages/AdminHome.tsx';
+import AdminPost from './pages/AdminPost.tsx';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/Redux/store';
+import { RootState } from '@/Redux/store.ts';
 
 export default function AdminDashboard() {
   const { loginUser } = useSelector((state: RootState) => state.User);
   const navigate = useNavigate()
   console.log("USSS ",loginUser?.userType);
-  if(loginUser?.userType==='REGULAR'){
-    navigate('/')
-  }
+  // if(loginUser?.userType==='REGULAR'){
+  //   navigate('/')
+  // }
     const location = useLocation();
   const currentPath = location.pathname.split("/").pop();
 

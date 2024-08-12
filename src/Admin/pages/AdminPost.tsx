@@ -1,6 +1,6 @@
-import { getAllPostsAdmin, updatePostStatus } from "@/Redux/Admin/AdminPostAction";
-import { DeleteByPostId } from "@/Redux/Post/PostAction";
-import { AppDispatch, RootState } from "@/Redux/store";
+import { getAllPostsAdmin, updatePostStatus } from "@/Redux/Admin/AdminPostAction.ts";
+import { DeleteByPostId } from "@/Redux/Post/PostAction.ts";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
 import { Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +14,10 @@ export default function AdminPost() {
   const [posts, setPosts] = useState(allAdminPost);
   const navigate = useNavigate()
   console.log("USSS ",loginUser?.userType);
-  if(loginUser?.userType==='REGULAR'){
-    navigate('/')
-  }
+  // if(loginUser?.userType==='REGULAR'){
+  //   navigate('/')
+  // }
+console.log("HOME ",allAdminPost);
 
 
   useEffect(() => {
@@ -130,7 +131,7 @@ export default function AdminPost() {
                   filteredPosts.map((post) => (
                     <tr key={post.id} className="">
                       <td className="whitespace-no-wrap py-4 text-sm font-bold text-gray-900 sm:px-6">
-                        {String(post.id)}
+                        {post.id}
                       </td>
                       <td className="whitespace-no-wrap py-4 text-sm font-bold text-gray-900 sm:px-6">
                         {post.title}

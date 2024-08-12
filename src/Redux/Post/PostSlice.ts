@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPost, DeleteByPostId, fetchAllPosts, fetchPostByDistrict, fetchPostByHouseType, fetchPostsByPostId, fetchPostsByUserId, filterPostBySearchFilter } from "./PostAction";
+import { createPost, DeleteByPostId, fetchAllPosts, fetchPostByDistrict, fetchPostByHouseType, fetchPostsByPostId, fetchPostsByUserId, filterPostBySearchFilter } from "./PostAction.ts";
 
 export interface Post{
     id:number,

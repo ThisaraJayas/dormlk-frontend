@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 
-interface SearchBoxProps {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function SearchBox({ searchQuery, setSearchQuery }: SearchBoxProps) {
+export default function SearchBox() {
   const [showRecommendations, setShowRecommendations] = useState(false);
-  const [localQuery, setLocalQuery] = useState(searchQuery);
+  const [localQuery, setLocalQuery] = useState("");
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  var searchQuery: string
 
   useEffect(() => {
     setLocalQuery(searchQuery); // Sync local query with prop

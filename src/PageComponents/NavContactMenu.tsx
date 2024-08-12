@@ -6,7 +6,7 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"; // Adjust the import path as needed
+} from "@/components/ui/navigation-menu.tsx"; // Adjust the import path as needed
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';

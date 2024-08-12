@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createComment, fetchCommentsByPostId } from "./CommentAction"
+import { createComment, fetchCommentsByPostId } from "./CommentAction.ts"
 
 export interface Comment{
     id:number,

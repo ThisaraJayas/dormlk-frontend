@@ -1,5 +1,5 @@
-import { createComment } from "@/Redux/Comment/CommentAction";
-import { AppDispatch, RootState } from "@/Redux/store";
+import { createComment } from "@/Redux/Comment/CommentAction.ts";
+import { AppDispatch, RootState } from "@/Redux/store.ts";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -56,8 +56,8 @@ export default function Comment({ postId }) {
                   <textarea
                     name="comment"
                     placeholder="Write your comment here"
-                    cols="30"
-                    rows="6"
+                    cols={30}
+                    rows={6}
 
                     className="h-40 w-full min-w-full max-w-full overflow-auto whitespace-pre-wrap rounded-md border bg-white p-5 text-sm font-normal normal-case text-gray-600 opacity-100 outline-none focus:text-gray-600 focus:opacity-100 focus:ring"                    value={content}
                     onChange={handleCommentChange}

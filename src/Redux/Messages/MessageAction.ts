@@ -1,7 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const createMessage = createAsyncThunk("createMessage",async(messageDetails)=>{
+export interface Message{
+    id: number;
+    firstName: string;
+    email: string;
+    mobileNo: string;
+    message: string
+}
+export const createMessage = createAsyncThunk("createMessage",async(messageDetails : Message)=>{
     console.log(messageDetails);
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
@@ -22,7 +29,7 @@ export const createMessage = createAsyncThunk("createMessage",async(messageDetai
     
 })
 
-export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",async(userId)=>{
+export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",async(userId : number)=>{
     console.log("I ",userId);
     
     try{
@@ -40,7 +47,7 @@ export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",as
         console.log("Fetch messages by UserId Error : ",error);
     }
 })
-export const fetchRecivedMessages = createAsyncThunk("fetchRecivedMessages",async(userId)=>{
+export const fetchRecivedMessages = createAsyncThunk("fetchRecivedMessages",async(userId: number)=>{
  
     try{
         const jwt = localStorage.getItem("jwt");

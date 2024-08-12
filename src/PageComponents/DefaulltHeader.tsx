@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import { CircleUser, Menu, Package2, LogIn, RegexIcon } from "lucide-react";
 import {
   DropdownMenu,
@@ -9,29 +9,32 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import SearchBox from "./SearchBox";
-import NavContactMenu from "./NavContactMenu";
+} from "@/components/ui/dropdown-menu.tsx";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet.tsx";
+import SearchBox from "./SearchBox.tsx";
+import NavContactMenu from "./NavContactMenu.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/Redux/store";
-import { getUser, logout } from "@/Redux/Auth/AuthAction";
+import { RootState } from "@/Redux/store.ts";
+import { getUser, logout } from "@/Redux/Auth/AuthAction.ts";
 import { BiRegistered } from "react-icons/bi";
 
+
 export default function DefaulltHeader() {
+ 
   const dispatch = useDispatch()
   const {loginUser} = useSelector((state:RootState)=>state.User)
   const navigate = useNavigate()
 
+
   useEffect(()=>{
     if (!loginUser) {
-      dispatch(getUser());
+      dispatch(getUser() as any);
   }
   },[loginUser,dispatch])
  
-  const logoutFunction = async (e: React.FormEvent<HTMLFormElement>) => {
+  const logoutFunction = (e: React.MouseEvent<HTMLDivElement>) =>{
     e.preventDefault();
-    dispatch(logout())
+    dispatch(logout() as any)
     window.location.reload();
 };
   return (
@@ -138,9 +141,9 @@ export default function DefaulltHeader() {
 </div>
 
         <div className=" md:flex">
-          <SearchBox />
+        <SearchBox />
         </div>
-
+       
         <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             <div
