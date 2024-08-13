@@ -39,11 +39,14 @@ export default function MyAccount() {
         <h1 className="py-2 text-2xl font-semibold">Account settings</h1>
        
         <p className="font- text-slate-600">In <b>Account Settings</b>, you can update your email, change your password, or delete your account. Make sure to review your settings and update them as needed to keep your account information current and secure.</p>
-        <Link to={'/admin/'}>
+        {loginUser?.userType=='ADMIN' &&(
+          <Link to={'/admin/'}>
         <p className="inline-flex items-center mt-3 rounded-full bg-green-100 px-4 py-1 text-green-600">
           Proceed to Admin Dashboard
         </p>
         </Link>
+        )}
+        
       </div>
       <hr className="mt-4 mb-8" />
       <p className="py-2 text-xl font-semibold">Email Address</p>
