@@ -24,6 +24,27 @@ const accLocation=[
   "Kandy",
   "Jaffna",
   "Matara",
+  "Rathnapura",
+  "Gampaha",
+  "Galle",
+  "Nuwara Eliya",
+  "Ampara",
+  "Anuradhapura",
+  "Badulla",
+  "Batticaloa",
+  "Hambantota",
+  "Kalutara",
+  "Kegalle",
+  "Kilinochchi",
+  "Kurunegala",
+  "Mannar",
+  "Matale",
+  "Monaragala",
+  "Mullaitivu",
+  "Polonnaruwa",
+  "Puttalam",
+  "Trincomalee",
+  "Vavuniya"
 ]
 
 export default function HomeHeader() {

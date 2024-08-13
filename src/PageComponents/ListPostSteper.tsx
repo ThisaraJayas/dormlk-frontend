@@ -49,7 +49,7 @@ export const facilities = [
   "Cooking",
   "Parking",
   "Attached Bathroom",
-  "Tables",
+  "Furniture",
   "Television",
   "Heater",
   "Kitcken",
@@ -60,8 +60,20 @@ export const facilities = [
 export const closeByLocation = [
   "SLIIT",
   "Horizon Campus",
-  "Univercity of Colombo",
-  "Univercity of Moratuwa",
+  "NSBM",
+  "University of Moratuwa",
+  "Open University",
+  "University of Colombo",
+  "Eastern University",
+  "University of Jaffna",
+  "University of Kelaniya",
+  "University of Peradeniya",
+  "Rajarata University",
+  "Uva Wellassa University",
+  "University of Sri Jayewardenepura",
+  "South Eastern University",
+  "Sabaragamuwa University",
+  "University of Ruhuna",
 ];
 export const suitableFor = ["Boys", "Girls", "Both"];
 
@@ -408,6 +420,7 @@ export default function ListPostSteper() {
                         <SelectItem value="Jaffna">Jaffna</SelectItem>
                         <SelectItem value="Rathnapura">Rathnapura</SelectItem>
                         <SelectItem value="Gampaha">Gampaha</SelectItem>
+                        <SelectItem value="Galle">Galle</SelectItem>
                         <SelectItem value="Ratnapura">Ratnapura</SelectItem>
                         <SelectItem value="Nuwara Eliya">Nuwara Eliya</SelectItem>
                         <SelectItem value="Ampara">Ampara</SelectItem>
