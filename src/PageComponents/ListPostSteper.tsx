@@ -57,6 +57,7 @@ export const facilities = [
   "Water",
   "Electricity",
 ];
+
 export const closeByLocation = [
   "SLIIT",
   "Horizon Campus",
@@ -75,7 +76,7 @@ export const closeByLocation = [
   "Sabaragamuwa University",
   "University of Ruhuna",
 ];
-export const suitableFor = ["Boys", "Girls", "Both"];
+export const suitableFor = ["Girls", "Boys"];
 
 export default function ListPostSteper() {
   const [location, setLocation] = useState(null);
