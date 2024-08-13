@@ -63,7 +63,7 @@ export default function HomeItems() {
                             <Spinner size="lg" />
                           </div>
                         ) : (
-                          allPost.slice(0,6).map((post) => (
+                          allPost.filter(post => post.postStatus === "ACCEPTED").slice(0,6).map((post) => (
                             <Link to={`/store/${post.id}`}>
                             <article className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xl">
                               <div className="w-full h-48 overflow-hidden">

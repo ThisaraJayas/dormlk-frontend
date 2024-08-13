@@ -23,13 +23,15 @@ interface Post {
   noOfBed?: number;
   noOfBathroom?: number;
   facilities: Facility[];
+  postStatus: string;
 }
 const post: Post = {
   id: '',
   title: '',
   images: [],
   cityDistrict: '',
-  facilities: []
+  facilities: [],
+  postStatus: ''
 }
 
 export default function HomeHeaderTabs() {
@@ -111,7 +113,7 @@ export default function HomeHeaderTabs() {
                             <Spinner size="lg" />
                           </div>
                         ) : (
-                            allPostByHouseType?.slice(0,6).map((post) => (
+                          allPostByHouseType?.filter(post => post.postStatus === "ACCEPTED").slice(0,6).map((post) => (
                               <Link to={`/store/${post.id}`}>
                             <article className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xl">
                               <div className="w-full h-48 overflow-hidden">

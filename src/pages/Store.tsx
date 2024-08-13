@@ -13,7 +13,8 @@ interface Post {
   cityDistrict: string;
   accommodationType: string;
   createdDateTime: Date;
-  price:string
+  price:string;
+  postStatus: string;
 }
 
 const ITEMS_PER_PAGE = 9;
@@ -72,6 +73,7 @@ export default function Store() {
 
   const filterAndSortPosts = (posts: Post[]) => {
     let filteredPosts = posts
+      .filter(post => post.postStatus === "ACCEPTED")
       .filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
       .filter(post => selectedLocation ? post.cityDistrict === selectedLocation : true);
 
