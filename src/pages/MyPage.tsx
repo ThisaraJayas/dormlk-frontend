@@ -45,7 +45,7 @@ export default function MyPage() {
         return <MyAccount />;
       // Add cases for other settings
       default:
-        return <MyPosts />;
+        return ;
     }
   };
   return (
@@ -66,8 +66,7 @@ export default function MyPage() {
             <Link to="/my/messages">Messages</Link>
             <Link to="/my/account">Account</Link>
             <Link to="/my/support">Support</Link>
-            <Link to="/my/organizations">Organizations</Link>
-            <Link to="/my/advanced">Advanced</Link>
+           
           </nav>
           <div className="grid gap-6">
           {renderSettingsContent()}
