@@ -162,7 +162,7 @@ export default function HomeTestimonial() {
 
             <div className="-mx-5 mt-8 px-8 py-1">
               <div className="">
-                <p className="text-base font-bold">Jacob Jones</p>
+                <p className="text-base font-bold">Kamal Perera</p>
                 <p className="text-green-90 mt-0.5 text-sm"></p>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function HomeTestimonial() {
 
             <div className="-mx-5 mt-8 px-8 py-1">
               <div className="">
-                <p className="text-base font-bold">James Khawalski</p>
+                <p className="text-base font-bold">Devika Rajendran</p>
                 <p className="mt-0.5 text-sm"></p>
               </div>
             </div>
@@ -204,7 +204,7 @@ export default function HomeTestimonial() {
 
             <div className="-mx-5 mt-8 px-8 py-1">
               <div className="">
-                <p className="text-base font-bold">Jenny Wilson</p>
+                <p className="text-base font-bold">Jenny Krishara</p>
                 <p className="text-green-90 mt-0.5 text-sm"></p>
               </div>
             </div>
