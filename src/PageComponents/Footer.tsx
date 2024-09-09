@@ -55,7 +55,7 @@ export default function Footer() {
       </ul>
     </nav>
     <div className="border-t border-slate-500 py-4 lg:col-span-12">
-      <p className="text-center text-sm text-gray-400">(2024) In Sri Lanka copyright law, a copyright notice is a notice of statutorily prescribed form that informs users.</p>
+      <p className="text-center text-sm text-gray-400">Dormlk © 2024. All rights reserved.</p>
     </div>
   </div>
 </footer>
