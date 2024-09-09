@@ -32,6 +32,8 @@ console.log("mmmmmm   ",messagesRecived);
   useEffect(() => {
     if (loginUser?._id) {
       const userId: string = loginUser._id.valueOf();
+      console.log("UUUU ",userId);
+      
       dispatch(fetchMessagesByUserId(userId));
       dispatch(fetchRecivedMessages(userId))
     }
