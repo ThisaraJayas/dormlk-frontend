@@ -10,32 +10,27 @@ import MessageReply from './components/MessageReply.tsx'
 import { updateMessageWithReply } from '@/Redux/Messages/MessageSlice.ts';
 
 export default function MyProfile() {
-  const dispatch = useDispatch<AppDispatch>()
-  const {allMessage, messagesRecived} = useSelector((state:RootState)=>state.Message)
-  const {loginUser} = useSelector((state:RootState)=>state.User)
-  const {allPost} = useSelector((state:RootState)=>state.Post)
+  const dispatch = useDispatch<AppDispatch>();
+  const { allMessage, messagesRecived } = useSelector((state: RootState) => state.Message);
+  const { loginUser } = useSelector((state: RootState) => state.User);
+  const { allPost } = useSelector((state: RootState) => state.Post);
 
   console.log(allMessage);
-  
 
-  // const messagesReceived = loginUser ? allMessage.filter(message => message.post.user.id == loginUser.id) : []
-console.log("mmmmmm   ",messagesRecived);
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
 
-  useEffect(()=>{
-    dispatch(getUser())
-  },[dispatch])
-  useEffect(()=>{
-    dispatch(fetchAllPosts())
-    
-  },[dispatch])
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+  }, [dispatch]);
 
   useEffect(() => {
     if (loginUser?._id) {
       const userId: string = loginUser._id.valueOf();
-      console.log("UUUU ",userId);
-      
+      console.log("UserId: ", userId);
       dispatch(fetchMessagesByUserId(userId));
-      dispatch(fetchRecivedMessages(userId))
+      dispatch(fetchRecivedMessages(userId));
     }
   }, [dispatch, loginUser?._id]);
 
@@ -48,102 +43,102 @@ console.log("mmmmmm   ",messagesRecived);
       minute: "numeric",
       hour12: true,
     };
-    return new Intl.DateTimeFormat("en-US", options).format(
-      new Date(dateString)
-    );
+    return new Intl.DateTimeFormat("en-US", options).format(new Date(dateString));
   };
+
   const handleNewReply = (messageId, reply) => {
     // Dispatch an action to update the message with the new reply in the Redux store
     dispatch(updateMessageWithReply({ messageId, reply }));
     const userId: string = loginUser._id.valueOf();
     dispatch(fetchMessagesByUserId(userId));
     dispatch(fetchRecivedMessages(userId));
-}
+  };
 
-// Sort messages and replies by date in descending order
-const sortedAllMessages = [...allMessage].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
-const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+  // Filter messages that you (the logged-in user) have posted
+  const myMessages = allMessage.filter(message => message.user._id === loginUser?._id);
+
+  // Filter messages where other users commented on your posts
+  const receivedMessages = messagesRecived.filter(message => message.post.user._id === loginUser?._id);
+
+  // Sort messages and replies by date in descending order
+  const sortedMyMessages = [...myMessages].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
+  const sortedReceivedMessages = [...receivedMessages].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
 
   return (
     <div>
-      <Tabs isFitted variant='enclosed'>
-  <TabList mb='1em'>
-    <Tab>My Messages</Tab>
-    <Tab>Received Messages</Tab>
-  </TabList>
-  <TabPanels>
-  <TabPanel>
-            {sortedAllMessages.map((message, index) => (
+      <Tabs isFitted variant="enclosed">
+        <TabList mb="1em">
+          <Tab>My Messages</Tab>
+          <Tab>Received Messages</Tab>
+        </TabList>
+        <TabPanels>
+          {/* My Messages Tab */}
+          <TabPanel>
+            {sortedMyMessages.map((message, index) => (
               <div key={index} className="rounded-lg mb-4 bg-gray-100 p-4">
                 <span className="truncate text-sm text-gray-400">
-                          Send on {' '}
-                          <a href="#" className="font-medium text-blue-600">
-                            <time className="text-xs" dateTime={new Date(message.createdDateTime).toISOString()}>
-                               {formatDateTime(String(message.createdDateTime))}
-                            </time>{" "}
-                          </a>
-                        </span>
-                
-                <p>Property : {message.post.title}</p>
-                <p className='mt-3'><b>{message.message}</b></p>
+                  Sent on {" "}
+                  <a href="#" className="font-medium text-blue-600">
+                    <time className="text-xs" dateTime={new Date(message.createdDateTime).toISOString()}>
+                      {formatDateTime(String(message.createdDateTime))}
+                    </time>
+                  </a>
+                </span>
+                <p>Property: {message.post.title}</p>
+                <p className="mt-3"><b>{message.message}</b></p>
 
                 {message.replies && message.replies.length > 0 && (
-  <div className="mt-4">
-    {message.replies.map((reply, replyIndex) => (
-      <div
-        key={replyIndex}
-        className={`rounded-lg mb-2 p-4 ${
-          reply.user && reply.user._id === loginUser?._id ? 'bg-blue-200' : 'bg-green-200'
-        }`}
-      >
-        <p className="text-gray-500 mb-2">
-          {reply.user && reply.user._id === loginUser?._id ? 'You' : 'Reply:'}
-        </p>
-        <p>{reply.reply}</p>
-      </div>
-    ))}
+                  <div className="mt-4">
+                    {message.replies.map((reply, replyIndex) => (
+                      <div
+                        key={replyIndex}
+                        className={`rounded-lg mb-2 p-4 ${reply.user._id === loginUser?._id ? "bg-blue-200" : "bg-green-200"}`}
+                      >
+                        <p className="text-gray-500 mb-2">
+                          {reply.user._id === loginUser?._id ? "You" : "Reply:"}
+                        </p>
+                        <p>{reply.reply}</p>
+                      </div>
+                    ))}
                     <MessageReply messageId={message._id} onNewReply={handleNewReply} />
                   </div>
                 )}
               </div>
             ))}
           </TabPanel>
-    {/* .......................................tab2........................ */}
-   
-<TabPanel>
+
+          {/* Received Messages Tab */}
+          <TabPanel>
             <div>
-              {sortedMessagesRecived.map((message, index) => (
+              {sortedReceivedMessages.map((message, index) => (
                 <div key={index} className="mx-auto my-10 max-w-4xl rounded-xl border px-4 py-6 text-gray-700">
                   <div className="">
                     <div className="flex items-center">
-                      
-                      <p className=" w-56">
+                      <p className="w-56">
                         <strong className="block font-medium text-gray-700">{message.fullName}</strong>
                         <span className="truncate text-sm text-gray-400">
-                        Received on {' '}
+                          Received on {" "}
                           <a href="#" className="font-medium text-blue-600">
-                          <time className="text-xs" dateTime={new Date(message.createdDateTime).toISOString()}>
-                               {formatDateTime(String(message.createdDateTime))}
-                            </time>{" "}
+                            <time className="text-xs" dateTime={new Date(message.createdDateTime).toISOString()}>
+                              {formatDateTime(String(message.createdDateTime))}
+                            </time>
                           </a>
                         </span>
                       </p>
                     </div>
                   </div>
-                  <p>Property : {message.post.title}</p>
-                  <p className='mt-2'><b>{message.message}</b></p>
+                  <p>Property: {message.post.title}</p>
+                  <p className="mt-2"><b>{message.message}</b></p>
 
                   {message.replies && message.replies.length > 0 && (
                     <div className="mt-4">
                       {message.replies.map((reply, replyIndex) => (
                         <div
                           key={replyIndex}
-                          className={`rounded-lg mb-2 p-4 ${
-                            reply.user._id === loginUser?._id ? 'bg-blue-200' : 'bg-green-200'
-                          }`}
+                          className={`rounded-lg mb-2 p-4 ${reply.user._id === loginUser?._id ? "bg-blue-200" : "bg-green-200"}`}
                         >
                           <p className="text-gray-500 mb-2">
-                            {reply.user._id === loginUser?._id ? 'You' : 'Reply:'}
+                            {reply.user._id === loginUser?._id ? "You" : "Reply:"}
                           </p>
                           <p>{reply.reply}</p>
                         </div>
@@ -151,13 +146,10 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                     </div>
                   )}
 
-                  <div className="mb-3">
-                    {/* Additional content or styling can be added here */}
-                  </div>
+                  <div className="mb-3"></div>
                   <div className="rounded-lg bg-gray-100 p-4">
                     <p className="mb-2 text-gray-500">
-                      {/* Display the message creation time or similar */}
-                      You commented on 
+                      You commented on
                     </p>
                     <MessageReply messageId={message._id} onNewReply={handleNewReply} />
                   </div>
@@ -165,10 +157,8 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
               ))}
             </div>
           </TabPanel>
-  </TabPanels>
-</Tabs>
-     
-
+        </TabPanels>
+      </Tabs>
     </div>
-  )
+  );
 }
