@@ -53,9 +53,9 @@ console.log("mmmmmm   ",messagesRecived);
   const handleNewReply = (messageId, reply) => {
     // Dispatch an action to update the message with the new reply in the Redux store
     dispatch(updateMessageWithReply({ messageId, reply }));
-    const userId: string = loginUser._id.valueOf();
-    dispatch(fetchMessagesByUserId(userId));
-    dispatch(fetchRecivedMessages(userId));
+    // const userId: string = loginUser._id.valueOf();
+    dispatch(fetchMessagesByUserId(loginUser._id));
+    dispatch(fetchRecivedMessages(loginUser._id));
 }
 
 // Sort messages and replies by date in descending order
