@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export interface Message{
-    id: number;
+    postId: string;
     firstName: string;
     email: string;
     mobileNo: string;
@@ -13,7 +13,7 @@ export const createMessage = createAsyncThunk("createMessage",async(messageDetai
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/messages`, messageDetails,{
+        const {data} = await axios.post(`https://dormlk-frontend-1anh.vercel.app/api/messages`, messageDetails,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -29,13 +29,13 @@ export const createMessage = createAsyncThunk("createMessage",async(messageDetai
     
 })
 
-export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",async(userId : number)=>{
+export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",async(userId : string)=>{
     console.log("I ",userId);
     
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/messages/messages/${userId}`, {
+        const {data}=await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/messages/user/${userId}`, {
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -47,12 +47,12 @@ export const fetchMessagesByUserId = createAsyncThunk("fetchMessagesByUserId",as
         console.log("Fetch messages by UserId Error : ",error);
     }
 })
-export const fetchRecivedMessages = createAsyncThunk("fetchRecivedMessages",async(userId: number)=>{
+export const fetchRecivedMessages = createAsyncThunk("fetchRecivedMessages",async(userId: string)=>{
  
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/messages/received?userId=${userId}`, {
+        const {data}=await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/messages/received?userId=${userId}`, {
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }

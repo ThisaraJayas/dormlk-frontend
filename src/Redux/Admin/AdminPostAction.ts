@@ -6,7 +6,7 @@ export const getAllPostsAdmin = createAsyncThunk("getAllPostsAdmin",async()=>{
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/admin/allPosts`,{
+        const {data}=await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/admin/allPosts`,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -22,7 +22,7 @@ export const getAllPostsAdmin = createAsyncThunk("getAllPostsAdmin",async()=>{
 
 export const updatePostStatus = createAsyncThunk(
     "updatePostStatus",
-    async ({ postId, newStatus }: { postId: number; newStatus: string }) => {
+    async ({ postId, newStatus }: { postId: string; newStatus: string }) => {
       console.log("New Status:", newStatus);
       console.log("Post ID:", postId);
   
@@ -31,7 +31,7 @@ export const updatePostStatus = createAsyncThunk(
   
       try {
         const { data } = await axios.put(
-          `https://dormlk-production.up.railway.app/api/admin/${postId}/status/${newStatus}`,
+          `https://dormlk-frontend-1anh.vercel.app/api/admin/${postId}/status/${newStatus}`,
           {}, // empty data object for PUT request
           {
             headers: {

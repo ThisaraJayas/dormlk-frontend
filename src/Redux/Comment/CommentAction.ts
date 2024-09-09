@@ -10,7 +10,7 @@ export const createComment = createAsyncThunk("createComment",async(content : Co
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/comments`, content,{
+        const {data} = await axios.post(`https://dormlk-frontend-1anh.vercel.app/api/comments`, content,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -23,11 +23,11 @@ export const createComment = createAsyncThunk("createComment",async(content : Co
     
 })
 
-export const fetchCommentsByPostId = createAsyncThunk("fetchCommentsByPostId",async(postId : number)=>{
+export const fetchCommentsByPostId = createAsyncThunk("fetchCommentsByPostId",async(postId : string)=>{
     console.log("PPP ",postId);
     
     try{
-        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/comments/${postId}`)
+        const {data}=await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/comments/${postId}`)
         return data
     }catch(error){
         console.log("Fetch Comments by PostId Error : ",error);

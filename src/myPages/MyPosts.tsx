@@ -17,11 +17,11 @@ export default function MyPosts() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (loginUser?.id) {
-      const userId: number = loginUser.id.valueOf();
+    if (loginUser?._id) {
+      const userId: string = loginUser._id.valueOf();
       dispatch(fetchPostsByUserId(userId));
     }
-  }, [dispatch, loginUser?.id]);
+  }, [dispatch, loginUser?._id]);
 
   console.log(allPostByUserId);
 
@@ -38,10 +38,10 @@ export default function MyPosts() {
     setIsDropdownOpen(false);
   };
 
-  const handleDelete = async (postId: number) => {
+  const handleDelete = async (postId: string) => {
     try {
       await dispatch(DeleteByPostId(postId));
-      const userId: number = loginUser.id.valueOf();
+      const userId: string = loginUser._id.valueOf();
       dispatch(fetchPostsByUserId(userId));
     } catch (error) {
       console.error("Failed to delete post", error);
@@ -143,7 +143,7 @@ export default function MyPosts() {
                         </div> */}
                       </div>
                       <div className="whitespace-no-wrap">
-                        <span className="mr-2">Post ID:</span> {post.id}
+                        <span className="mr-2">Post ID:</span> {post._id}
                       </div>
                       <div className="whitespace-no-wrap">
                         <span className="mr-2">Title:</span> {post.title}
@@ -151,7 +151,7 @@ export default function MyPosts() {
                     </div>
                   </td>
 
-                  <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">{String(post.id)}</td>
+                  <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">{String(post._id)}</td>
 
                   <td className="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell">{post.title}</td>
 
@@ -167,7 +167,7 @@ export default function MyPosts() {
 
                   <td className="whitespace-no-wrap py-4 text-sm font-medium text-gray-600 sm:px-3 lg:table-cell">
                     <Button
-                      onClick={() => handleDelete(post.id)}
+                      onClick={() => handleDelete(post._id)}
                       colorScheme="red"
                       size="sm"
                     >

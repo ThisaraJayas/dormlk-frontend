@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getAllPostsAdmin, updatePostStatus } from "./AdminPostAction.ts";
 
 export interface Post{
-    id:number,
+    _id:string,
     title:string,
     description:string,
     location:string,
     facilities:[],
     suitableFor:[],
     closeByLocation:[],
-    cityDistrict:string,
+    cityDistrict:string,ss
     accommodationType:string,
     availability:string,
     mobileContact: string;
@@ -21,7 +21,7 @@ export interface Post{
     noOfBathroom:string;
     images: string[];
     user: {
-        id: number;
+        _id: string;
         firstName: string;
         lastName: string;
     };
@@ -60,7 +60,7 @@ export const AdminPostSlice = createSlice({
         builder.addCase(updatePostStatus.fulfilled,(state, action)=>{
             state.status='succeeded';
             const index = state.allAdminPost.findIndex(
-                (post) => post.id === action.payload.id
+                (post) => post._id === action.payload.id
               );
               if (index !== -1) {
                 // Replace the old post with the updated one

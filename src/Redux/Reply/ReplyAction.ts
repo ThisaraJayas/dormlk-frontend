@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 interface ReplyDetails {
-    messageId: number;
+    messageId: string;
     reply: string;
   }
 export const createReply = createAsyncThunk("createReply",async(replyDetails :ReplyDetails)=>{
@@ -9,7 +9,7 @@ export const createReply = createAsyncThunk("createReply",async(replyDetails :Re
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/reply`, replyDetails,{
+        const {data} = await axios.post(`https://dormlk-frontend-1anh.vercel.app/api/replies`, replyDetails,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }

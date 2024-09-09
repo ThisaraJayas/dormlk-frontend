@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit"
 import { createComment, fetchCommentsByPostId } from "./CommentAction.ts"
 
 export interface Comment{
-    id:number,
+    _id:string,
     content:string,
     createdDateTime: Date,
     starRating:number,
     user: {
-        id: number;
+        _id: string;
         firstName: string;
         lastName: string;
     };

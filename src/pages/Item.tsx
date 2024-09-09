@@ -59,14 +59,14 @@ export default function Item() {
 
   const handleMessageSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const messageId: number = Number(id);
-        dispatch(createMessage({ id: messageId, firstName, email, mobileNo, message: messageText })); 
+        const messageId: string = String(id);
+        dispatch(createMessage({ postId: messageId, firstName, email, mobileNo, message: messageText })); 
   };
   console.log("Send Message ",message);
   
 
   useEffect(() => {
-    const Id: number = Number(id);
+    const Id: string = String(id);
     dispatch(fetchCommentsByPostId(Id));
   }, [dispatch, id]);
 
@@ -74,7 +74,7 @@ console.log("RRR ",totalComments);
 
   useEffect(() => {
     if (id) {
-      const Id: number = Number(id);
+      const Id: string = String(id);
       dispatch(fetchPostsByPostId(Id));
     }
   }, [dispatch, id]);

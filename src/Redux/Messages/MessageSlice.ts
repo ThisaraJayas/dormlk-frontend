@@ -3,34 +3,34 @@ import { createComment } from "../Comment/CommentAction.ts";
 import { createMessage, fetchMessagesByUserId, fetchRecivedMessages } from "./MessageAction.ts";
 
 export interface Message{
-    id:number,
+    _id:string,
     fullName:string,
     email: string,
     mobileNo:number,
     createdDateTime: Date,
     message:string,
     user: {
-        id: number;
+        _id: string;
         email:string;
         firstName: string;
         lastName: string;
     };
     replies:{
-        id:number,
+        _id:string,
         reply:string,
         createdDateTime: Date,
         user: {
-            id: number;
+            _id: string;
             firstName: string;
             lastName: string;
         };
     }[]; 
     post:{
-        id:number,
+        _id:string,
         title:string,
         cityDistrict:string,
         user:{
-            id: number;
+            _id: string;
             email:string;
             firstName: string;
             lastName: string;
@@ -58,7 +58,7 @@ export const MessageSlice = createSlice({
         // Action to add a reply to a specific message
         updateMessageWithReply: (state, action) => {
             const { messageId, reply } = action.payload;
-            const message = state.allMessage.find(msg => msg.id === messageId);
+            const message = state.allMessage.find(msg => msg._id === messageId);
             if (message) {
                 message.replies.push(reply);
             }

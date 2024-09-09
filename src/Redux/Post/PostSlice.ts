@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createPost, DeleteByPostId, fetchAllPosts, fetchPostByDistrict, fetchPostByHouseType, fetchPostsByPostId, fetchPostsByUserId, filterPostBySearchFilter } from "./PostAction.ts";
 
 export interface Post{
-    id:number,
+    _id:string,
     title:string,
     description:string,
     location:string,
@@ -22,7 +22,7 @@ export interface Post{
     noOfBathroom:string;
     images: string[];
     user: {
-        id: number;
+        _id: string;
         email:string;
         firstName: string;
         lastName: string;

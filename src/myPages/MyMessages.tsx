@@ -30,12 +30,12 @@ console.log("mmmmmm   ",messagesRecived);
   },[dispatch])
 
   useEffect(() => {
-    if (loginUser?.id) {
-      const userId: number = loginUser.id.valueOf();
+    if (loginUser?._id) {
+      const userId: string = loginUser._id.valueOf();
       dispatch(fetchMessagesByUserId(userId));
       dispatch(fetchRecivedMessages(userId))
     }
-  }, [dispatch, loginUser?.id]);
+  }, [dispatch, loginUser?._id]);
 
   const formatDateTime = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -53,7 +53,7 @@ console.log("mmmmmm   ",messagesRecived);
   const handleNewReply = (messageId, reply) => {
     // Dispatch an action to update the message with the new reply in the Redux store
     dispatch(updateMessageWithReply({ messageId, reply }));
-    const userId: number = loginUser.id.valueOf();
+    const userId: string = loginUser._id.valueOf();
     dispatch(fetchMessagesByUserId(userId));
     dispatch(fetchRecivedMessages(userId));
 }
@@ -91,16 +91,16 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                       <div
                         key={replyIndex}
                         className={`rounded-lg mb-2 p-4 ${
-                          reply.user.id === loginUser?.id ? 'bg-blue-200' : 'bg-green-200'
+                          reply.user._id === loginUser?._id ? 'bg-blue-200' : 'bg-green-200'
                         }`}
                       >
                         <p className="text-gray-500 mb-2">
-                        {reply.user.id === loginUser?.id ? 'You' : 'Reply:'}
+                        {reply.user._id === loginUser?._id ? 'You' : 'Reply:'}
                         </p>
                         <p>{reply.reply}</p>
                       </div>
                     ))}
-                    <MessageReply messageId={message.id} onNewReply={handleNewReply} />
+                    <MessageReply messageId={message._id} onNewReply={handleNewReply} />
                   </div>
                 )}
               </div>
@@ -137,11 +137,11 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                         <div
                           key={replyIndex}
                           className={`rounded-lg mb-2 p-4 ${
-                            reply.user.id === loginUser?.id ? 'bg-blue-200' : 'bg-green-200'
+                            reply.user._id === loginUser?._id ? 'bg-blue-200' : 'bg-green-200'
                           }`}
                         >
                           <p className="text-gray-500 mb-2">
-                            {reply.user.id === loginUser?.id ? 'You' : 'Reply:'}
+                            {reply.user._id === loginUser?._id ? 'You' : 'Reply:'}
                           </p>
                           <p>{reply.reply}</p>
                         </div>
@@ -157,7 +157,7 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                       {/* Display the message creation time or similar */}
                       You commented on 
                     </p>
-                    <MessageReply messageId={message.id} onNewReply={handleNewReply} />
+                    <MessageReply messageId={message._id} onNewReply={handleNewReply} />
                   </div>
                 </div>
               ))}

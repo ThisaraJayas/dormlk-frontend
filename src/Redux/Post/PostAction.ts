@@ -22,7 +22,7 @@ export const createPost = createAsyncThunk("createPost",async(postData :Post)=>{
     const jwt = localStorage.getItem("jwt");
     if (!jwt) throw new Error("JWT not found");
     try{
-        const {data} = await axios.post(`https://dormlk-production.up.railway.app/api/post`,postData,{
+        const {data} = await axios.post(`https://dormlk-frontend-1anh.vercel.app/api/posts`,postData,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -37,7 +37,7 @@ export const createPost = createAsyncThunk("createPost",async(postData :Post)=>{
 
 export const fetchPostByDistrict = createAsyncThunk("fetchPostByDistrict", async(district : string)=>{
     try{
-        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/district/${district}`)
+        const {data} = await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/posts/district/${district}`)
         return data
     }catch(error){
         console.log("Fetch Post by district Error : ",error); 
@@ -53,7 +53,7 @@ interface FilterPostBySearchParams {
 export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilter", async(params: FilterPostBySearchParams)=>{
     const { district, accommodationType } = params;
     try{
-        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/search`, 
+        const {data} = await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/posts/search`, 
             {
                 params: {district, accommodationType},
             }
@@ -67,7 +67,7 @@ export const filterPostBySearchFilter = createAsyncThunk("filterPostBySearchFilt
 
 export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
     try{
-        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/allPosts`)
+        const {data} = await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/posts`)
         return data
     }catch(error){
         console.log("Fetch Post Error : ",error); 
@@ -77,38 +77,38 @@ export const fetchAllPosts = createAsyncThunk("fetchAllPosts", async()=>{
 
 export const fetchPostByHouseType = createAsyncThunk("fetchPostByHouseType", async(accommodationType : string)=>{
     try{
-        const {data} = await axios.get(`https://dormlk-production.up.railway.app/api/post/accommodationType/${accommodationType}`)
+        const {data} = await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/posts/accommodationType/${accommodationType}`)
         return data
     }catch(error){
         console.log("Fetch Post by Houe Type Error : ",error); 
     }
 })
 
-export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(userId : number)=>{
+export const fetchPostsByUserId = createAsyncThunk("fetchPostsByUserId",async(userId : string)=>{
     try{
-        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/post/posts/${userId}`)
+        const {data}=await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/posts/posts/${userId}`)
         return data
     }catch(error){
         console.log("Fetch Post by UserId Error : ",error);
     }
 })
 
-export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(postId :number)=>{
+export const fetchPostsByPostId = createAsyncThunk("fetchPostsByPostId",async(postId :string)=>{
     try{
-        const {data}=await axios.get(`https://dormlk-production.up.railway.app/api/post/${postId}`)
+        const {data}=await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/posts/${postId}`)
         console.log(data);
         
         return data
     }catch(error){
-        console.log("Fetch Post by UserId Error : ",error);
+        console.log("Fetch Post by Postid Error : ",error);
     }
 })
 
-export const DeleteByPostId = createAsyncThunk("post/DeleteByPostId",async(postId : number)=>{
+export const DeleteByPostId = createAsyncThunk("post/DeleteByPostId",async(postId : string)=>{
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data}=await axios.delete(`https://dormlk-production.up.railway.app/api/post/${postId}`,{
+        const {data}=await axios.delete(`https://dormlk-frontend-1anh.vercel.app/api/posts/${postId}`,{
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }

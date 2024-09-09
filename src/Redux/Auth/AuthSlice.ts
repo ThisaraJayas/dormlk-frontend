@@ -3,7 +3,7 @@ import { getUser, login, logout, passwordChange, register } from "./AuthAction.t
 
 
 export interface User{
-    id:Number,
+    _id:string,
     firstName:string,
     lastName:string,
     email:string,

@@ -15,11 +15,11 @@ export const register = createAsyncThunk("register", async (userData: Register) 
     console.log(userData);
     
     try {
-        const { data } = await axios.post(`https://dormlk-production.up.railway.app/auth/register`, userData);
+        const { data } = await axios.post(`https://dormlkbackendmain.vercel.app/api/users/register`, userData);
         console.log(data);
 
-        if (data.jwt) {
-            localStorage.setItem("jwt", data.jwt);
+        if (data.token) {
+            localStorage.setItem("jwt", data.token);
         }
         return data;
     } catch (error) {
@@ -32,9 +32,11 @@ export const login = createAsyncThunk("login", async(userData : Login)=>{
     console.log(userData);
     
     try{
-        const {data} = await axios.post(`https://dormlk-production.up.railway.app/auth/login`,userData)
-        if(data.jwt){
-            localStorage.setItem("jwt",data.jwt)
+        const {data} = await axios.post(`https://dormlk-frontend-1anh.vercel.app/api/users/login`,userData)
+        console.log(data.token);
+        
+        if(data.token){
+            localStorage.setItem("jwt",data.token)
         }
         return data
     }catch(error){
@@ -49,7 +51,7 @@ export const getUser = createAsyncThunk("getUser", async()=>{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
 
-        const { data } = await axios.get(`https://dormlk-production.up.railway.app/api/user/profile`, {
+        const { data } = await axios.get(`https://dormlk-frontend-1anh.vercel.app/api/users/profile`, {
             headers: {
                 "Authorization": `Bearer ${jwt}`
             }
@@ -68,7 +70,8 @@ export const passwordChange = createAsyncThunk("passwordChange", async(newPasswo
     try{
         const jwt = localStorage.getItem("jwt");
         if (!jwt) throw new Error("JWT not found");
-        const {data} = await axios.put(`https://dormlk-production.up.railway.app/api/user/change-password/${newPassword}`,
+        // https://dormlk-production.up.railway.app/api/user/change-password/${newPassword}
+        const {data} = await axios.put(``,
             { }, 
             {
               headers: {

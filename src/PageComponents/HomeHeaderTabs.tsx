@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 
 type Facility = 'Parking' | 'Wi-Fi' | 'Pool' | 'Gym';
 interface Post {
-  id: string;
+  _id: string;
   title: string;
   images: string[];
   cityDistrict: string;
@@ -26,7 +26,7 @@ interface Post {
   postStatus: string;
 }
 const post: Post = {
-  id: '',
+  _id: '',
   title: '',
   images: [],
   cityDistrict: '',
@@ -42,7 +42,11 @@ export default function HomeHeaderTabs() {
     dispatch(fetchPostByHouseType(HouseType));
   };
 
-
+  useEffect(() => {
+    console.log('Current status:', status);
+    console.log('Posts by house type:', allPostByHouseType);
+  }, [status, allPostByHouseType]);
+  
   useEffect(() => {
     handleTabChange("Annex");
   }, [dispatch]);
@@ -114,7 +118,7 @@ export default function HomeHeaderTabs() {
                           </div>
                         ) : (
                           allPostByHouseType?.filter(post => post.postStatus === "ACCEPTED").slice(0,6).map((post) => (
-                              <Link to={`/store/${post.id}`}>
+                              <Link to={`/store/${post._id}`}>
                             <article className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xl">
                               <div className="w-full h-48 overflow-hidden">
                                 <img

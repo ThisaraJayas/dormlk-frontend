@@ -4,19 +4,19 @@ import { createReply } from "./ReplyAction.ts";
 
 
 export interface Reply{
-    id:number,
+    _id:string,
     reply:string,
     createdDateTime: Date,
     user: {
-        id: number;
+        _id: string;
         email:string;
         firstName: string;
         lastName: string;
     };
     message:{
-        id: number;
+        _id: string;
         user: {
-            id: number;
+            _id: string;
             email:string;
             firstName: string;
             lastName: string;

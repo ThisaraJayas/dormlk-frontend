@@ -4,7 +4,7 @@ import { Button, Spinner } from "@chakra-ui/react";
 
 // Define a type for the post
 interface Post {
-  id: number;
+  _id: string;
   title: string;
   images?: string[];
   cityDistrict: string;
@@ -22,7 +22,7 @@ interface StoreItemProps {
 const StoreItem: React.FC<StoreItemProps> = ({ post }) => {
   return (
     <article
-      key={post.id}
+      key={post._id}
       className="mb-4 w-[500px] max-w-full overflow-hidden rounded-xl border text-gray-700 shadow-md duration-500 ease-in-out hover:shadow-xl"
     >
       <div className="w-full h-48 overflow-hidden">

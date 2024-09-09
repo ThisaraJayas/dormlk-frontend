@@ -24,7 +24,7 @@ console.log("HOME ",allAdminPost);
     dispatch(getAllPostsAdmin());
   }, [dispatch]);
 
-  const handleStatusChange = (postId: number, newStatus: string) => {
+  const handleStatusChange = (postId: string, newStatus: string) => {
     console.log("Post ID:", postId);
     console.log("New Status:", newStatus);
     dispatch(updatePostStatus({ postId, newStatus }));
@@ -38,9 +38,9 @@ console.log("HOME ",allAdminPost);
   const filteredPosts = posts.filter((post) =>
     filterStatus ? post.postStatus === filterStatus : true
   );
-  const handleDelete = async(postId: number) => {
+  const handleDelete = async(postId: string) => {
     await dispatch(DeleteByPostId(postId));
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));// Ensure deletePost action is dispatched
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));// Ensure deletePost action is dispatched
   };
   return (
     <div>
@@ -129,9 +129,9 @@ console.log("HOME ",allAdminPost);
               <tbody className="lg:border-gray-300">
                 {
                   filteredPosts.map((post) => (
-                    <tr key={post.id} className="">
+                    <tr key={post._id} className="">
                       <td className="whitespace-no-wrap py-4 text-sm font-bold text-gray-900 sm:px-6">
-                        {post.id}
+                        {post._id}
                       </td>
                       <td className="whitespace-no-wrap py-4 text-sm font-bold text-gray-900 sm:px-6">
                         {post.title}
@@ -144,7 +144,7 @@ console.log("HOME ",allAdminPost);
                       <td>
                       <select
                           className="sm: mr-4 block w-full whitespace-pre rounded-lg border p-1 pr-10 text-base outline-none focus:shadow sm:text-sm"
-                          onChange={(e) => handleStatusChange(post.id, e.target.value)}
+                          onChange={(e) => handleStatusChange(post._id, e.target.value)}
                           value={post.postStatus}
                         >
                           <option value="PENDING" className="whitespace-no-wrap text-sm">
@@ -186,7 +186,7 @@ console.log("HOME ",allAdminPost);
                         e.currentTarget.style.backgroundColor = '#f12905'; // Emerald 600
                         e.currentTarget.style.borderColor = '#f12905'; // Emerald 600
                       }}
-                        onClick={() => handleDelete(post.id)} // Add onClick handler
+                        onClick={() => handleDelete(post._id)} // Add onClick handler
                         className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
                       >
                         Delete Post
