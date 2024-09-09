@@ -85,21 +85,21 @@ const sortedMessagesRecived = [...messagesRecived].sort((a, b) => new Date(b.cre
                 <p>Property : {message.post.title}</p>
                 <p className='mt-3'><b>{message.message}</b></p>
 
-                {message.replies && (
-                  <div className="mt-4">
-                    {message.replies.map((reply, replyIndex) => (
-                      <div
-                        key={replyIndex}
-                        className={`rounded-lg mb-2 p-4 ${
-                          reply.user._id === loginUser?._id ? 'bg-blue-200' : 'bg-green-200'
-                        }`}
-                      >
-                        <p className="text-gray-500 mb-2">
-                        {reply.user._id === loginUser?._id ? 'You' : 'Reply:'}
-                        </p>
-                        <p>{reply.reply}</p>
-                      </div>
-                    ))}
+                {message.replies && message.replies.length > 0 && (
+  <div className="mt-4">
+    {message.replies.map((reply, replyIndex) => (
+      <div
+        key={replyIndex}
+        className={`rounded-lg mb-2 p-4 ${
+          reply.user && reply.user._id === loginUser?._id ? 'bg-blue-200' : 'bg-green-200'
+        }`}
+      >
+        <p className="text-gray-500 mb-2">
+          {reply.user && reply.user._id === loginUser?._id ? 'You' : 'Reply:'}
+        </p>
+        <p>{reply.reply}</p>
+      </div>
+    ))}
                     <MessageReply messageId={message._id} onNewReply={handleNewReply} />
                   </div>
                 )}
