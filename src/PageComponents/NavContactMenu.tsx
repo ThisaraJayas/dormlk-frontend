@@ -32,7 +32,7 @@ const contactMethods = [
     {
         title: "Email",
         icon: <FontAwesomeIcon icon={faEnvelope} style={{color: "#000"}} />,
-        href: "mailto:dormlk@gmail.com",
+        href: "mailto:contact.dorms@gmail.com",
     },
 ];
 
