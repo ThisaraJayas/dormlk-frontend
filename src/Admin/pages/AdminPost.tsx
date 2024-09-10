@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "@/Redux/store.ts";
 import { Button } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminPost() {
   const dispatch = useDispatch<AppDispatch>();
@@ -191,6 +191,14 @@ console.log("HOME ",allAdminPost);
                       >
                         Delete Post
                       </Button>
+                      <Link to={`/admin/post/${post._id}`}>
+                      <Button
+                       
+                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
+                      >
+                        View Post
+                      </Button>
+                      </Link>
                     </td>
                     </tr>
                   ))}

@@ -17,6 +17,7 @@ import Store from './pages/Store.tsx'
 import DefaulltHeader from './PageComponents/DefaulltHeader.tsx'
 import MyPage from './pages/MyPage.tsx'
 import AdminDashboard from './Admin/AdminDashboard.tsx'
+import ViewAdminPostData from './Admin/pages/ViewAdminPostData.tsx'
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/store' element={<Store/>}/>
         <Route path='/my/*' element={<MyPage/>}/>
         <Route path='/admin/*' element={<AdminDashboard/>}/>
+        <Route path='/admin/post/:id' element={<ViewAdminPostData/>}/>
       </Routes>
      
       {/* <Link to={''}>
