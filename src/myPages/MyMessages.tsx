@@ -58,11 +58,11 @@ export default function MyProfile() {
   const myMessages = allMessage.filter(message => message.user._id === loginUser?._id);
 
   // Received Messages: Messages where the post owner is the logged-in user but the message author is someone else
-  const receivedMessages = messagesRecived.filter(message => message.post.user._id === loginUser?._id && message.user._id !== loginUser?._id);
-  const postMessage = allMessage.filter(message => message.post.user._id === loginUser?._id);
+  // const receivedMessages = messagesRecived.filter(message => message.post.user._id === loginUser?._id && message.user._id !== loginUser?._id);
+  const receivedMessages = allMessage.filter(message => message.post.user._id === loginUser?._id);
   console.log("LOGIN USER ID ",loginUser?._id);
   
-console.log("RECIVED MESSAFE ",postMessage);
+console.log("RECIVED MESSAFE ",receivedMessages);
 
   // Sort messages and replies by date in descending order
   const sortedMyMessages = [...myMessages].sort((a, b) => new Date(b.createdDateTime).getTime() - new Date(a.createdDateTime).getTime());
