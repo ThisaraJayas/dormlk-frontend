@@ -63,6 +63,62 @@ export default function ViewAdminPostData() {
                 </div>
               </div>
             </div>
+            <h1 className="sm: text-4xl font-bold text-gray-900 sm:text-4xl">
+                {itemPost.title}
+              </h1>
+              <h1 className="sm: text-1xl text-gray-600 sm:text-1xl">
+                {itemPost.location}
+              </h1>
+              <h2 className="mt-8 text-base text-gray-900">Facilities</h2>
+              <div className="mt-3 flex  flex-wrap items-center gap-1">
+                {itemPost.facilities &&
+                  itemPost.facilities.map((facitites, index) => (
+                    <label key={index} className="">
+                      <p className="bg-emerald-600 text-white rounded-lg border border-emerald-600 px-6 py-2 font-bold">
+                        {facitites}
+                      </p>
+                    </label>
+                  ))}
+              </div>
+
+              <h2 className="mt-8 text-base text-gray-900">House Details</h2>
+
+              <div className="mt-3 flex select-none flex-wrap items-center gap-1">
+                <label className="">
+                  <input
+                    type="radio"
+                    name="subscription"
+                    value="4 Months"
+                    className="peer sr-only"
+                  />
+                  <p className="bg-white text-emerald-600 rounded-lg border border-emerald-600 px-6 py-2 font-bold">
+                    {itemPost.accommodationType}
+                  </p>
+                </label>
+                <label className="">
+                  <input
+                    type="radio"
+                    name="subscription"
+                    value="4 Months"
+                    className="peer sr-only"
+                  />
+                  <p className="bg-white text-emerald-600 rounded-lg border border-emerald-600 px-6 py-2 font-bold">
+                    {itemPost.noOfBathroom} Beds
+                  </p>
+                </label>
+                <label className="">
+                  <input
+                    type="radio"
+                    name="subscription"
+                    value="8 Months"
+                    className="peer sr-only"
+                    checked
+                  />
+                  <p className="bg-white text-emerald-600 rounded-lg border border-emerald-600 px-6 py-2 font-bold">
+                    {itemPost.noOfBathroom} Bathrooms
+                  </p>
+                </label>
+              </div>
             </section>
     </div>
   )
