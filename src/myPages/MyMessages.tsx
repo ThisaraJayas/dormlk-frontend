@@ -30,7 +30,7 @@ export default function MyProfile() {
       const userId: string = loginUser._id.valueOf();
       console.log("UserId: ", userId);
       dispatch(fetchMessagesByUserId(userId));
-      dispatch(fetchRecivedMessages(userId));
+      dispatch(fetchRecivedMessages());
     }
   }, [dispatch, loginUser?._id]);
 
@@ -51,7 +51,7 @@ export default function MyProfile() {
     dispatch(updateMessageWithReply({ messageId, reply }));
     const userId: string = loginUser._id.valueOf();
     dispatch(fetchMessagesByUserId(userId));
-    dispatch(fetchRecivedMessages(userId));
+    dispatch(fetchRecivedMessages());
   };
 
   // My Messages: Messages where the logged-in user is the author
