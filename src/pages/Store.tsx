@@ -101,10 +101,32 @@ export default function Store() {
         {/* Filter Controls */}
         <Flex mb={4}  justifyContent="space-between" alignItems="center">
           <Select placeholder="Select Location" onChange={handleLocationChange} value={selectedLocation} width="47%">
-            <option value="Colombo">Colombo</option>
-            <option value="Kandy">Kandy</option>
-            <option value="Galle">Galle</option>
-            {/* Add more locations as needed */}
+          <option value="Colombo">Colombo</option>
+          <option value="Kandy">Kandy</option>
+          <option value="Jaffna">Jaffna</option>
+          <option value="Matara">Matara</option>
+          <option value="Rathnapura">Rathnapura</option>
+          <option value="Gampaha">Gampaha</option>
+          <option value="Galle">Galle</option>
+          <option value="Nuwara Eliya">Nuwara Eliya</option>
+          <option value="Ampara">Ampara</option>
+          <option value="Anuradhapura">Anuradhapura</option>
+          <option value="Badulla">Badulla</option>
+          <option value="Batticaloa">Batticaloa</option>
+          <option value="Hambantota">Hambantota</option>
+          <option value="Kalutara">Kalutara</option>
+          <option value="Kegalle">Kegalle</option>
+          <option value="Kilinochchi">Kilinochchi</option>
+          <option value="Kurunegala">Kurunegala</option>
+          <option value="Mannar">Mannar</option>
+          <option value="Matale">Matale</option>
+          <option value="Monaragala">Monaragala</option>
+          <option value="Mullaitivu">Mullaitivu</option>
+          <option value="Polonnaruwa">Polonnaruwa</option>
+          <option value="Puttalam">Puttalam</option>
+          <option value="Trincomalee">Trincomalee</option>
+          <option value="Vavuniya">Vavuniya</option>
+
           </Select>
 
           <Select placeholder="Sort by Date" onChange={handleDateSortChange} value={selectedDateSort} width="47%">
