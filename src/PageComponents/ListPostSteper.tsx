@@ -1,5 +1,5 @@
 import "../styles/post.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
@@ -102,6 +102,13 @@ export default function ListPostSteper() {
   });
   const dispatch = useDispatch<AppDispatch>();
   const {status} = useSelector((state: RootState) => state.Post);
+  const {loginUser, status: userStatus} =useSelector((state:RootState)=>state.User)
+    const navigate = useNavigate()
+    useEffect(() => {
+      if (userStatus === 'failed' && !loginUser) {
+        navigate('/login');
+      }
+    }, [status, loginUser, navigate]);
 
   const [titleCount, setTitleCount] = useState(70);
   const [descriptionCount, setDescriptionCount] = useState(5000);
