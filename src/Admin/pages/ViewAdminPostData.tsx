@@ -1,3 +1,4 @@
+import ChakraCarousel from '@/PageComponents/ChakraCarousel.tsx';
 import { fetchPostsByPostId } from '@/Redux/Post/PostAction.ts';
 import { AppDispatch, RootState } from '@/Redux/store.ts';
 import React, { useEffect, useState } from 'react'
@@ -24,7 +25,45 @@ export default function ViewAdminPostData() {
   }, [dispatch, id]);
 
   console.log(itemPost);
+  useEffect(() => {
+    if (itemPost && itemPost.images && itemPost.images.length > 0) {
+      setSelectedImage(itemPost.images[0]); // Set the first image as the default selected image
+    }
+  }, [itemPost]);
+
+  const handleThumbnailClick = (image: string) => {
+    setSelectedImage(image);
+  };
+  // Add a loading or error state if necessary
+  if (!itemPost) {
+    return <div>Loading...</div>; // You can replace this with a more sophisticated loading indicator
+  }
+
   return (
-    <div>ViewAdminPgostData</div>
+    <div><section className="py-12 mt-6 sm:py-16">
+       <div className="lg:col-span-3 lg:row-end-1">
+              <div className="lg:flex lg:items-start">
+                <div className="lg:order-2 lg:ml-5">
+                  <ChakraCarousel gap='1'>
+                    {itemPost.images &&
+                      itemPost.images.map((image, index) => (
+                        <div
+                          key={index}
+                          className={`flex-shrink-0 w-full h-[400px] overflow-hidden rounded-lg`}
+                        >
+                          <img
+                            className="w-full h-full object-cover"
+                            src={image}
+                            alt={`Large view ${index}`}
+                            onClick={() => handleThumbnailClick(image)}
+                          />
+                        </div>
+                      ))}
+                  </ChakraCarousel>
+                </div>
+              </div>
+            </div>
+            </section>
+    </div>
   )
 }
